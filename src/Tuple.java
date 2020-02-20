@@ -59,6 +59,10 @@ public class Tuple {
     return new Vector(this.x, this.y, this.z);
   }
 
+  public static Color color(double r, double g, double b) {
+    return new Color(r, g, b);
+  }
+
   @Override
   public boolean equals(Object other) {
     if (other == null || !(other instanceof Tuple)) {
