@@ -24,12 +24,24 @@ public class Tuple {
     return valuesAlmostEqual(this.w, Constants.POINT_W_VALUE);
   }
 
-  public static Tuple add(Tuple t1, Tuple t2) {
+  protected static Tuple add(Tuple t1, Tuple t2) {
     return tuple(t1.x + t2.x, t1.y + t2.y, t1.z + t2.z, t1.w + t2.w);
   }
 
-  public static Tuple subtract(Tuple t1, Tuple t2) {
+  protected static Tuple subtract(Tuple t1, Tuple t2) {
     return tuple(t1.x - t2.x, t1.y - t2.y, t1.z - t2.z, t1.w - t2.w);
+  }
+
+  public Tuple scale(double scalar) {
+    return tuple(this.x * scalar, this.y * scalar, this.z * scalar, this.w * scalar);
+  }
+
+  public Tuple mult(double scalar) {
+    return this.scale(scalar);
+  }
+
+  public Tuple div(double scalar) {
+    return this.mult(1 / scalar);
   }
 
   public static Tuple tuple(double x, double y, double z, double w) {

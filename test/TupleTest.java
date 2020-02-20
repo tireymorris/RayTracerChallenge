@@ -134,4 +134,39 @@ public class TupleTest {
 
     assertEquals(Tuple.vector(-2, -4, -6), v1.minus(v2));
   }
+
+  @Test
+  public void subtractVectorFromZeroVector() {
+    Vector zero = Tuple.vector(0, 0, 0);
+    Vector v = Tuple.vector(1, -2, 3);
+
+    assertEquals(Tuple.vector(-1, 2, -3), zero.minus(v));
+  }
+
+  @Test
+  public void negateVector() {
+    Vector zero = Tuple.vector(0, 0, 0);
+    Vector v = Tuple.vector(1, -2, 3);
+
+    assertEquals(Tuple.vector(-1, 2, -3), zero.minus(v));
+    assertEquals(Tuple.vector(-1, 2, -3), v.negate());
+  }
+
+  @Test
+  public void scalarMultiplyTuple1() {
+    Tuple t = Tuple.tuple(1, -2, 3, -4);
+    assertEquals(Tuple.tuple(3.5, -7, 10.5, -14), t.scale(3.5));
+  }
+
+  @Test
+  public void scalarMultiplyTuple2() {
+    Tuple t = Tuple.tuple(1, -2, 3, -4);
+    assertEquals(Tuple.tuple(0.5, -1, 1.5, -2), t.mult(0.5));
+  }
+
+  @Test
+  public void divTuple() {
+    Tuple t = Tuple.tuple(1, -2, 3, -4);
+    assertEquals(Tuple.tuple(0.5, -1, 1.5, -2), t.div(2));
+  }
 }

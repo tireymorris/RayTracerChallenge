@@ -10,4 +10,11 @@ public class Vector extends Tuple {
   public Vector plus(Vector other) {
     return super.add(this, other).asVector();
   }
+
+  // gives us the opposite of a vector
+  // for example, given a vector that points from a surface toward a light source,
+  // what vector points from the light source back to the surface?
+  public Vector negate() {
+    return Constants.ZERO_VECTOR.minus(this);
+  }
 }
