@@ -67,8 +67,8 @@ public class TupleTest {
     assertTrue(point.isPoint());
     assertFalse(point.isVector());
 
-    assertEquals(point, new Tuple(4.3, -4.2, 3.1, 1.0));
-    assertNotEquals(point, new Tuple(4.3, -4.2, 3.1, 0.0));
+    assertEquals(new Tuple(4.3, -4.2, 3.1, 1.0), point);
+    assertNotEquals(new Tuple(4.3, -4.2, 3.1, 0.0), point);
   }
 
   @Test
@@ -83,7 +83,28 @@ public class TupleTest {
     assertFalse(point.isPoint());
     assertTrue(point.isVector());
 
-    assertEquals(point, new Tuple(4.3, -4.2, 3.1, 0.0));
-    assertNotEquals(point, new Tuple(4.3, -4.2, 3.1, 1.0));
+    assertEquals(new Tuple(4.3, -4.2, 3.1, 0.0), point);
+    assertNotEquals(new Tuple(4.3, -4.2, 3.1, 1.0), point);
+  }
+
+  @Test
+  public void addTuples() {
+    Tuple t1 = Tuple.tuple(3, -2, 5, 1);
+    Tuple t2 = Tuple.tuple(-2, 3, 1, 0);
+
+    Tuple result = Tuple.add(t1, t2);
+
+    assertEquals(new Tuple(1, 1, 6, 1), result);
+  }
+
+  @Test
+  public void subtractTwoPoints() {
+    Tuple p1 = Tuple.point(3, 2, 1);
+    Tuple p2 = Tuple.point(5, 6, 7);
+
+    // This is the vector pointing from p2 to p1
+    Tuple result = Tuple.subtract(p1, p2);
+
+    assertEquals(Tuple.vector(-2, -4, -6), result);
   }
 }

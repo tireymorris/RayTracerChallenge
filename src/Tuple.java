@@ -15,6 +15,7 @@ public class Tuple {
     this.w = w;
   }
 
+  // TODO: Move to dedicated Math module
   private boolean valuesAlmostEqual(double valueOne, double valueTwo) {
     return Math.abs(valueOne - valueTwo) < FLOATING_POINT_DELTA;
   }
@@ -25,6 +26,14 @@ public class Tuple {
 
   public boolean isPoint() {
     return valuesAlmostEqual(this.w, POINT_W_VALUE);
+  }
+
+  public static Tuple add(Tuple t1, Tuple t2) {
+    return tuple(t1.x + t2.x, t1.y + t2.y, t1.z + t2.z, t1.w + t2.w);
+  }
+
+  public static Tuple subtract(Tuple t1, Tuple t2) {
+    return tuple(t1.x - t2.x, t1.y - t2.y, t1.z - t2.z, t1.w - t2.w);
   }
 
   public static Tuple tuple(double x, double y, double z, double w) {
@@ -50,5 +59,4 @@ public class Tuple {
     return valuesAlmostEqual(this.x, otherTuple.x) && valuesAlmostEqual(this.y, otherTuple.y)
         && valuesAlmostEqual(this.z, otherTuple.z) && valuesAlmostEqual(this.w, otherTuple.w);
   }
-
 }
