@@ -36,16 +36,16 @@ public class Tuple {
     return new Tuple(x, y, z, w);
   }
 
-  public static Tuple point(double x, double y, double z) {
-    return tuple(x, y, z, Constants.POINT_W_VALUE);
+  public static Point point(double x, double y, double z) {
+    return tuple(x, y, z, Constants.POINT_W_VALUE).asPoint();
   }
 
   public Point asPoint() {
     return new Point(this.x, this.y, this.z);
   }
 
-  public static Tuple vector(double x, double y, double z) {
-    return tuple(x, y, z, Constants.VECTOR_W_VALUE);
+  public static Vector vector(double x, double y, double z) {
+    return tuple(x, y, z, Constants.VECTOR_W_VALUE).asVector();
   }
 
   public Vector asVector() {
