@@ -1,0 +1,29 @@
+apply plugin: 'java'
+sourceSets {
+   main {
+      java {
+         srcDir 'src'
+      }
+   }
+	
+   test {
+      java {
+         srcDir 'test'
+      }
+   }
+}
+
+repositories {
+   mavenCentral()
+}
+
+dependencies {
+  implementation 'junit:junit:4.13'
+}
+
+
+jar {
+   manifest {
+      attributes 'Main-Class': 'Application'
+   }
+}

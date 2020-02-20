@@ -1,0 +1,1 @@
+gradle build && java -jar build/libs/grandpa.jar
