@@ -7,10 +7,10 @@ public class TupleTest {
   public void testConstructionAndIsPoint() {
     Tuple tuple = new Tuple(4.3, -4.2, 3.1, 1.0);
 
-    assertEquals(4.3, tuple.x, Tuple.FLOATING_POINT_DELTA);
-    assertEquals(-4.2, tuple.y, Tuple.FLOATING_POINT_DELTA);
-    assertEquals(3.1, tuple.z, Tuple.FLOATING_POINT_DELTA);
-    assertEquals(1.0, tuple.w, Tuple.FLOATING_POINT_DELTA);
+    assertEquals(4.3, tuple.x, Constants.EPSILON);
+    assertEquals(-4.2, tuple.y, Constants.EPSILON);
+    assertEquals(3.1, tuple.z, Constants.EPSILON);
+    assertEquals(1.0, tuple.w, Constants.EPSILON);
 
     assertTrue(tuple.isPoint());
     assertFalse(tuple.isVector());
@@ -20,10 +20,10 @@ public class TupleTest {
   public void testConstructionAndIsVector() {
     Tuple tuple = new Tuple(4.3, -4.2, 3.1, 0.0);
 
-    assertEquals(4.3, tuple.x, Tuple.FLOATING_POINT_DELTA);
-    assertEquals(-4.2, tuple.y, Tuple.FLOATING_POINT_DELTA);
-    assertEquals(3.1, tuple.z, Tuple.FLOATING_POINT_DELTA);
-    assertEquals(0.0, tuple.w, Tuple.FLOATING_POINT_DELTA);
+    assertEquals(4.3, tuple.x, Constants.EPSILON);
+    assertEquals(-4.2, tuple.y, Constants.EPSILON);
+    assertEquals(3.1, tuple.z, Constants.EPSILON);
+    assertEquals(0.0, tuple.w, Constants.EPSILON);
 
     assertTrue(tuple.isVector());
     assertFalse(tuple.isPoint());
@@ -33,10 +33,10 @@ public class TupleTest {
   public void tupleIsPoint() {
     Tuple tuple = Tuple.tuple(4.3, -4.2, 3.1, 1.0);
 
-    assertEquals(4.3, tuple.x, Tuple.FLOATING_POINT_DELTA);
-    assertEquals(-4.2, tuple.y, Tuple.FLOATING_POINT_DELTA);
-    assertEquals(3.1, tuple.z, Tuple.FLOATING_POINT_DELTA);
-    assertEquals(1.0, tuple.w, Tuple.FLOATING_POINT_DELTA);
+    assertEquals(4.3, tuple.x, Constants.EPSILON);
+    assertEquals(-4.2, tuple.y, Constants.EPSILON);
+    assertEquals(3.1, tuple.z, Constants.EPSILON);
+    assertEquals(1.0, tuple.w, Constants.EPSILON);
 
     assertTrue(tuple.isPoint());
     assertFalse(tuple.isVector());
@@ -46,10 +46,10 @@ public class TupleTest {
   public void tupleIsVector() {
     Tuple tuple = Tuple.tuple(4.3, -4.2, 3.1, 0.0);
 
-    assertEquals(4.3, tuple.x, Tuple.FLOATING_POINT_DELTA);
-    assertEquals(-4.2, tuple.y, Tuple.FLOATING_POINT_DELTA);
-    assertEquals(3.1, tuple.z, Tuple.FLOATING_POINT_DELTA);
-    assertEquals(0.0, tuple.w, Tuple.FLOATING_POINT_DELTA);
+    assertEquals(4.3, tuple.x, Constants.EPSILON);
+    assertEquals(-4.2, tuple.y, Constants.EPSILON);
+    assertEquals(3.1, tuple.z, Constants.EPSILON);
+    assertEquals(0.0, tuple.w, Constants.EPSILON);
 
     assertTrue(tuple.isVector());
     assertFalse(tuple.isPoint());
@@ -59,10 +59,10 @@ public class TupleTest {
   public void pointCreatesTuple() {
     Tuple point = Tuple.point(4.3, -4.2, 3.1);
 
-    assertEquals(4.3, point.x, Tuple.FLOATING_POINT_DELTA);
-    assertEquals(-4.2, point.y, Tuple.FLOATING_POINT_DELTA);
-    assertEquals(3.1, point.z, Tuple.FLOATING_POINT_DELTA);
-    assertEquals(1.0, point.w, Tuple.FLOATING_POINT_DELTA);
+    assertEquals(4.3, point.x, Constants.EPSILON);
+    assertEquals(-4.2, point.y, Constants.EPSILON);
+    assertEquals(3.1, point.z, Constants.EPSILON);
+    assertEquals(1.0, point.w, Constants.EPSILON);
 
     assertTrue(point.isPoint());
     assertFalse(point.isVector());
@@ -75,10 +75,10 @@ public class TupleTest {
   public void pointCreatesVector() {
     Tuple point = Tuple.vector(4.3, -4.2, 3.1);
 
-    assertEquals(4.3, point.x, Tuple.FLOATING_POINT_DELTA);
-    assertEquals(-4.2, point.y, Tuple.FLOATING_POINT_DELTA);
-    assertEquals(3.1, point.z, Tuple.FLOATING_POINT_DELTA);
-    assertEquals(0.0, point.w, Tuple.FLOATING_POINT_DELTA);
+    assertEquals(4.3, point.x, Constants.EPSILON);
+    assertEquals(-4.2, point.y, Constants.EPSILON);
+    assertEquals(3.1, point.z, Constants.EPSILON);
+    assertEquals(0.0, point.w, Constants.EPSILON);
 
     assertFalse(point.isPoint());
     assertTrue(point.isVector());
@@ -99,8 +99,8 @@ public class TupleTest {
 
   @Test
   public void subtractTwoPoints() {
-    Tuple p1 = Tuple.point(3, 2, 1);
-    Tuple p2 = Tuple.point(5, 6, 7);
+    Point p1 = Tuple.point(3, 2, 1).asPoint();
+    Point p2 = Tuple.point(5, 6, 7).asPoint();
 
     // This is the vector pointing from p2 to p1
     Tuple result = Tuple.subtract(p1, p2);

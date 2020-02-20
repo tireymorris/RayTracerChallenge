@@ -1,8 +1,4 @@
 public class Tuple {
-  public static final double FLOATING_POINT_DELTA = 0.0000001;
-  public static final double VECTOR_W_VALUE = 0.0;
-  public static final double POINT_W_VALUE = 1.0;
-
   public double x;
   public double y;
   public double z;
@@ -17,15 +13,15 @@ public class Tuple {
 
   // TODO: Move to dedicated Math module
   private boolean valuesAlmostEqual(double valueOne, double valueTwo) {
-    return Math.abs(valueOne - valueTwo) < FLOATING_POINT_DELTA;
+    return Math.abs(valueOne - valueTwo) < Constants.EPSILON;
   }
 
   public boolean isVector() {
-    return valuesAlmostEqual(this.w, VECTOR_W_VALUE);
+    return valuesAlmostEqual(this.w, Constants.VECTOR_W_VALUE);
   }
 
   public boolean isPoint() {
-    return valuesAlmostEqual(this.w, POINT_W_VALUE);
+    return valuesAlmostEqual(this.w, Constants.POINT_W_VALUE);
   }
 
   public static Tuple add(Tuple t1, Tuple t2) {
@@ -41,11 +37,19 @@ public class Tuple {
   }
 
   public static Tuple point(double x, double y, double z) {
-    return tuple(x, y, z, POINT_W_VALUE);
+    return tuple(x, y, z, Constants.POINT_W_VALUE);
+  }
+
+  public Point asPoint() {
+    return new Point(this.x, this.y, this.z);
   }
 
   public static Tuple vector(double x, double y, double z) {
-    return tuple(x, y, z, VECTOR_W_VALUE);
+    return tuple(x, y, z, Constants.VECTOR_W_VALUE);
+  }
+
+  public Vector asVector() {
+    return new Vector(this.x, this.y, this.z);
   }
 
   @Override
