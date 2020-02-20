@@ -7,4 +7,25 @@ public class Color extends Tuple {
     this.g = g;
     this.b = b;
   }
+
+  public Color plus(Color other) {
+    return super.add(this, other).asColor();
+  }
+
+  public Color minus(Color other) {
+    return super.subtract(this, other).asColor();
+  }
+
+  @Override
+  public Color scale(double scalar) {
+    return super.scale(scalar).asColor();
+  }
+
+  // Hadamard product
+  // Multiply components together to form a new, blended color
+  // Might use when (i.e.) finding out the visible color of a yellow-green surface
+  // When illuminated by reddish-purple light
+  public Color blend(Color other) {
+    return super.color(this.r * other.r, this.g * other.g, this.b * other.b);
+  }
 }

@@ -44,7 +44,7 @@ public class Tuple {
   }
 
   public static Point point(double x, double y, double z) {
-    return tuple(x, y, z, Constants.POINT_W_VALUE).asPoint();
+    return new Point(x, y, z);
   }
 
   public Point asPoint() {
@@ -52,7 +52,7 @@ public class Tuple {
   }
 
   public static Vector vector(double x, double y, double z) {
-    return tuple(x, y, z, Constants.VECTOR_W_VALUE).asVector();
+    return new Vector(x, y, z);
   }
 
   public Vector asVector() {
@@ -61,6 +61,10 @@ public class Tuple {
 
   public static Color color(double r, double g, double b) {
     return new Color(r, g, b);
+  }
+
+  public Color asColor() {
+    return new Color(this.x, this.y, this.z);
   }
 
   @Override
