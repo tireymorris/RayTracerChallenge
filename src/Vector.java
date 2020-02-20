@@ -17,4 +17,18 @@ public class Vector extends Tuple {
   public Vector negate() {
     return Constants.ZERO_VECTOR.minus(this);
   }
+
+  // represents length of vector
+  public double magnitude() {
+    return Math.sqrt(this.x * this.x + this.y * this.y + this.z * this.z);
+  }
+
+  // take arbitrary vector and convert to unit vector
+  // keeps calculations relative to common scale (the unit vector)
+  // without this, calculations would be scaled differently for every ray cast
+  public Vector normalize() {
+    double magnitude = this.magnitude();
+
+    return super.vector(this.x / magnitude, this.y / magnitude, this.z / magnitude);
+  }
 }

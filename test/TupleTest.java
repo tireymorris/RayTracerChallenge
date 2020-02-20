@@ -169,4 +169,64 @@ public class TupleTest {
     Tuple t = Tuple.tuple(1, -2, 3, -4);
     assertEquals(Tuple.tuple(0.5, -1, 1.5, -2), t.div(2));
   }
+
+  @Test
+  public void computeVectorMagnitude1() {
+    Vector v = Tuple.vector(1, 0, 0);
+
+    assertEquals(v.magnitude(), 1, Constants.EPSILON);
+  }
+
+  @Test
+  public void computeVectorMagnitude2() {
+    Vector v = Tuple.vector(0, 1, 0);
+
+    assertEquals(v.magnitude(), 1, Constants.EPSILON);
+  }
+
+  @Test
+  public void computeVectorMagnitude3() {
+    Vector v = Tuple.vector(0, 0, 1);
+
+    assertEquals(v.magnitude(), 1, Constants.EPSILON);
+  }
+
+  @Test
+  public void computeVectorMagnitude4() {
+    Vector v = Tuple.vector(1, 2, 3);
+
+    assertEquals(v.magnitude(), Math.sqrt(14), Constants.EPSILON);
+  }
+
+  @Test
+  public void computeVectorMagnitude5() {
+    Vector v = Tuple.vector(-1, -2, -3);
+
+    assertEquals(v.magnitude(), Math.sqrt(14), Constants.EPSILON);
+  }
+
+  @Test
+  public void normalizeVector1() {
+    Vector v = Tuple.vector(4, 0, 0);
+
+    assertEquals(Constants.I_VECTOR, v.normalize());
+  }
+
+  @Test
+  public void normalizeVector2() {
+    Vector v = Tuple.vector(1, 2, 3);
+
+    Vector result1 = Tuple.vector(0.26726, 0.53452, 0.80178);
+    Vector result2 = Tuple.vector(1 / Math.sqrt(14), 2 / Math.sqrt(14), 3 / Math.sqrt(14));
+
+    assertEquals(result1, v.normalize());
+    assertEquals(result2, v.normalize());
+  }
+
+  @Test
+  public void normalizedVectorLengthIs1() {
+    Vector v = Tuple.vector(1, 2, 3);
+
+    assertEquals(1, v.normalize().magnitude(), Constants.EPSILON);
+  }
 }
