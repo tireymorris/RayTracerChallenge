@@ -31,4 +31,22 @@ public class Vector extends Tuple {
 
     return super.vector(this.x / magnitude, this.y / magnitude, this.z / magnitude);
   }
+
+  // also called scalar product or inner product
+  // shows up when intersecting rays with objects or computing surface shading
+  // smaller dot product => larger angle between vectors
+  // 1 == identical
+  // -1 == opposite
+  // (technically, cosine between the vectors)
+  public double dot(Vector other) {
+    return this.x * other.x + this.y * other.y + this.z * other.z;
+  }
+
+  // returns a new vector perpendicular to its operands
+  // primariliy used with view transformations
+  // order matters! otherwise sign will be negated
+  public Vector cross(Vector other) {
+    return Tuple.vector(this.y * other.z - this.z * other.y, this.z * other.x - this.x * other.z,
+        this.x * other.y - this.y * other.x);
+  }
 }

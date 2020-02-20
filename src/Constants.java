@@ -7,4 +7,8 @@ public final class Constants {
   public static final Vector I_VECTOR = new Vector(1, 0, 0);
   public static final Vector J_VECTOR = new Vector(0, 1, 0);
   public static final Vector K_VECTOR = new Vector(0, 0, 1);
+
+  public static boolean valuesAlmostEqual(double valueOne, double valueTwo) {
+    return Math.abs(valueOne - valueTwo) < EPSILON;
+  }
 }

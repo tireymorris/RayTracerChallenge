@@ -11,17 +11,12 @@ public class Tuple {
     this.w = w;
   }
 
-  // TODO: Move to dedicated Math module
-  private boolean valuesAlmostEqual(double valueOne, double valueTwo) {
-    return Math.abs(valueOne - valueTwo) < Constants.EPSILON;
-  }
-
   public boolean isVector() {
-    return valuesAlmostEqual(this.w, Constants.VECTOR_W_VALUE);
+    return Constants.valuesAlmostEqual(this.w, Constants.VECTOR_W_VALUE);
   }
 
   public boolean isPoint() {
-    return valuesAlmostEqual(this.w, Constants.POINT_W_VALUE);
+    return Constants.valuesAlmostEqual(this.w, Constants.POINT_W_VALUE);
   }
 
   protected static Tuple add(Tuple t1, Tuple t2) {
@@ -72,7 +67,7 @@ public class Tuple {
 
     Tuple otherTuple = (Tuple) other;
 
-    return valuesAlmostEqual(this.x, otherTuple.x) && valuesAlmostEqual(this.y, otherTuple.y)
-        && valuesAlmostEqual(this.z, otherTuple.z) && valuesAlmostEqual(this.w, otherTuple.w);
+    return Constants.valuesAlmostEqual(this.x, otherTuple.x) && Constants.valuesAlmostEqual(this.y, otherTuple.y)
+        && Constants.valuesAlmostEqual(this.z, otherTuple.z) && Constants.valuesAlmostEqual(this.w, otherTuple.w);
   }
 }

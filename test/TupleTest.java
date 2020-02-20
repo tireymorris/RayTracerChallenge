@@ -229,4 +229,21 @@ public class TupleTest {
 
     assertEquals(1, v.normalize().magnitude(), Constants.EPSILON);
   }
+
+  @Test
+  public void dotProduct() {
+    Vector v1 = Tuple.vector(1, 2, 3);
+    Vector v2 = Tuple.vector(2, 3, 4);
+
+    assertEquals(20, v1.dot(v2), Constants.EPSILON);
+  }
+
+  @Test
+  public void crossProduct() {
+    Vector v1 = Tuple.vector(1, 2, 3);
+    Vector v2 = Tuple.vector(2, 3, 4);
+
+    assertEquals(Tuple.vector(-1, 2, -1), v1.cross(v2));
+    assertEquals(Tuple.vector(1, -2, 1), v2.cross(v1));
+  }
 }
