@@ -70,4 +70,9 @@ public class Tuple {
     return Constants.valuesAlmostEqual(this.x, otherTuple.x) && Constants.valuesAlmostEqual(this.y, otherTuple.y)
         && Constants.valuesAlmostEqual(this.z, otherTuple.z) && Constants.valuesAlmostEqual(this.w, otherTuple.w);
   }
+
+  @Override
+  public String toString() {
+    return String.format("{ %f, %f, %f, %f }", this.x, this.y, this.z, this.w);
+  }
 }
