@@ -1,81 +1,86 @@
-public final class Transform {
-  public static Matrix translate(double x, double y, double z) {
-    Matrix result = Constants.IDENTITY_MATRIX();
 
-    result.set(0, 3, x);
-    result.set(1, 3, y);
-    result.set(2, 3, z);
+// TODO: Handle exceptions
+import java.util.ArrayList;
+import java.util.Collections;
 
-    return result;
+public class Transform {
+  private ArrayList<Matrix> state;
+
+  private Transform() {
+    this.state = new ArrayList<Matrix>();
+    this.state.add(Constants.IDENTITY_MATRIX());
   }
 
-  // scaling by inverse will shrink by same factor
-  public static Matrix scale(double x, double y, double z) {
-    Matrix result = Constants.IDENTITY_MATRIX();
-
-    result.set(0, 0, x);
-    result.set(1, 1, y);
-    result.set(2, 2, z);
-
-    return result;
+  public static Transform identity() {
+    return new Transform();
   }
 
-  public static Matrix reflectX() {
-    return Transform.scale(-1, 1, 1);
+  public Matrix build() {
+    Matrix transform = Constants.IDENTITY_MATRIX();
+    Collections.reverse(this.state); // TODO: Transform now unusable?
+
+    // Applying backwards because they're in order A -> B -> C
+    // but T = C * B * A
+    for (Matrix intermediate : this.state) {
+      transform = transform.mult(intermediate);
+    }
+
+    return transform;
   }
 
-  public static Matrix reflectY() {
-    return Transform.scale(1, -1, 1);
+  public Transform translate(double x, double y, double z) {
+    this.state.add(Transformations.translation(x, y, z));
+
+    return this;
   }
 
-  public static Matrix reflectZ() {
-    return Transform.scale(-1, 1, -1);
+  public Transform scale(double x, double y, double z) {
+    this.state.add(Transformations.scaling(x, y, z));
+
+    return this;
   }
 
-  public static Matrix rotateX(double radians) {
-    Matrix result = Constants.IDENTITY_MATRIX();
+  public Transform reflectX() {
+    this.state.add(Transformations.reflectionX());
 
-    result.set(1, 1, Math.cos(radians));
-    result.set(1, 2, -Math.sin(radians));
-    result.set(2, 1, Math.sin(radians));
-    result.set(2, 2, Math.cos(radians));
-
-    return result;
+    return this;
   }
 
-  public static Matrix rotateY(double radians) {
-    Matrix result = Constants.IDENTITY_MATRIX();
+  public Transform reflectY() {
+    this.state.add(Transformations.reflectionY());
 
-    result.set(0, 0, Math.cos(radians));
-    result.set(0, 2, Math.sin(radians));
-    result.set(2, 0, -Math.sin(radians));
-    result.set(2, 2, Math.cos(radians));
-
-    return result;
+    return this;
   }
 
-  public static Matrix rotateZ(double radians) {
-    Matrix result = Constants.IDENTITY_MATRIX();
+  public Transform reflectZ() {
+    this.state.add(Transformations.reflectionZ());
 
-    result.set(0, 0, Math.cos(radians));
-    result.set(0, 1, -Math.sin(radians));
-    result.set(1, 0, Math.sin(radians));
-    result.set(1, 1, Math.cos(radians));
+    return this;
+  }
 
-    return result;
+  public Transform rotateX(double radians) {
+    this.state.add(Transformations.rotationX(radians));
+
+    return this;
+  }
+
+  public Transform rotateY(double radians) {
+    this.state.add(Transformations.rotationY(radians));
+
+    return this;
+  }
+
+  public Transform rotateZ(double radians) {
+    this.state.add(Transformations.rotationZ(radians));
+
+    return this;
   }
 
   // // also called skew
-  public static Matrix shear(double dxy, double dxz, double dyx, double dyz, double dzx, double dzy) {
-    Matrix result = Constants.IDENTITY_MATRIX();
+  public Transform shear(double dxy, double dxz, double dyx, double dyz, double dzx, double dzy) {
+    this.state.add(Transformations.shearing(dxy, dxz, dyx, dyz, dzx, dzy));
 
-    result.set(0, 1, dxy);
-    result.set(0, 2, dxz);
-    result.set(1, 0, dyx);
-    result.set(1, 2, dyz);
-    result.set(2, 0, dzx);
-    result.set(2, 1, dzy);
-
-    return result;
+    return this;
   }
+
 }
