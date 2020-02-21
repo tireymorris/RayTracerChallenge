@@ -35,9 +35,9 @@ public class CanvasTest {
   @Test
   public void constructPPMHeader() {
     Canvas canvas = new Canvas(5, 3);
-    StringBuffer PPM = canvas.constructPPM();
+    String PPM = canvas.constructPPM();
 
-    String[] header = PPM.toString().split("\n");
+    String[] header = PPM.split("\n");
     header = Arrays.copyOfRange(header, 0, 3);
     String[] expected = { "P3", "5 3", "255" };
 
@@ -57,9 +57,9 @@ public class CanvasTest {
     canvas.writePixel(2, 1, c2);
     canvas.writePixel(4, 2, c3);
 
-    StringBuffer PPM = canvas.constructPPM();
+    String PPM = canvas.constructPPM();
 
-    String[] lines = PPM.toString().split("\n");
+    String[] lines = PPM.split("\n");
     lines = Arrays.copyOfRange(lines, 3, 6);
     String[] expected = { "255 0 0 0 0 0 0 0 0 0 0 0 0 0 0", "0 0 0 0 0 0 0 128 0 0 0 0 0 0 0",
         "0 0 0 0 0 0 0 0 0 0 0 0 0 0 255" };
@@ -74,16 +74,24 @@ public class CanvasTest {
 
     canvas.fill(Tuple.color(1, 0.8, 0.6));
 
-    StringBuffer PPM = canvas.constructPPM();
+    String PPM = canvas.constructPPM();
 
-    String[] lines = PPM.toString().split("\n");
-    lines = Arrays.copyOfRange(lines, 3, 8);
+    String[] lines = PPM.split("\n");
+    lines = Arrays.copyOfRange(lines, 3, 7);
     String[] expected = { "255 204 153 255 204 153 255 204 153 255 204 153 255 204 153 255 204",
-        "255 204 153 255 204 153 255 204 153 255 204 153 255 204 153 255 204",
+        "153 255 204 153 255 204 153 255 204 153 255 204 153",
         "255 204 153 255 204 153 255 204 153 255 204 153 255 204 153 255 204",
         "153 255 204 153 255 204 153 255 204 153 255 204 153" };
 
-    assertEquals(3, lines.length);
+    assertEquals(4, lines.length);
     assertArrayEquals(expected, lines);
+  }
+
+  @Test
+  public void constructedPPMMustEndInNewline() {
+    Canvas canvas = new Canvas(5, 3);
+    String PPM = canvas.constructPPM();
+
+    assertEquals(PPM.charAt(PPM.length() - 1), '\n');
   }
 }

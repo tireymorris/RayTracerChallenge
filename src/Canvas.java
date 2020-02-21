@@ -1,3 +1,6 @@
+import java.io.File;
+import java.io.FileWriter;
+
 public class Canvas {
   Color[] pixels;
 
@@ -41,18 +44,17 @@ public class Canvas {
     return this.pixels[width * y + x];
   }
 
-  public StringBuffer constructPPM() {
+  public String constructPPM() {
     // P3 is magic number for our version of PPM
     // third line is maximum pixel value
-    // TODO: refactor
     StringBuffer PPM = new StringBuffer(String.format("P3\n%d %d\n255\n", this.width, this.height));
 
-    int lineLength = 0;
     for (int row = 0; row < this.height; row++) {
+      StringBuffer line = new StringBuffer();
+
       for (int col = 0; col < this.width; col++) {
-        if (col != 0) {
-          PPM.append(" ");
-          lineLength++;
+        if (col > 0) {
+          line.append(" ");
         }
 
         Color pixel = this.pixelAt(col, row);
@@ -62,37 +64,31 @@ public class Canvas {
         int g = (int) Math.round(pixel.g);
         int b = (int) Math.round(pixel.b);
 
-        if (lineLength + 3 > 70) {
-          PPM.append("\n");
-          lineLength = 0;
-        }
-
-        if (lineLength + 3 > 70) {
-          PPM.append("\n");
-          lineLength = 0;
-        }
-        PPM.append(r);
-        lineLength++;
-
-        if (lineLength + 3 > 70) {
-          PPM.append("\n");
-          lineLength = 0;
-        }
-        PPM.append(g);
-        lineLength++;
-
-        if (lineLength + 3 > 70) {
-          PPM.append("\n");
-          lineLength = 0;
-        }
-        PPM.append(b);
-        lineLength++;
+        line.append(String.format("%d %d %d", r, g, b));
       }
 
+      if (line.length() > 70) {
+        int indexToInsertSpace = line.substring(0, 69).lastIndexOf(" ");
+        line.replace(indexToInsertSpace, indexToInsertSpace + 1, "\n");
+      }
+
+      PPM.append(line);
       PPM.append("\n");
-
     }
+    return PPM.toString();
+  }
 
-    return PPM;
+  public void exportToPPM(String path) {
+    File file = new File(path);
+
+    try {
+      String PPM = this.constructPPM();
+
+      FileWriter writer = new FileWriter(file);
+      writer.append(PPM);
+      writer.close();
+    } catch (Exception e) {
+      System.err.println("Could not export to PPM!");
+    }
   }
 }
