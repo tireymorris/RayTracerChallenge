@@ -67,4 +67,28 @@ public class Matrix {
 
     return true;
   }
+
+  public static Matrix mult(Matrix a, Matrix b) {
+    if (!(a.numRows == 4 && a.numCols == 4 && b.numRows == 4 && b.numCols == 4)) {
+      throw new IndexOutOfBoundsException("Multiplication currently only supported for 4x4 matrices");
+    }
+
+    Matrix result = new Matrix(a.numRows, b.numCols);
+
+    for (int row = 0; row < a.numRows; row++) {
+      for (int col = 0; col < b.numCols; col++) {
+        double product = a.get(row, 0) * b.get(0, col) + a.get(row, 1) * b.get(1, col) + a.get(row, 2) * b.get(2, col)
+            + a.get(row, 3) * b.get(3, col);
+
+        result.set(row, col, product);
+      }
+    }
+
+    return result;
+  }
+
+  // will be useful for combining transformations
+  public Matrix mult(Matrix other) {
+    return Matrix.mult(this, other);
+  }
 }
