@@ -111,4 +111,20 @@ public class Matrix {
   public Tuple mult(Tuple other) {
     return Matrix.mult(this, other);
   }
+
+  public Matrix transpose() {
+    Matrix result = new Matrix(this.numRows, this.numCols);
+    for (int row = 0; row < this.numRows; row++) {
+      for (int col = 0; col < this.numCols; col++) {
+        result.set(col, row, this.get(row, col));
+      }
+    }
+
+    return result;
+  }
+
+  // in theory, tells you if system has a solution (nonzero)
+  public double determinant() {
+    return this.get(0, 0) * this.get(1, 1) - this.get(0, 1) * this.get(1, 0);
+  }
 }

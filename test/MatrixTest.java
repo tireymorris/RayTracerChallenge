@@ -110,4 +110,32 @@ public class MatrixTest {
     assertEquals(tuple, Constants.IDENTITY_MATRIX.mult(tuple));
     assertEquals(backup, Constants.IDENTITY_MATRIX.mult(tuple));
   }
+
+  @Test
+  public void transposeMatrix() {
+    double[][] rows = { { 0, 9, 3, 0 }, { 9, 8, 0, 8 }, { 1, 8, 5, 3 }, { 0, 0, 5, 8 } };
+    Matrix a = Matrix.fromRows(rows);
+
+    double[][] tRows = { { 0, 9, 1, 0 }, { 9, 8, 8, 0 }, { 3, 0, 5, 5 }, { 0, 8, 3, 8 } };
+    Matrix b = Matrix.fromRows(tRows);
+
+    assertEquals(b, a.transpose());
+    assertEquals(a, b.transpose());
+    assertEquals(a, a.transpose().transpose());
+  }
+
+  @Test
+  public void transposeIdentityMatrix() {
+    assertEquals(Constants.IDENTITY_MATRIX, Constants.IDENTITY_MATRIX.transpose());
+  }
+
+  @Test
+  public void calculate2x2Determinant() {
+    double[][] rows = { { 1, 5 }, { -3, 2 } };
+    Matrix m = Matrix.fromRows(rows);
+
+    double expected = 1 * 2 - 5 * -3;
+
+    assertEquals(expected, m.determinant(), Constants.EPSILON);
+  }
 }
