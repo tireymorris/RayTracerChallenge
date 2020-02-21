@@ -8,6 +8,8 @@ public final class Constants {
   public static final Vector J_VECTOR = new Vector(0, 1, 0);
   public static final Vector K_VECTOR = new Vector(0, 0, 1);
 
+  public static Color PURPLE = Tuple.color(0.4, 0.0627, 0.949);
+
   public static boolean valuesAlmostEqual(double valueOne, double valueTwo) {
     return Math.abs(valueOne - valueTwo) < EPSILON;
   }

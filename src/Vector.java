@@ -11,6 +11,21 @@ public class Vector extends Tuple {
     return super.add(this, other).asVector();
   }
 
+  @Override
+  public Vector scale(double scalar) {
+    return super.scale(scalar).asVector();
+  }
+
+  @Override
+  protected Vector mult(double scalar) {
+    return super.scale(scalar).asVector();
+  }
+
+  @Override
+  protected Vector div(double scalar) {
+    return super.mult(1 / scalar).asVector();
+  }
+
   // gives us the opposite of a vector
   // for example, given a vector that points from a surface toward a light source,
   // what vector points from the light source back to the surface?
