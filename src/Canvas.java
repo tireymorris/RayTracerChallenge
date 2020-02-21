@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.FileWriter;
+import java.io.IOException;
 
 public class Canvas {
   Color[] pixels;
@@ -18,7 +19,7 @@ public class Canvas {
     }
   }
 
-  public void checkCoordinates(int x, int y) {
+  private void checkCoordinates(int x, int y) {
     if ((width * y + x) >= width * height || x < 0 || y < 0 || x >= width || y >= height) {
       throw new IndexOutOfBoundsException("Pixel coordinates are invalid");
     }
@@ -78,17 +79,13 @@ public class Canvas {
     return PPM.toString();
   }
 
-  public void exportToPPM(String path) {
+  public void exportToPPM(String path) throws IOException {
     File file = new File(path);
 
-    try {
-      String PPM = this.constructPPM();
+    String PPM = this.constructPPM();
 
-      FileWriter writer = new FileWriter(file);
-      writer.append(PPM);
-      writer.close();
-    } catch (Exception e) {
-      System.err.println("Could not export to PPM!");
-    }
+    FileWriter writer = new FileWriter(file);
+    writer.append(PPM);
+    writer.close();
   }
 }

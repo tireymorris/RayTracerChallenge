@@ -1,3 +1,5 @@
+import java.io.IOException;
+
 class Environment {
   Vector gravity = Tuple.vector(0, -0.1, 0);
   Vector wind = Tuple.vector(-0.01, 0, 0);
@@ -16,8 +18,7 @@ class Projectile {
 
   public void tick() {
     position = position.plus(velocity);
-
-    velocity = velocity.plus(env.gravity.plus(env.wind));
+    velocity = velocity.plus(env.gravity).plus(env.wind);
   }
 
   public static void main(String[] args) {
@@ -29,19 +30,23 @@ class Projectile {
     while (p.position.y > 0) {
       p.tick();
 
-      double y = canvas.height - p.position.y;
+      int x = (int) Math.round(p.position.x);
+      int y = (int) Math.round(canvas.height - p.position.y);
 
       try {
-        canvas.writePixel((int) Math.round(p.position.x), (int) Math.round(y), Constants.PURPLE);
-        canvas.writePixel((int) Math.round(p.position.x + 1), (int) Math.round(y), Constants.PURPLE);
-        canvas.writePixel((int) Math.round(p.position.x - 1), (int) Math.round(y), Constants.PURPLE);
-        canvas.writePixel((int) Math.round(p.position.x), (int) Math.round(y + 1), Constants.PURPLE);
-        canvas.writePixel((int) Math.round(p.position.x), (int) Math.round(y - 1), Constants.PURPLE);
+        canvas.writePixel(x, y, Constants.PURPLE);
+        canvas.writePixel(x + 1, y, Constants.PURPLE);
+        canvas.writePixel(x - 1, y, Constants.PURPLE);
+        canvas.writePixel(x, y + 1, Constants.PURPLE);
+        canvas.writePixel(x, y - 1, Constants.PURPLE);
       } catch (IndexOutOfBoundsException e) {
-
       }
     }
 
-    canvas.exportToPPM("/home/tmorris/Desktop/proj.PPM");
+    try {
+      canvas.exportToPPM("/home/tmorris/Desktop/proj.PPM");
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
   }
 }
