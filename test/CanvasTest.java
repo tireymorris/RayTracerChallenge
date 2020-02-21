@@ -67,4 +67,23 @@ public class CanvasTest {
     assertEquals(3, lines.length);
     assertArrayEquals(expected, lines);
   }
+
+  @Test
+  public void constructPPMSplitsLongLines() {
+    Canvas canvas = new Canvas(10, 2);
+
+    canvas.fill(Tuple.color(1, 0.8, 0.6));
+
+    StringBuffer PPM = canvas.constructPPM();
+
+    String[] lines = PPM.toString().split("\n");
+    lines = Arrays.copyOfRange(lines, 3, 8);
+    String[] expected = { "255 204 153 255 204 153 255 204 153 255 204 153 255 204 153 255 204",
+        "255 204 153 255 204 153 255 204 153 255 204 153 255 204 153 255 204",
+        "255 204 153 255 204 153 255 204 153 255 204 153 255 204 153 255 204",
+        "153 255 204 153 255 204 153 255 204 153 255 204 153" };
+
+    assertEquals(3, lines.length);
+    assertArrayEquals(expected, lines);
+  }
 }
