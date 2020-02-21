@@ -10,6 +10,9 @@ public final class Constants {
 
   public static Color PURPLE = Tuple.color(0.4, 0.0627, 0.949);
 
+  private static double[][] identityValues = { { 1, 0, 0, 0 }, { 0, 1, 0, 0 }, { 0, 0, 1, 0 }, { 0, 0, 0, 1 } };
+  public static Matrix IDENTITY_MATRIX = Matrix.fromRows(identityValues);
+
   public static boolean valuesAlmostEqual(double valueOne, double valueTwo) {
     return Math.abs(valueOne - valueTwo) < EPSILON;
   }
@@ -17,5 +20,4 @@ public final class Constants {
   public static double constrain(double value, double min, double max) {
     return Math.min(Math.max(value, min), max);
   }
-
 }

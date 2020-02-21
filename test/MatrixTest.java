@@ -90,4 +90,24 @@ public class MatrixTest {
 
     assertEquals(Tuple.tuple(18, 24, 33, 1), a.mult(b));
   }
+
+  @Test
+  public void multMatrixByIdentity() {
+    double[][] rows = { { 0, 1, 2, 4 }, { 1, 2, 4, 8 }, { 2, 4, 8, 16 }, { 4, 8, 16, 32 } };
+
+    Matrix a = Matrix.fromRows(rows);
+    Matrix backup = Matrix.fromRows(rows);
+
+    assertEquals(a, a.mult(Constants.IDENTITY_MATRIX));
+    assertEquals(backup, a.mult(Constants.IDENTITY_MATRIX));
+  }
+
+  @Test
+  public void multIdentityByTuple() {
+    Tuple tuple = Tuple.tuple(1, 2, 3, 4);
+    Tuple backup = Tuple.tuple(1, 2, 3, 4);
+
+    assertEquals(tuple, Constants.IDENTITY_MATRIX.mult(tuple));
+    assertEquals(backup, Constants.IDENTITY_MATRIX.mult(tuple));
+  }
 }
