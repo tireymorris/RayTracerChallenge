@@ -160,4 +160,147 @@ public class MatrixTest {
 
     assertEquals(expected, original.submatrix(2, 1));
   }
+
+  @Test
+  public void minor3x3() {
+    double[][] rows = { { 3, 5, 0 }, { 2, -1, -7 }, { 6, -1, 5 } };
+    Matrix a = Matrix.fromRows(rows);
+
+    Matrix b = a.submatrix(1, 0);
+
+    assertEquals(25, b.determinant(), Constants.EPSILON);
+    assertEquals(25, a.minor(1, 0), Constants.EPSILON);
+  }
+
+  @Test
+  public void cofactor3x3() {
+    double[][] rows = { { 3, 5, 0 }, { 2, -1, -7 }, { 6, -1, 5 } };
+    Matrix a = Matrix.fromRows(rows);
+
+    assertEquals(-12, a.minor(0, 0), Constants.EPSILON);
+    assertEquals(-12, a.cofactor(0, 0), Constants.EPSILON);
+    assertEquals(25, a.minor(1, 0), Constants.EPSILON);
+    assertEquals(-25, a.cofactor(1, 0), Constants.EPSILON);
+  }
+
+  @Test
+  public void determinant3x3() {
+    double[][] rows = { { 1, 2, 6 }, { -5, 8, -4 }, { 2, 6, 4 } };
+    Matrix a = Matrix.fromRows(rows);
+
+    assertEquals(56, a.cofactor(0, 0), Constants.EPSILON);
+    assertEquals(12, a.cofactor(0, 1), Constants.EPSILON);
+    assertEquals(-46, a.cofactor(0, 2), Constants.EPSILON);
+
+    assertEquals(-196, a.determinant(), Constants.EPSILON);
+  }
+
+  @Test
+  public void determinant4x4() {
+    double[][] rows = { { -2, -8, 3, 5 }, { -3, 1, 7, 3 }, { 1, 2, -9, 6 }, { -6, 7, 7, -9 } };
+    Matrix a = Matrix.fromRows(rows);
+
+    assertEquals(690, a.cofactor(0, 0), Constants.EPSILON);
+    assertEquals(447, a.cofactor(0, 1), Constants.EPSILON);
+    assertEquals(210, a.cofactor(0, 2), Constants.EPSILON);
+    assertEquals(51, a.cofactor(0, 3), Constants.EPSILON);
+
+    assertEquals(-4071, a.determinant(), Constants.EPSILON);
+  }
+
+  @Test
+  public void invertible1() {
+    double[][] rows = { { 6, 4, 4, 4 }, { 5, 5, 7, 6 }, { 4, -9, 3, -7 }, { 9, 1, 7, -6 } };
+    Matrix a = Matrix.fromRows(rows);
+
+    assertEquals(-2120, a.determinant(), Constants.EPSILON);
+    assertTrue(a.invertible());
+  }
+
+  @Test
+  public void invertible2() {
+    double[][] rows = { { 4, 2, -2, -3 }, { 9, 6, 2, 6 }, { 0, -5, 1, -5 }, { 0, 0, 0, 0 } };
+    Matrix a = Matrix.fromRows(rows);
+
+    assertEquals(0, a.determinant(), Constants.EPSILON);
+    assertFalse(a.invertible());
+  }
+
+  @Test
+  public void inverse4x4_1() {
+    double[][] rows = { { -5, 2, 6, -8 }, { 1, -5, 1, 8 }, { 7, 7, -6, -7 }, { 1, -3, 7, 4 } };
+    Matrix a = Matrix.fromRows(rows);
+
+    Matrix b = a.inverse();
+
+    double[][] invertedRows = { { 0.21805, 0.45113, 0.24060, -0.04511 }, { -0.80827, -1.45677, -0.44361, 0.52068 },
+        { -0.07895, -0.22368, -0.05263, 0.19737 }, { -0.52256, -0.81391, -0.30075, 0.30639 } };
+    Matrix inverse = Matrix.fromRows(invertedRows);
+
+    assertEquals(532, a.determinant(), Constants.EPSILON);
+    assertEquals(-160, a.cofactor(2, 3), Constants.EPSILON);
+    assertEquals(105, a.cofactor(3, 2), Constants.EPSILON);
+
+    assertEquals(-160.0 / 532, b.get(3, 2), Constants.EPSILON);
+    assertEquals(105.0 / 532, b.get(2, 3), Constants.EPSILON);
+
+    assertEquals(inverse, b);
+  }
+
+  @Test
+  public void inverse4x4_2() {
+    double[][] rows = { { 8, -5, 9, 2 }, { 7, 5, 6, 1 }, { -6, 0, 9, 6 }, { -3, 0, -9, -4 } };
+    Matrix a = Matrix.fromRows(rows);
+
+    Matrix b = a.inverse();
+
+    double[][] invertedRows = { { -0.15385, -0.15385, -0.28205, -0.53846 }, { -0.07692, 0.12308, 0.02564, 0.03077 },
+        { 0.35897, 0.35897, 0.43590, 0.92308 }, { -0.69231, -0.69231, -0.76923, -1.92308 } };
+    Matrix inverse = Matrix.fromRows(invertedRows);
+
+    assertEquals(inverse, b);
+  }
+
+  @Test
+  public void inverse4x4_3() {
+    double[][] rows = { { 9, 3, 0, 9 }, { -5, -2, -6, -3 }, { -4, 9, 6, 4 }, { -7, 6, 6, 2 } };
+    Matrix a = Matrix.fromRows(rows);
+
+    Matrix b = a.inverse();
+
+    double[][] invertedRows = { { -0.04074, -0.07778, 0.14444, -0.22222 }, { -0.07778, 0.03333, 0.36667, -0.33333 },
+        { -0.02901, -0.14630, -0.10926, 0.12963 }, { 0.17778, 0.06667, -0.26667, 0.33333 } };
+    Matrix inverse = Matrix.fromRows(invertedRows);
+
+    assertEquals(inverse, b);
+  }
+
+  @Test
+  public void inverseMultTransitive() {
+    double[][] aRows = { { 3, -9, 7, 3 }, { 3, -8, 2, -9 }, { -4, 4, 4, 1 }, { -6, 5, -1, 1 } };
+    Matrix a = Matrix.fromRows(aRows);
+
+    double[][] bRows = { { 8, 2, 2, 2 }, { 3, -1, 7, 0 }, { 7, 0, 5, 4 }, { 6, -2, 0, 5 } };
+    Matrix b = Matrix.fromRows(bRows);
+
+    Matrix c = a.mult(b);
+
+    assertEquals(a, c.mult(b.inverse()));
+  }
+
+  @Test
+  public void multByInverseGivesIdentity() {
+    double[][] bRows = { { 8, 2, 2, 2 }, { 3, -1, 7, 0 }, { 7, 0, 5, 4 }, { 6, -2, 0, 5 } };
+    Matrix b = Matrix.fromRows(bRows);
+
+    assertEquals(Constants.IDENTITY_MATRIX, b.mult(b.inverse()));
+  }
+
+  @Test
+  public void transposeAndInverseCommutative() {
+    double[][] aRows = { { 3, -9, 7, 3 }, { 3, -8, 2, -9 }, { -4, 4, 4, 1 }, { -6, 5, -1, 1 } };
+    Matrix a = Matrix.fromRows(aRows);
+
+    assertEquals(a.transpose().inverse(), a.inverse().transpose());
+  }
 }

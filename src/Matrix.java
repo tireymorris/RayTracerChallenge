@@ -1,6 +1,7 @@
 import java.io.InvalidObjectException;
 import java.util.Arrays;
 
+// TODO: decide on policy for static methods (some are, some aren't)
 public class Matrix {
   public int numRows;
   public int numCols;
@@ -129,7 +130,17 @@ public class Matrix {
 
   // in theory, tells you if system has a solution (nonzero)
   public double determinant() {
-    return this.get(0, 0) * this.get(1, 1) - this.get(0, 1) * this.get(1, 0);
+    if (this.numRows == 2 && this.numCols == 2) {
+      return this.get(0, 0) * this.get(1, 1) - this.get(0, 1) * this.get(1, 0);
+    }
+
+    double det = 0;
+    // can be computed with row-wise or column-wise
+    for (int col = 0; col < this.numCols; col++) {
+      det += this.get(0, col) * this.cofactor(0, col);
+    }
+
+    return det;
   }
 
   public Matrix submatrix(int deadRow, int deadCol) {
@@ -160,5 +171,60 @@ public class Matrix {
     }
 
     return result;
+  }
+
+  public double minor(int row, int col) {
+    return this.submatrix(row, col).determinant();
+  }
+
+  public double cofactor(int row, int col) {
+    int sign = (row + col) % 2 == 0 ? 1 : -1;
+
+    return sign * this.minor(row, col);
+  }
+
+  // also implies this matrix corresponds to a system with a solution
+  public boolean invertible() {
+    return this.determinant() != 0;
+  }
+
+  // allows reversing the effects of a transformation / matrix multiplication
+  public Matrix inverse() {
+    if (!this.invertible()) {
+      // TODO: Handle exception
+      // throw new InvalidObjectException("Matrix is not invertible");
+      System.err.println("Matrix is not invertible");
+      return this;
+    }
+
+    Matrix result = new Matrix(this.numRows, this.numCols);
+    double det = this.determinant();
+
+    for (int row = 0; row < this.numRows; row++) {
+      for (int col = 0; col < this.numCols; col++) {
+        result.set(col, row, this.cofactor(row, col) / det);
+      }
+    }
+
+    return result;
+  }
+
+  @Override
+  public String toString() {
+    StringBuffer buffer = new StringBuffer();
+
+    for (int row = 0; row < this.numRows; row++) {
+      buffer.append("[ ");
+      for (int col = 0; col < this.numCols; col++) {
+        buffer.append(this.get(row, col));
+
+        if (col < this.numCols - 1) {
+          buffer.append(", ");
+        }
+      }
+      buffer.append("]\n");
+    }
+
+    return buffer.toString();
   }
 }
