@@ -28,4 +28,9 @@ public class Color extends Tuple {
   public Color blend(Color other) {
     return super.color(this.r * other.r, this.g * other.g, this.b * other.b);
   }
+
+  public Color toRGB() {
+    Color intermediate = this.scale(255);
+    return intermediate.constrain(0, 255).asColor();
+  }
 }

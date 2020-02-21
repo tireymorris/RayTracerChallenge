@@ -1,4 +1,7 @@
 import static org.junit.Assert.*;
+
+import java.util.Arrays;
+
 import org.junit.Test;
 
 public class CanvasTest {
@@ -27,5 +30,41 @@ public class CanvasTest {
     canvas.writePixel(2, 3, red);
 
     assertEquals(red, canvas.pixelAt(2, 3));
+  }
+
+  @Test
+  public void constructPPMHeader() {
+    Canvas canvas = new Canvas(5, 3);
+    StringBuffer PPM = canvas.constructPPM();
+
+    String[] header = PPM.toString().split("\n");
+    header = Arrays.copyOfRange(header, 0, 3);
+    String[] expected = { "P3", "5 3", "255" };
+
+    assertEquals(3, header.length);
+    assertArrayEquals(expected, header);
+  }
+
+  @Test
+  public void constructPPM() {
+    Canvas canvas = new Canvas(5, 3);
+
+    Color c1 = Tuple.color(1.5, 0, 0);
+    Color c2 = Tuple.color(0, 0.5, 0);
+    Color c3 = Tuple.color(-0.5, 0, 1);
+
+    canvas.writePixel(0, 0, c1);
+    canvas.writePixel(2, 1, c2);
+    canvas.writePixel(4, 2, c3);
+
+    StringBuffer PPM = canvas.constructPPM();
+
+    String[] lines = PPM.toString().split("\n");
+    lines = Arrays.copyOfRange(lines, 3, 6);
+    String[] expected = { "255 0 0 0 0 0 0 0 0 0 0 0 0 0 0", "0 0 0 0 0 0 0 128 0 0 0 0 0 0 0",
+        "0 0 0 0 0 0 0 0 0 0 0 0 0 0 255" };
+
+    assertEquals(3, lines.length);
+    assertArrayEquals(expected, lines);
   }
 }

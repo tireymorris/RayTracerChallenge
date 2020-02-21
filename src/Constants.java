@@ -11,4 +11,9 @@ public final class Constants {
   public static boolean valuesAlmostEqual(double valueOne, double valueTwo) {
     return Math.abs(valueOne - valueTwo) < EPSILON;
   }
+
+  public static double constrain(double value, double min, double max) {
+    return Math.min(Math.max(value, min), max);
+  }
+
 }

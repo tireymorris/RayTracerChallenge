@@ -1,21 +1,21 @@
-public class Tuple {
-  public double x;
-  public double y;
-  public double z;
-  public double w;
+class Tuple {
+  protected double x;
+  protected double y;
+  protected double z;
+  protected double w;
 
-  public Tuple(double x, double y, double z, double w) {
+  protected Tuple(double x, double y, double z, double w) {
     this.x = x;
     this.y = y;
     this.z = z;
     this.w = w;
   }
 
-  public boolean isVector() {
+  protected boolean isVector() {
     return Constants.valuesAlmostEqual(this.w, Constants.VECTOR_W_VALUE);
   }
 
-  public boolean isPoint() {
+  protected boolean isPoint() {
     return Constants.valuesAlmostEqual(this.w, Constants.POINT_W_VALUE);
   }
 
@@ -27,44 +27,50 @@ public class Tuple {
     return tuple(t1.x - t2.x, t1.y - t2.y, t1.z - t2.z, t1.w - t2.w);
   }
 
-  public Tuple scale(double scalar) {
+  protected Tuple scale(double scalar) {
     return tuple(this.x * scalar, this.y * scalar, this.z * scalar, this.w * scalar);
   }
 
-  public Tuple mult(double scalar) {
+  protected Tuple mult(double scalar) {
     return this.scale(scalar);
   }
 
-  public Tuple div(double scalar) {
+  protected Tuple div(double scalar) {
     return this.mult(1 / scalar);
   }
 
-  public static Tuple tuple(double x, double y, double z, double w) {
+  protected static Tuple tuple(double x, double y, double z, double w) {
     return new Tuple(x, y, z, w);
   }
 
-  public static Point point(double x, double y, double z) {
+  protected static Point point(double x, double y, double z) {
     return new Point(x, y, z);
   }
 
-  public Point asPoint() {
+  protected Point asPoint() {
     return new Point(this.x, this.y, this.z);
   }
 
-  public static Vector vector(double x, double y, double z) {
+  protected static Vector vector(double x, double y, double z) {
     return new Vector(x, y, z);
   }
 
-  public Vector asVector() {
+  protected Vector asVector() {
     return new Vector(this.x, this.y, this.z);
   }
 
-  public static Color color(double r, double g, double b) {
+  protected static Color color(double r, double g, double b) {
     return new Color(r, g, b);
   }
 
-  public Color asColor() {
+  protected Color asColor() {
     return new Color(this.x, this.y, this.z);
+  }
+
+  // ensure
+  protected Tuple constrain(double min, double max) {
+    return tuple(Constants.constrain(this.x, min, max), Constants.constrain(this.y, min, max),
+        Constants.constrain(this.z, min, max), Constants.constrain(this.z, min, max));
   }
 
   @Override

@@ -10,8 +10,8 @@ public class Canvas {
 
     pixels = new Color[width * height];
 
-    for (int i = 0; i < width * height; i++) {
-      pixels[i] = Tuple.color(0, 0, 0);
+    for (int idx = 0; idx < width * height; idx++) {
+      pixels[idx] = Tuple.color(0, 0, 0);
     }
   }
 
@@ -33,4 +33,31 @@ public class Canvas {
     return this.pixels[width * y + x];
   }
 
+  public StringBuffer constructPPM() {
+    // P3 is magic number for our version of PPM
+    // third line is maximum pixel value
+    StringBuffer PPM = new StringBuffer(String.format("P3\n%d %d\n255\n", this.width, this.height));
+
+    for (int row = 0; row < this.height; row++) {
+      for (int col = 0; col < this.width; col++) {
+        if (col != 0) {
+          PPM.append(" ");
+        }
+
+        Color pixel = this.pixelAt(col, row);
+        pixel = pixel.toRGB();
+
+        int r = (int) Math.round(pixel.r);
+        int g = (int) Math.round(pixel.g);
+        int b = (int) Math.round(pixel.b);
+
+        PPM.append(String.format("%d %d %d", r, g, b));
+      }
+
+      PPM.append("\n");
+    }
+
+    return PPM;
+
+  }
 }
