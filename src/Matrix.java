@@ -8,6 +8,10 @@ public class Matrix {
   public double[] elements;
 
   public Matrix(int numRows, int numCols) {
+    if (numRows < 1 || numCols < 1) {
+      throw new IndexOutOfBoundsException("Need matrix with at least one row and column");
+    }
+
     this.elements = new double[numRows * numCols];
 
     this.numRows = numRows;
@@ -126,5 +130,35 @@ public class Matrix {
   // in theory, tells you if system has a solution (nonzero)
   public double determinant() {
     return this.get(0, 0) * this.get(1, 1) - this.get(0, 1) * this.get(1, 0);
+  }
+
+  public Matrix submatrix(int deadRow, int deadCol) {
+    // TODO: Better algorithm
+    Matrix result = new Matrix(this.numRows - 1, this.numCols - 1);
+
+    int resultRow = 0;
+    int resultCol = 0;
+
+    for (int row = 0; row < this.numRows; row++) {
+      boolean appended = false;
+
+      for (int col = 0; col < this.numCols; col++) {
+        if (row == deadRow || col == deadCol) {
+          continue;
+        }
+
+        result.set(resultRow, resultCol, this.get(row, col));
+        resultCol++;
+
+        appended = true;
+      }
+
+      if (appended) {
+        resultRow++;
+      }
+      resultCol = 0;
+    }
+
+    return result;
   }
 }

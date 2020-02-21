@@ -138,4 +138,26 @@ public class MatrixTest {
 
     assertEquals(expected, m.determinant(), Constants.EPSILON);
   }
+
+  @Test
+  public void submatrix3x3() {
+    double[][] rows = { { 1, 5, 0 }, { -3, 2, 7 }, { 0, 6, -3 } };
+    Matrix original = Matrix.fromRows(rows);
+
+    double[][] expectedRows = { { -3, 2 }, { 0, 6 } };
+    Matrix expected = Matrix.fromRows(expectedRows);
+
+    assertEquals(expected, original.submatrix(0, 2));
+  }
+
+  @Test
+  public void submatrix4x4() {
+    double[][] rows = { { -6, 1, 1, 6 }, { -8, 5, 8, 6 }, { -1, 0, 8, 2 }, { -7, 1, -1, 1 } };
+    Matrix original = Matrix.fromRows(rows);
+
+    double[][] expectedRows = { { -6, 1, 6 }, { -8, 8, 6 }, { -7, -1, 1 } };
+    Matrix expected = Matrix.fromRows(expectedRows);
+
+    assertEquals(expected, original.submatrix(2, 1));
+  }
 }
