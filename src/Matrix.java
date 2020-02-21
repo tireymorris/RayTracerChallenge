@@ -68,9 +68,11 @@ public class Matrix {
     return true;
   }
 
+  // computes the dot product of every row-column combination in the two matrices
+  // will be useful for combining transformations
   public static Matrix mult(Matrix a, Matrix b) {
-    if (!(a.numRows == 4 && a.numCols == 4 && b.numRows == 4 && b.numCols == 4)) {
-      throw new IndexOutOfBoundsException("Multiplication currently only supported for 4x4 matrices");
+    if (a.numCols != b.numRows) {
+      throw new IndexOutOfBoundsException("Multiplication attempted for non-matching matrices");
     }
 
     Matrix result = new Matrix(a.numRows, b.numCols);
@@ -87,8 +89,26 @@ public class Matrix {
     return result;
   }
 
-  // will be useful for combining transformations
   public Matrix mult(Matrix other) {
+    return Matrix.mult(this, other);
+  }
+
+  public static Tuple mult(Matrix a, Tuple b) {
+    // TODO: Assumes Tuple is always a quadruple
+    Matrix bMatrix = new Matrix(4, 1);
+
+    bMatrix.set(0, 0, b.x);
+    bMatrix.set(1, 0, b.y);
+    bMatrix.set(2, 0, b.z);
+    bMatrix.set(3, 0, b.w);
+
+    Matrix product = Matrix.mult(a, bMatrix);
+    Tuple result = Tuple.tuple(product.get(0, 0), product.get(1, 0), product.get(2, 0), product.get(3, 0));
+
+    return result;
+  }
+
+  public Tuple mult(Tuple other) {
     return Matrix.mult(this, other);
   }
 }

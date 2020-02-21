@@ -69,7 +69,7 @@ public class MatrixTest {
   }
 
   @Test
-  public void matrixMultiply() {
+  public void matrixMatrixMultiply() {
     double[][] rows1 = { { 1, 2, 3, 4 }, { 5, 6, 7, 8 }, { 9, 8, 7, 6 }, { 5, 4, 3, 2 } };
     double[][] rows2 = { { -2, 1, 2, 3 }, { 3, 2, 1, -1 }, { 4, 3, 6, 5 }, { 1, 2, 7, 8 } };
 
@@ -79,5 +79,15 @@ public class MatrixTest {
     double[][] expected = { { 20, 22, 50, 48 }, { 44, 54, 114, 108 }, { 40, 58, 110, 102 }, { 16, 26, 46, 42 } };
 
     assertEquals(Matrix.fromRows(expected), m1.mult(m2));
+  }
+
+  @Test
+  public void matrixTupleMultiply() {
+    double[][] rows = { { 1, 2, 3, 4 }, { 2, 4, 4, 2 }, { 8, 6, 4, 1 }, { 0, 0, 0, 1 } };
+
+    Matrix a = Matrix.fromRows(rows);
+    Tuple b = Tuple.tuple(1, 2, 3, 1);
+
+    assertEquals(Tuple.tuple(18, 24, 33, 1), a.mult(b));
   }
 }
