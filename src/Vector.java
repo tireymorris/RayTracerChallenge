@@ -30,7 +30,7 @@ public class Vector extends Tuple {
   // for example, given a vector that points from a surface toward a light source,
   // what vector points from the light source back to the surface?
   public Vector negate() {
-    return Constants.ZERO_VECTOR.minus(this);
+    return Tuple.vector(0, 0, 0).minus(this);
   }
 
   // represents length of vector

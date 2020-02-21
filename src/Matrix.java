@@ -98,23 +98,18 @@ public class Matrix {
     return Matrix.mult(this, other);
   }
 
-  public static Tuple mult(Matrix a, Tuple b) {
-    // TODO: Assumes Tuple is always a quadruple
+  public Tuple mult(Tuple other) {
     Matrix bMatrix = new Matrix(4, 1);
 
-    bMatrix.set(0, 0, b.x);
-    bMatrix.set(1, 0, b.y);
-    bMatrix.set(2, 0, b.z);
-    bMatrix.set(3, 0, b.w);
+    bMatrix.set(0, 0, other.x);
+    bMatrix.set(1, 0, other.y);
+    bMatrix.set(2, 0, other.z);
+    bMatrix.set(3, 0, other.w);
 
-    Matrix product = Matrix.mult(a, bMatrix);
+    Matrix product = Matrix.mult(this, bMatrix);
     Tuple result = Tuple.tuple(product.get(0, 0), product.get(1, 0), product.get(2, 0), product.get(3, 0));
 
     return result;
-  }
-
-  public Tuple mult(Tuple other) {
-    return Matrix.mult(this, other);
   }
 
   public Matrix transpose() {

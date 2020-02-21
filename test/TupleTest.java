@@ -209,7 +209,7 @@ public class TupleTest {
   public void normalizeVector1() {
     Vector v = Tuple.vector(4, 0, 0);
 
-    assertEquals(Constants.I_VECTOR, v.normalize());
+    assertEquals(Tuple.vector(1, 0, 0), v.normalize());
   }
 
   @Test
