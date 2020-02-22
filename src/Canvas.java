@@ -88,4 +88,12 @@ public class Canvas {
     writer.append(PPM);
     writer.close();
   }
+
+  public int toCanvasX(double x) {
+    return (int) Math.round(this.width / 2 + x);
+  }
+
+  public int toCanvasY(double y) {
+    return (int) Math.round(this.height / 2 - y);
+  }
 }

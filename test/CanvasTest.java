@@ -92,4 +92,25 @@ public class CanvasTest {
 
     assertEquals(PPM.charAt(PPM.length() - 1), '\n');
   }
+
+  @Test
+  public void toCanvasCoordinates() {
+    Canvas canvas = new Canvas(100, 100);
+
+    double x = 0, y = 0;
+    assertEquals(50, canvas.toCanvasX(x));
+    assertEquals(50, canvas.toCanvasY(y));
+
+    x = 30;
+    y = -45;
+    assertEquals(80, canvas.toCanvasX(x));
+    assertEquals(95, canvas.toCanvasY(y));
+
+    canvas = new Canvas(80, 100);
+    x = 40;
+    y = -50;
+    assertEquals(80, canvas.toCanvasX(x));
+    assertEquals(100, canvas.toCanvasY(y));
+  }
+
 }
