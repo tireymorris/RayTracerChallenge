@@ -1,11 +1,9 @@
 public class Sphere extends Entity {
   public double radius;
-  private Transform transform;
 
   public Sphere() {
-    super(Tuple.point(0, 0, 0), new Material());
+    super(Tuple.point(0, 0, 0), new Material(), Transform.identity());
     this.radius = 1;
-    this.transform = Transform.identity();
   }
 
   public Transform getTransform() {
@@ -27,4 +25,13 @@ public class Sphere extends Entity {
 
     return worldNormal.normalize();
   }
+
+  public Sphere withMaterial(Material material) {
+    return (Sphere) super.withMaterial(material);
+  }
+
+  public Sphere withTransform(Transform transform) {
+    return (Sphere) super.withTransform(transform);
+  }
+
 }
