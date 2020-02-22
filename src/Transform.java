@@ -7,7 +7,7 @@ public class Transform {
 
   private Transform() {
     this.state = new ArrayList<Matrix>();
-    this.state.add(Constants.IDENTITY_MATRIX());
+    this.state.add(Matrix.IDENTITY_MATRIX());
   }
 
   public static Transform identity() {
@@ -15,7 +15,7 @@ public class Transform {
   }
 
   public Matrix build() {
-    Matrix transform = Constants.IDENTITY_MATRIX();
+    Matrix transform = Matrix.IDENTITY_MATRIX();
 
     // Applying backwards because they're in order A -> B -> C
     // but T = C * B * A

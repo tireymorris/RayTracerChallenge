@@ -6,6 +6,11 @@ public class Matrix {
 
   public double[] elements;
 
+  public static Matrix IDENTITY_MATRIX() {
+    double[][] identityValues = { { 1, 0, 0, 0 }, { 0, 1, 0, 0 }, { 0, 0, 1, 0 }, { 0, 0, 0, 1 } };
+    return fromRows(identityValues);
+  }
+
   public Matrix(int numRows, int numCols) {
     if (numRows < 1 || numCols < 1) {
       throw new IndexOutOfBoundsException("Need matrix with at least one row and column");
@@ -69,6 +74,14 @@ public class Matrix {
     }
 
     return true;
+  }
+
+  public Matrix clone() {
+    Matrix result = new Matrix(this.numRows, this.numCols);
+
+    result.elements = this.elements.clone();
+
+    return result;
   }
 
   // computes the dot product of every row-column combination in the two matrices

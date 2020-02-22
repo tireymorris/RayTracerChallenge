@@ -1,6 +1,6 @@
 public class Transformations {
   public static Matrix translation(double x, double y, double z) {
-    Matrix result = Constants.IDENTITY_MATRIX();
+    Matrix result = Matrix.IDENTITY_MATRIX();
 
     result.set(0, 3, x);
     result.set(1, 3, y);
@@ -11,7 +11,7 @@ public class Transformations {
 
   // scaling by inverse will shrink by same factor
   public static Matrix scaling(double x, double y, double z) {
-    Matrix result = Constants.IDENTITY_MATRIX();
+    Matrix result = Matrix.IDENTITY_MATRIX();
 
     result.set(0, 0, x);
     result.set(1, 1, y);
@@ -33,7 +33,7 @@ public class Transformations {
   }
 
   public static Matrix rotationX(double radians) {
-    Matrix result = Constants.IDENTITY_MATRIX();
+    Matrix result = Matrix.IDENTITY_MATRIX();
 
     result.set(1, 1, Math.cos(radians));
     result.set(1, 2, -Math.sin(radians));
@@ -44,7 +44,7 @@ public class Transformations {
   }
 
   public static Matrix rotationY(double radians) {
-    Matrix result = Constants.IDENTITY_MATRIX();
+    Matrix result = Matrix.IDENTITY_MATRIX();
 
     result.set(0, 0, Math.cos(radians));
     result.set(0, 2, Math.sin(radians));
@@ -55,7 +55,7 @@ public class Transformations {
   }
 
   public static Matrix rotationZ(double radians) {
-    Matrix result = Constants.IDENTITY_MATRIX();
+    Matrix result = Matrix.IDENTITY_MATRIX();
 
     result.set(0, 0, Math.cos(radians));
     result.set(0, 1, -Math.sin(radians));
@@ -67,7 +67,7 @@ public class Transformations {
 
   // // also called skew
   public static Matrix shearing(double dxy, double dxz, double dyx, double dyz, double dzx, double dzy) {
-    Matrix result = Constants.IDENTITY_MATRIX();
+    Matrix result = Matrix.IDENTITY_MATRIX();
 
     result.set(0, 1, dxy);
     result.set(0, 2, dxz);

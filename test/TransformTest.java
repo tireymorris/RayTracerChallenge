@@ -193,7 +193,7 @@ public class TransformTest {
 
     Matrix t = Transformations.viewTransformation(from, to, up);
 
-    assertEquals(Constants.IDENTITY_MATRIX(), t);
+    assertEquals(Matrix.IDENTITY_MATRIX(), t);
   }
 
   @Test

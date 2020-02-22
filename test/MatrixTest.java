@@ -98,8 +98,8 @@ public class MatrixTest {
     Matrix a = Matrix.fromRows(rows);
     Matrix backup = Matrix.fromRows(rows);
 
-    assertEquals(a, a.mult(Constants.IDENTITY_MATRIX()));
-    assertEquals(backup, a.mult(Constants.IDENTITY_MATRIX()));
+    assertEquals(a, a.mult(Matrix.IDENTITY_MATRIX()));
+    assertEquals(backup, a.mult(Matrix.IDENTITY_MATRIX()));
   }
 
   @Test
@@ -107,8 +107,8 @@ public class MatrixTest {
     Tuple tuple = new Tuple(1, 2, 3, 4);
     Tuple backup = new Tuple(1, 2, 3, 4);
 
-    assertEquals(tuple, Constants.IDENTITY_MATRIX().mult(tuple));
-    assertEquals(backup, Constants.IDENTITY_MATRIX().mult(tuple));
+    assertEquals(tuple, Matrix.IDENTITY_MATRIX().mult(tuple));
+    assertEquals(backup, Matrix.IDENTITY_MATRIX().mult(tuple));
   }
 
   @Test
@@ -126,7 +126,7 @@ public class MatrixTest {
 
   @Test
   public void transposeIdentityMatrix() {
-    assertEquals(Constants.IDENTITY_MATRIX(), Constants.IDENTITY_MATRIX().transpose());
+    assertEquals(Matrix.IDENTITY_MATRIX(), Matrix.IDENTITY_MATRIX().transpose());
   }
 
   @Test
@@ -293,7 +293,7 @@ public class MatrixTest {
     double[][] bRows = { { 8, 2, 2, 2 }, { 3, -1, 7, 0 }, { 7, 0, 5, 4 }, { 6, -2, 0, 5 } };
     Matrix b = Matrix.fromRows(bRows);
 
-    assertEquals(Constants.IDENTITY_MATRIX(), b.mult(b.inverse()));
+    assertEquals(Matrix.IDENTITY_MATRIX(), b.mult(b.inverse()));
   }
 
   @Test

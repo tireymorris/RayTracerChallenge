@@ -8,11 +8,6 @@ public final class Constants {
   public static final double PI = Math.PI;
   public static final double TAU = Math.PI * 2.0;
 
-  public static Matrix IDENTITY_MATRIX() {
-    double[][] identityValues = { { 1, 0, 0, 0 }, { 0, 1, 0, 0 }, { 0, 0, 1, 0 }, { 0, 0, 0, 1 } };
-    return Matrix.fromRows(identityValues);
-  }
-
   public static boolean valuesAlmostEqual(double valueOne, double valueTwo) {
     return Math.abs(valueOne - valueTwo) < EPSILON;
   }

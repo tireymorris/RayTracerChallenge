@@ -96,4 +96,18 @@ public class Canvas {
   public int toCanvasY(double y) {
     return (int) Math.round(this.height / 2 - y);
   }
+
+  public static Canvas render(Camera camera, World world) {
+    Canvas image = new Canvas(camera.getHsize(), camera.getVsize());
+
+    for (int y = 0; y < camera.getVsize(); y++) {
+      for (int x = 0; x < camera.getHsize(); x++) {
+        Ray ray = camera.rayForPixel(x, y);
+        Color color = world.colorAt(ray);
+        image.writePixel(x, y, color);
+      }
+    }
+
+    return image;
+  }
 }

@@ -5,7 +5,7 @@ public class SphereTest {
   @Test
   public void defaultTransformation() {
     Sphere s = new Sphere();
-    assertEquals(Constants.IDENTITY_MATRIX(), s.getTransform().build());
+    assertEquals(Matrix.IDENTITY_MATRIX(), s.getTransform().build());
   }
 
   @Test
