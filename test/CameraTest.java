@@ -51,7 +51,7 @@ public class CameraTest {
   @Test
   public void rayWhenCameraTransformed() {
     Camera c = new Camera(201, 101, Constants.HALF_PI);
-    c.setTransform(Transform.identity().translate(0, -2, 5).rotateY(Constants.QUARTER_PI).build());
+    c.setTransform(Transform.identity().translate(0, -2, 5).rotateY(Constants.QUARTER_PI));
     Ray r = c.rayForPixel(100, 50);
 
     assertEquals(new Point(0, 2, -5), r.origin);
@@ -67,7 +67,7 @@ public class CameraTest {
     Point to = new Point(0, 0, 0);
     Vector up = new Vector(0, 1, 0);
 
-    c.setTransform(Transformations.viewTransformation(from, to, up));
+    c.setTransform(Transform.identity().viewTransform(from, to, up));
 
     Canvas image = Canvas.render(c, w);
     assertEquals(new Color(0.38066, 0.47583, 0.2855), image.pixelAt(5, 5));

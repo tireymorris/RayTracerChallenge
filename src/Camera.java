@@ -5,7 +5,7 @@ public class Camera {
   private double pixelSize;
   private double halfWidth;
   private double halfHeight;
-  private Matrix transform;
+  private Transform transform;
 
   public Camera(int hsize, int vsize, double fieldOfView) {
     this.hsize = hsize;
@@ -13,7 +13,7 @@ public class Camera {
 
     this.fieldOfView = fieldOfView;
 
-    this.transform = Matrix.IDENTITY_MATRIX();
+    this.transform = Transform.identity();
 
     calculatePixelSize();
   }
@@ -34,8 +34,8 @@ public class Camera {
     // use camera matrix to transform canvas point and the origin
     // then compute ray's direction vector
     // (note that canvas is at z = -1)
-    Point pixel = transform.inverse().mult(new Point(worldX, worldY, -1));
-    Point origin = transform.inverse().mult(new Point(0, 0, 0));
+    Point pixel = transform.build().inverse().mult(new Point(worldX, worldY, -1));
+    Point origin = transform.build().inverse().mult(new Point(0, 0, 0));
     Vector direction = pixel.minus(origin).normalize();
 
     return new Ray(origin, direction);
@@ -79,7 +79,7 @@ public class Camera {
   }
 
   public Matrix getTransform() {
-    return transform.clone();
+    return transform.build().clone();
   }
 
   public void setHsize(int hsize) {
@@ -97,7 +97,7 @@ public class Camera {
     calculatePixelSize();
   }
 
-  public void setTransform(Matrix transform) {
+  public void setTransform(Transform transform) {
     this.transform = transform;
     calculatePixelSize();
   }
