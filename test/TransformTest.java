@@ -184,4 +184,62 @@ public class TransformTest {
 
     assertEquals(new Point(15, 0, 7), t.mult(p));
   }
+
+  @Test
+  public void viewTransformDefaultOrientation() {
+    Point from = new Point(0, 0, 0);
+    Point to = new Point(0, 0, -1);
+    Vector up = new Vector(0, 1, 0);
+
+    Matrix t = Transformations.viewTransformation(from, to, up);
+
+    assertEquals(Constants.IDENTITY_MATRIX(), t);
+  }
+
+  @Test
+  public void viewTransformFlipsXAndZ() {
+    Point from = new Point(0, 0, 0);
+    Point to = new Point(0, 0, 1);
+    Vector up = new Vector(0, 1, 0);
+
+    Matrix t = Transformations.viewTransformation(from, to, up);
+
+    assertEquals(Transformations.scaling(-1, 1, -1), t);
+  }
+
+  @Test
+  public void viewTransformMovesTheWorld() {
+    Point from = new Point(0, 0, 8);
+    Point to = new Point(0, 0, 0);
+    Vector up = new Vector(0, 1, 0);
+
+    Matrix t = Transformations.viewTransformation(from, to, up);
+
+    assertEquals(Transformations.translation(0, 0, -8), t);
+  }
+
+  @Test
+  public void viewTransformArbitrary() {
+    Point from = new Point(1, 3, 2);
+    Point to = new Point(4, -2, 8);
+    Vector up = new Vector(1, 1, 0);
+
+    Matrix t = Transformations.viewTransformation(from, to, up);
+
+    double[][] rows = { { -0.50709, 0.50709, 0.67612, -2.36643 }, { 0.76772, 0.60609, 0.12122, -2.82843 },
+        { -0.35857, 0.59761, -0.71714, 0 }, { 0, 0, 0, 1 } };
+
+    assertEquals(Matrix.fromRows(rows), t);
+  }
+
+  @Test
+  public void viewTransformMovesTheWorld2() {
+    Point from = new Point(0, 0, 8);
+    Point to = new Point(0, 0, 0);
+    Vector up = new Vector(0, 1, 0);
+
+    Matrix t = Transform.identity().viewTransform(from, to, up).build();
+
+    assertEquals(Transformations.translation(0, 0, -8), t);
+  }
 }

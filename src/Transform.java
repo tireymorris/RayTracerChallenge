@@ -82,4 +82,9 @@ public class Transform {
     return this;
   }
 
+  public Transform viewTransform(Point from, Point to, Vector up) {
+    this.state.add(Transformations.viewTransformation(from, to, up));
+
+    return this;
+  }
 }

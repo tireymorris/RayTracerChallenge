@@ -78,4 +78,21 @@ public class Transformations {
 
     return result;
   }
+
+  public static Matrix viewTransformation(Point from, Point to, Vector up) {
+    Vector forward = to.minus(from).normalize();
+
+    Vector left = forward.cross(up.normalize());
+
+    // allows given Up vector to be an approximation
+    Vector trueUp = left.cross(forward);
+
+    double[][] orientationRows = { { left.x, left.y, left.z, 0 }, { trueUp.x, trueUp.y, trueUp.z, 0 },
+        { -forward.x, -forward.y, -forward.z, 0 }, { 0, 0, 0, 1 } };
+
+    Matrix orientation = Matrix.fromRows(orientationRows);
+    Matrix translation = Transformations.translation(-from.x, -from.y, -from.z);
+
+    return orientation.mult(translation);
+  }
 }
