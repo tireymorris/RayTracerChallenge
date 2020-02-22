@@ -193,10 +193,7 @@ public class Matrix {
   // allows reversing the effects of a transformation / matrix multiplication
   public Matrix inverse() {
     if (!this.invertible()) {
-      // TODO: Handle exception
-      // throw new InvalidObjectException("Matrix is not invertible");
-      System.err.println("Matrix is not invertible");
-      return this;
+      throw new IndexOutOfBoundsException("Matrix is not invertible");
     }
 
     Matrix result = new Matrix(this.numRows, this.numCols);

@@ -1,1 +1,1 @@
-gradle build && java -jar build/libs/grandpa.jar
+gradle build && time java -jar build/libs/grandpa.jar

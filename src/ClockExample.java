@@ -30,7 +30,6 @@ public class ClockExample {
     try {
       canvas.exportToPPM("/home/tmorris/Desktop/clock.ppm");
     } catch (IOException e) {
-      // TODO Auto-generated catch block
       e.printStackTrace();
     }
   }

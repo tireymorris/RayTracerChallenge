@@ -1,15 +1,11 @@
 public class Sphere extends Entity {
-  public Point origin;
   public double radius;
-  public Material material;
-
   private Transform transform;
 
   public Sphere() {
-    super(Tuple.point(0, 0, 0));
+    super(Tuple.point(0, 0, 0), new Material());
     this.radius = 1;
     this.transform = Transform.identity();
-    this.material = new Material();
   }
 
   public Transform getTransform() {
