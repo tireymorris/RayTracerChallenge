@@ -1,7 +1,4 @@
 import static org.junit.Assert.*;
-
-import java.util.ArrayList;
-
 import org.junit.Test;
 
 public class RayTest {
@@ -30,11 +27,11 @@ public class RayTest {
     Ray r = new Ray(Tuple.point(0, 0, -5), Tuple.vector(0, 0, 1));
     Sphere s = new Sphere();
 
-    Intersection[] intersections = r.intersect(s);
+    Intersection[] xs = r.intersect(s);
 
-    assertEquals(2, intersections.length);
-    assertEquals(4.0, intersections[0].t, Constants.EPSILON);
-    assertEquals(6.0, intersections[1].t, Constants.EPSILON);
+    assertEquals(2, xs.length);
+    assertEquals(4.0, xs[0].t, Constants.EPSILON);
+    assertEquals(6.0, xs[1].t, Constants.EPSILON);
   }
 
   @Test
@@ -42,11 +39,11 @@ public class RayTest {
     Ray r = new Ray(Tuple.point(0, 1, -5), Tuple.vector(0, 0, 1));
     Sphere s = new Sphere();
 
-    Intersection[] intersections = r.intersect(s);
+    Intersection[] xs = r.intersect(s);
 
-    assertEquals(2, intersections.length);
-    assertEquals(5.0, intersections[0].t, Constants.EPSILON);
-    assertEquals(5.0, intersections[1].t, Constants.EPSILON);
+    assertEquals(2, xs.length);
+    assertEquals(5.0, xs[0].t, Constants.EPSILON);
+    assertEquals(5.0, xs[1].t, Constants.EPSILON);
   }
 
   @Test
@@ -54,11 +51,11 @@ public class RayTest {
     Ray r = new Ray(Tuple.point(0, 0, 0), Tuple.vector(0, 0, 1));
     Sphere s = new Sphere();
 
-    Intersection[] intersections = r.intersect(s);
+    Intersection[] xs = r.intersect(s);
 
-    assertEquals(2, intersections.length);
-    assertEquals(-1.0, intersections[0].t, Constants.EPSILON);
-    assertEquals(1.0, intersections[1].t, Constants.EPSILON);
+    assertEquals(2, xs.length);
+    assertEquals(-1.0, xs[0].t, Constants.EPSILON);
+    assertEquals(1.0, xs[1].t, Constants.EPSILON);
   }
 
   @Test
@@ -66,11 +63,11 @@ public class RayTest {
     Ray r = new Ray(Tuple.point(0, 0, 5), Tuple.vector(0, 0, 1));
     Sphere s = new Sphere();
 
-    Intersection[] intersections = r.intersect(s);
+    Intersection[] xs = r.intersect(s);
 
-    assertEquals(2, intersections.length);
-    assertEquals(-6.0, intersections[0].t, Constants.EPSILON);
-    assertEquals(-4.0, intersections[1].t, Constants.EPSILON);
+    assertEquals(2, xs.length);
+    assertEquals(-6.0, xs[0].t, Constants.EPSILON);
+    assertEquals(-4.0, xs[1].t, Constants.EPSILON);
   }
 
   @Test
@@ -78,10 +75,35 @@ public class RayTest {
     Ray r = new Ray(Tuple.point(0, 0, -5), Tuple.vector(0, 0, 1));
     Sphere s = new Sphere();
 
-    Intersection[] intersections = r.intersect(s);
+    Intersection[] xs = r.intersect(s);
 
-    assertEquals(2, intersections.length);
-    assertEquals(s, intersections[0].entity);
-    assertEquals(s, intersections[1].entity);
+    assertEquals(2, xs.length);
+    assertEquals(s, xs[0].entity);
+    assertEquals(s, xs[1].entity);
+  }
+
+  @Test
+  public void translateRay() {
+    Ray r = new Ray(Tuple.point(1, 2, 3), Tuple.vector(0, 1, 0));
+    Matrix m = Transformations.translation(3, 4, 5);
+
+    Ray r2 = r.transform(m);
+
+    assertEquals(Tuple.point(4, 6, 8), r2.origin);
+    assertEquals(Tuple.vector(0, 1, 0), r2.direction);
+
+    assertEquals(Tuple.point(1, 2, 3), r.origin);
+    assertEquals(Tuple.vector(0, 1, 0), r.direction);
+  }
+
+  @Test
+  public void scaleRay() {
+    Ray r = new Ray(Tuple.point(1, 2, 3), Tuple.vector(0, 1, 0));
+    Matrix m = Transformations.scaling(2, 3, 4);
+
+    Ray r2 = r.transform(m);
+
+    assertEquals(Tuple.point(2, 6, 12), r2.origin);
+    assertEquals(Tuple.vector(0, 3, 0), r2.direction);
   }
 }

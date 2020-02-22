@@ -17,10 +17,10 @@ public class IntersectionTest {
     Intersection i1 = new Intersection(1, s);
     Intersection i2 = new Intersection(2, s);
 
-    Intersection[] intersections = Intersection.intersections(i1, i2);
-    assertEquals(2, intersections.length);
-    assertEquals(1, intersections[0].t, Constants.EPSILON);
-    assertEquals(2, intersections[1].t, Constants.EPSILON);
+    Intersection[] xs = Intersection.intersections(i1, i2);
+    assertEquals(2, xs.length);
+    assertEquals(1, xs[0].t, Constants.EPSILON);
+    assertEquals(2, xs[1].t, Constants.EPSILON);
   }
 
   @Test
@@ -29,8 +29,8 @@ public class IntersectionTest {
     Intersection i1 = new Intersection(1, s);
     Intersection i2 = new Intersection(2, s);
 
-    Intersection[] intersections = Intersection.intersections(i1, i2);
-    assertEquals(i1, Intersection.hit(intersections));
+    Intersection[] xs = Intersection.intersections(i1, i2);
+    assertEquals(i1, Intersection.hit(xs));
   }
 
   @Test
@@ -39,8 +39,8 @@ public class IntersectionTest {
     Intersection i1 = new Intersection(-1, s);
     Intersection i2 = new Intersection(1, s);
 
-    Intersection[] intersections = Intersection.intersections(i1, i2);
-    assertEquals(i2, Intersection.hit(intersections));
+    Intersection[] xs = Intersection.intersections(i1, i2);
+    assertEquals(i2, Intersection.hit(xs));
   }
 
   @Test
@@ -49,8 +49,8 @@ public class IntersectionTest {
     Intersection i1 = new Intersection(-2, s);
     Intersection i2 = new Intersection(-1, s);
 
-    Intersection[] intersections = Intersection.intersections(i1, i2);
-    assertNull(Intersection.hit(intersections));
+    Intersection[] xs = Intersection.intersections(i1, i2);
+    assertNull(Intersection.hit(xs));
   }
 
   @Test
@@ -61,7 +61,7 @@ public class IntersectionTest {
     Intersection i3 = new Intersection(-3, s);
     Intersection i4 = new Intersection(2, s);
 
-    Intersection[] intersections = Intersection.intersections(i1, i2, i3, i4);
-    assertEquals(i4, Intersection.hit(intersections));
+    Intersection[] xs = Intersection.intersections(i1, i2, i3, i4);
+    assertEquals(i4, Intersection.hit(xs));
   }
 }

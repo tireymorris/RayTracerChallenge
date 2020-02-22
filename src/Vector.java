@@ -17,12 +17,12 @@ public class Vector extends Tuple {
   }
 
   @Override
-  protected Vector mult(double scalar) {
+  public Vector mult(double scalar) {
     return super.scale(scalar).asVector();
   }
 
   @Override
-  protected Vector div(double scalar) {
+  public Vector div(double scalar) {
     return super.mult(1 / scalar).asVector();
   }
 

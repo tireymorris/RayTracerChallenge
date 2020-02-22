@@ -1,7 +1,5 @@
 
-// TODO: Handle exceptions
 import java.util.ArrayList;
-import java.util.Collections;
 
 public class Transform {
   private ArrayList<Matrix> state;
@@ -17,11 +15,11 @@ public class Transform {
 
   public Matrix build() {
     Matrix transform = Constants.IDENTITY_MATRIX();
-    Collections.reverse(this.state); // TODO: Transform now unusable?
 
     // Applying backwards because they're in order A -> B -> C
     // but T = C * B * A
-    for (Matrix intermediate : this.state) {
+    for (int i = this.state.size() - 1; i >= 0; i--) {
+      Matrix intermediate = this.state.get(i);
       transform = transform.mult(intermediate);
     }
 
