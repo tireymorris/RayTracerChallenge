@@ -23,7 +23,7 @@ public class SphereTest {
     Sphere s = new Sphere();
 
     s.setTransform(Transform.identity().scale(2, 2, 2));
-    Intersection[] xs = r.intersect(s);
+    Intersection[] xs = s.intersections(r);
 
     assertEquals(2, xs.length);
     assertEquals(3, xs[0].t, Constants.EPSILON);

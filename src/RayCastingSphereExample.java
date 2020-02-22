@@ -25,7 +25,7 @@ public class RayCastingSphereExample {
         Point position = Tuple.point(worldX, worldY, wallZ);
         Ray r = new Ray(rayOrigin, position.minus(rayOrigin).normalize());
 
-        Intersection[] xs = r.intersect((Sphere) shape);
+        Intersection[] xs = shape.intersections(r);
         Intersection hit = Intersection.hit(xs);
 
         if (hit != null) {
@@ -70,7 +70,7 @@ public class RayCastingSphereExample {
         Point position = Tuple.point(worldX, worldY, wallZ);
         Ray r = new Ray(rayOrigin, position.minus(rayOrigin).normalize());
 
-        Intersection[] xs = r.intersect((Sphere) shape);
+        Intersection[] xs = shape.intersections(r);
         Intersection hit = Intersection.hit(xs);
 
         if (hit != null) {

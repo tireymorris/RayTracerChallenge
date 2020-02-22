@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class World {
   ArrayList<Entity> entities;
@@ -42,6 +43,19 @@ public class World {
     setLightSource(light);
 
     return this;
+  }
+
+  public Intersection[] intersections(Ray ray) {
+    ArrayList<Intersection> intersections = new ArrayList<>();
+
+    for (Entity e : this.entities) {
+      intersections.addAll(Arrays.asList(e.intersections(ray)));
+    }
+
+    Intersection[] xs = new Intersection[intersections.size()];
+    intersections.sort((i1, i2) -> i1.compareTo(i2));
+
+    return intersections.toArray(xs);
   }
 
 }

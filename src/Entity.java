@@ -20,4 +20,17 @@ public abstract class Entity {
 
     return this;
   }
+
+  public Transform getTransform() {
+    return this.transform;
+  }
+
+  public void setTransform(Transform transform) {
+    this.transform = transform;
+  }
+
+  public Intersection[] intersections(Ray ray) {
+    Intersection[] xs = {};
+    return xs;
+  }
 }

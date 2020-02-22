@@ -27,7 +27,7 @@ public class RayTest {
     Ray r = new Ray(Tuple.point(0, 0, -5), Tuple.vector(0, 0, 1));
     Sphere s = new Sphere();
 
-    Intersection[] xs = r.intersect(s);
+    Intersection[] xs = s.intersections(r);
 
     assertEquals(2, xs.length);
     assertEquals(4.0, xs[0].t, Constants.EPSILON);
@@ -39,7 +39,7 @@ public class RayTest {
     Ray r = new Ray(Tuple.point(0, 1, -5), Tuple.vector(0, 0, 1));
     Sphere s = new Sphere();
 
-    Intersection[] xs = r.intersect(s);
+    Intersection[] xs = s.intersections(r);
 
     assertEquals(2, xs.length);
     assertEquals(5.0, xs[0].t, Constants.EPSILON);
@@ -51,7 +51,7 @@ public class RayTest {
     Ray r = new Ray(Tuple.point(0, 0, 0), Tuple.vector(0, 0, 1));
     Sphere s = new Sphere();
 
-    Intersection[] xs = r.intersect(s);
+    Intersection[] xs = s.intersections(r);
 
     assertEquals(2, xs.length);
     assertEquals(-1.0, xs[0].t, Constants.EPSILON);
@@ -63,7 +63,7 @@ public class RayTest {
     Ray r = new Ray(Tuple.point(0, 0, 5), Tuple.vector(0, 0, 1));
     Sphere s = new Sphere();
 
-    Intersection[] xs = r.intersect(s);
+    Intersection[] xs = s.intersections(r);
 
     assertEquals(2, xs.length);
     assertEquals(-6.0, xs[0].t, Constants.EPSILON);
@@ -75,7 +75,7 @@ public class RayTest {
     Ray r = new Ray(Tuple.point(0, 0, -5), Tuple.vector(0, 0, 1));
     Sphere s = new Sphere();
 
-    Intersection[] xs = r.intersect(s);
+    Intersection[] xs = s.intersections(r);
 
     assertEquals(2, xs.length);
     assertEquals(s, xs[0].entity);

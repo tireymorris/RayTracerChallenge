@@ -36,4 +36,18 @@ public class WorldTest {
     assertEquals(s2.radius, ent2.radius, Constants.EPSILON);
     assertEquals(s2.transform.build(), ent2.transform.build());
   }
+
+  @Test
+  public void rayIntersectsWithWorld() {
+    World w = World.defaultWorld();
+    Ray r = new Ray(Tuple.point(0, 0, -5), Tuple.vector(0, 0, 1));
+
+    Intersection[] xs = w.intersections(r);
+
+    assertEquals(4, xs.length);
+    assertEquals(4, xs[0].t, Constants.EPSILON);
+    assertEquals(4.5, xs[1].t, Constants.EPSILON);
+    assertEquals(5.5, xs[2].t, Constants.EPSILON);
+    assertEquals(6, xs[3].t, Constants.EPSILON);
+  }
 }
