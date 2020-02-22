@@ -14,15 +14,15 @@ public class ClockExample {
       int x = canvas.toCanvasX(dot.x);
       int y = canvas.toCanvasY(dot.y);
 
-      canvas.writePixel(x, y, Constants.WHITE());
-      canvas.writePixel(x, y + 1, Constants.WHITE());
-      canvas.writePixel(x, y - 1, Constants.WHITE());
-      canvas.writePixel(x + 1, y, Constants.WHITE());
-      canvas.writePixel(x + 1, y - 1, Constants.WHITE());
-      canvas.writePixel(x + 1, y + 1, Constants.WHITE());
-      canvas.writePixel(x - 1, y, Constants.WHITE());
-      canvas.writePixel(x - 1, y - 1, Constants.WHITE());
-      canvas.writePixel(x - 1, y + 1, Constants.WHITE());
+      canvas.writePixel(x, y, Color.WHITE());
+      canvas.writePixel(x, y + 1, Color.WHITE());
+      canvas.writePixel(x, y - 1, Color.WHITE());
+      canvas.writePixel(x + 1, y, Color.WHITE());
+      canvas.writePixel(x + 1, y - 1, Color.WHITE());
+      canvas.writePixel(x + 1, y + 1, Color.WHITE());
+      canvas.writePixel(x - 1, y, Color.WHITE());
+      canvas.writePixel(x - 1, y - 1, Color.WHITE());
+      canvas.writePixel(x - 1, y + 1, Color.WHITE());
 
       hand = Transformations.rotationZ(Constants.HALF_PI / 3.0).mult(hand).asVector();
     }

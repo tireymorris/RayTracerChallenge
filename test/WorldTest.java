@@ -23,8 +23,8 @@ public class WorldTest {
     assertFalse(defaultWorld.entities.contains(s1));
     assertFalse(defaultWorld.entities.contains(s2));
 
-    Sphere ent1 = (Sphere) defaultWorld.entities.get(0);
-    Sphere ent2 = (Sphere) defaultWorld.entities.get(1);
+    Sphere ent1 = (Sphere) defaultWorld.getEntity(0);
+    Sphere ent2 = (Sphere) defaultWorld.getEntity(1);
 
     assertEquals(s1.material, ent1.material);
     assertEquals(s1.origin, ent1.origin);
@@ -49,5 +49,64 @@ public class WorldTest {
     assertEquals(4.5, xs[1].t, Constants.EPSILON);
     assertEquals(5.5, xs[2].t, Constants.EPSILON);
     assertEquals(6, xs[3].t, Constants.EPSILON);
+  }
+
+  @Test
+  public void shadeIntersection() {
+    World w = World.defaultWorld();
+    Ray r = new Ray(new Point(0, 0, -5), new Vector(0, 0, 1));
+
+    Entity s = w.getEntity(0);
+    Intersection i = new Intersection(4, s);
+
+    IntersectionComputations comps = new IntersectionComputations(i, r);
+    Color c = w.shadeHit(comps);
+
+    assertEquals(new Color(0.38066, 0.47583, 0.2855), c);
+  }
+
+  @Test
+  public void shadeIntersectionFromInside() {
+    World w = World.defaultWorld();
+    w.lightSource = Light.pointLight(new Point(0, 0.25, 0), new Color(1, 1, 1));
+    Ray r = new Ray(new Point(0, 0, 0), new Vector(0, 0, 1));
+
+    Entity s = w.getEntity(1);
+    Intersection i = new Intersection(0.5, s);
+
+    IntersectionComputations comps = new IntersectionComputations(i, r);
+    Color c = w.shadeHit(comps);
+
+    assertEquals(new Color(0.90498, 0.90498, 0.90498), c);
+  }
+
+  @Test
+  public void colorAtMissIsBlack() {
+    World w = World.defaultWorld();
+    Ray r = new Ray(new Point(0, 0, -5), new Vector(0, 1, 0));
+
+    assertEquals(Color.BLACK(), w.colorAt(r));
+  }
+
+  @Test
+  public void colorAtHit() {
+    World w = World.defaultWorld();
+    Ray r = new Ray(new Point(0, 0, -5), new Vector(0, 0, 1));
+
+    assertEquals(new Color(0.38066, 0.47583, 0.2855), w.colorAt(r));
+  }
+
+  @Test
+  public void usesCorrectHit() {
+    World w = World.defaultWorld();
+    Entity outer = w.getEntity(0);
+    Entity inner = w.getEntity(1);
+
+    outer.material.ambient = 1;
+    inner.material.ambient = 1;
+
+    Ray r = new Ray(new Point(0, 0, 0.75), new Vector(0, 0, -1));
+
+    assertEquals(inner.material.color, w.colorAt(r));
   }
 }

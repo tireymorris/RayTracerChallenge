@@ -1,6 +1,5 @@
 import java.util.Arrays;
 
-// TODO: decide on policy for static methods (some are, some aren't)
 public class Matrix {
   public int numRows;
   public int numCols;

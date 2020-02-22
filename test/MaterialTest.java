@@ -9,7 +9,7 @@ public class MaterialTest {
   public void defaultMaterial() {
     Material m = new Material();
 
-    assertEquals(Constants.WHITE(), m.color);
+    assertEquals(Color.WHITE(), m.color);
     assertEquals(0.1, m.ambient, Constants.EPSILON);
     assertEquals(0.9, m.diffuse, Constants.EPSILON);
     assertEquals(0.9, m.specular, Constants.EPSILON);
@@ -20,7 +20,7 @@ public class MaterialTest {
   public void lighting1() {
     Vector eye = new Vector(0, 0, -1);
     Vector normal = new Vector(0, 0, -1);
-    Light light = Light.pointLight(new Point(0, 0, -10), Constants.WHITE());
+    Light light = Light.pointLight(new Point(0, 0, -10), Color.WHITE());
 
     Color result = Light.lighting(m, light, position, eye, normal);
     assertEquals(new Color(1.9, 1.9, 1.9), result);
@@ -30,7 +30,7 @@ public class MaterialTest {
   public void lighting2() {
     Vector eye = new Vector(0, Math.sqrt(2) / 2, -Math.sqrt(2) / 2);
     Vector normal = new Vector(0, 0, -1);
-    Light light = Light.pointLight(new Point(0, 0, -10), Constants.WHITE());
+    Light light = Light.pointLight(new Point(0, 0, -10), Color.WHITE());
 
     Color result = Light.lighting(m, light, position, eye, normal);
     assertEquals(new Color(1.0, 1.0, 1.0), result);
@@ -40,7 +40,7 @@ public class MaterialTest {
   public void lighting3() {
     Vector eye = new Vector(0, 0, -1);
     Vector normal = new Vector(0, 0, -1);
-    Light light = Light.pointLight(new Point(0, 10, -10), Constants.WHITE());
+    Light light = Light.pointLight(new Point(0, 10, -10), Color.WHITE());
 
     Color result = Light.lighting(m, light, position, eye, normal);
     assertEquals(new Color(0.7364, 0.7364, 0.7364), result);
@@ -50,7 +50,7 @@ public class MaterialTest {
   public void lighting4() {
     Vector eye = new Vector(0, -Math.sqrt(2) / 2, -Math.sqrt(2) / 2);
     Vector normal = new Vector(0, 0, -1);
-    Light light = Light.pointLight(new Point(0, 10, -10), Constants.WHITE());
+    Light light = Light.pointLight(new Point(0, 10, -10), Color.WHITE());
 
     Color result = Light.lighting(m, light, position, eye, normal);
     assertEquals(new Color(1.6364, 1.6364, 1.6364), result);
@@ -60,7 +60,7 @@ public class MaterialTest {
   public void lighting5() {
     Vector eye = new Vector(0, 0, -1);
     Vector normal = new Vector(0, 0, -1);
-    Light light = Light.pointLight(new Point(0, 0, 10), Constants.WHITE());
+    Light light = Light.pointLight(new Point(0, 0, 10), Color.WHITE());
 
     Color result = Light.lighting(m, light, position, eye, normal);
     assertEquals(new Color(0.1, 0.1, 0.1), result);

@@ -6,7 +6,7 @@ public class Material {
   public double shininess;
 
   public Material() {
-    this.color = Constants.WHITE();
+    this.color = Color.WHITE();
     this.ambient = 0.1; // works best between 0 and 1
     this.diffuse = 0.9; // works best between 0 and 1
     this.specular = 0.9; // works best between 0 and 1

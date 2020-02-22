@@ -33,4 +33,8 @@ public abstract class Entity {
     Intersection[] xs = {};
     return xs;
   }
+
+  public Vector normalAt(Point worldPoint) {
+    throw new NoSuchMethodError();
+  }
 }

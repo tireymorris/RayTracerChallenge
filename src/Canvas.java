@@ -3,10 +3,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class Canvas {
-  Color[] pixels;
+  protected Color[] pixels;
 
-  int width;
-  int height;
+  public int width;
+  public int height;
 
   public Canvas(int width, int height) {
     this.width = width;
@@ -15,7 +15,7 @@ public class Canvas {
     pixels = new Color[width * height];
 
     for (int idx = 0; idx < width * height; idx++) {
-      pixels[idx] = Constants.BLACK();
+      pixels[idx] = Color.BLACK();
     }
   }
 

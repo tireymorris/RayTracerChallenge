@@ -34,11 +34,11 @@ class ProjectileExample {
       int y = (int) Math.round(canvas.height - p.position.y);
 
       try {
-        canvas.writePixel(x, y, Constants.PURPLE());
-        canvas.writePixel(x + 1, y, Constants.PURPLE());
-        canvas.writePixel(x - 1, y, Constants.PURPLE());
-        canvas.writePixel(x, y + 1, Constants.PURPLE());
-        canvas.writePixel(x, y - 1, Constants.PURPLE());
+        canvas.writePixel(x, y, Color.PURPLE());
+        canvas.writePixel(x + 1, y, Color.PURPLE());
+        canvas.writePixel(x - 1, y, Color.PURPLE());
+        canvas.writePixel(x, y + 1, Color.PURPLE());
+        canvas.writePixel(x, y - 1, Color.PURPLE());
       } catch (IndexOutOfBoundsException e) {
       }
     }

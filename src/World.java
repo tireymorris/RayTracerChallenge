@@ -1,9 +1,11 @@
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class World {
-  ArrayList<Entity> entities;
-  Light lightSource;
+  public List<Entity> entities;
+  public Light lightSource;
 
   private World() {
     entities = new ArrayList<>();
@@ -21,6 +23,18 @@ public class World {
     return createWorld().withEntities(s1, s2).withLightSource(light);
   }
 
+  public Entity getEntity(int index) {
+    return entities.get(index);
+  }
+
+  public void setEntity(int index, Entity ent) {
+    entities.set(index, ent);
+  }
+
+  public void addEntity(Entity ent) {
+    entities.add(ent);
+  }
+
   public void setEntities(Entity... entities) {
     for (Entity ent : entities) {
       this.entities.add(ent);
@@ -36,7 +50,7 @@ public class World {
   }
 
   public void setLightSource(Light light) {
-    this.lightSource = light;
+    lightSource = light;
   }
 
   public World withLightSource(Light light) {
@@ -46,11 +60,12 @@ public class World {
   }
 
   public Intersection[] intersections(Ray ray) {
-    ArrayList<Intersection> intersections = new ArrayList<>();
+    List<Intersection> intersections = new ArrayList<>();
 
-    for (Entity e : this.entities) {
+    for (Entity e : entities) {
       intersections.addAll(Arrays.asList(e.intersections(ray)));
     }
+    intersections = intersections.stream().filter(x -> x != null).collect(Collectors.toList());
 
     Intersection[] xs = new Intersection[intersections.size()];
     intersections.sort((i1, i2) -> i1.compareTo(i2));
@@ -58,4 +73,23 @@ public class World {
     return intersections.toArray(xs);
   }
 
+  public Color shadeHit(IntersectionComputations comps) {
+    return Light.lighting(comps.entity.material, lightSource, comps.point, comps.eyeVector, comps.normalVector);
+  }
+
+  public Color colorAt(Ray ray) {
+    Intersection[] intersections = intersections(ray);
+
+    if (intersections.length == 0) {
+      return Color.BLACK();
+    }
+
+    Intersection hit = Intersection.hit(intersections);
+
+    if (hit == null) {
+      return Color.BLACK();
+    }
+
+    return shadeHit(new IntersectionComputations(hit, ray));
+  }
 }

@@ -29,7 +29,7 @@ public class RayCastingSphereExample {
         Intersection hit = Intersection.hit(xs);
 
         if (hit != null) {
-          canvas.writePixel(x, y, Constants.PURPLE());
+          canvas.writePixel(x, y, Color.PURPLE());
         }
       }
     }
@@ -46,7 +46,7 @@ public class RayCastingSphereExample {
     Canvas canvas = new Canvas(canvasPixels, canvasPixels);
 
     Sphere shape = new Sphere();
-    shape.material.color = Constants.PURPLE();
+    shape.material.color = Color.PURPLE();
 
     Point lightPosition = new Point(-10, 10, -10);
     Color lightColor = new Color(1, 1, 1);

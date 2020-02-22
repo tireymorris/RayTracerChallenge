@@ -1,8 +1,8 @@
 import java.util.Arrays;
 
 public class Intersection implements Comparable {
-  double t;
-  Entity entity;
+  public double t;
+  public Entity entity;
 
   public Intersection(double t, Entity e) {
     this.t = t;

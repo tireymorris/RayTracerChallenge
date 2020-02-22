@@ -1,7 +1,7 @@
 // TODO: consider different structure
 public class Light {
-  Point position;
-  Color intensity;
+  public Point position;
+  public Color intensity;
 
   public Light(Point position, Color intensity) {
     this.position = position;
@@ -29,8 +29,8 @@ public class Light {
     Color diffuse, specular;
 
     if (lightDotNormal < 0) {
-      diffuse = Constants.BLACK();
-      specular = Constants.BLACK();
+      diffuse = Color.BLACK();
+      specular = Color.BLACK();
     } else {
       // compute diffuse contribution
       diffuse = effectiveColor.scale(material.diffuse).scale(lightDotNormal);
@@ -41,7 +41,7 @@ public class Light {
       double reflectDotEye = reflectVector.dot(eyeVector);
 
       if (reflectDotEye <= 0) {
-        specular = Constants.BLACK();
+        specular = Color.BLACK();
       } else {
         // compute specular contribution
         double factor = Math.pow(reflectDotEye, material.shininess);

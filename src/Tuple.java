@@ -35,12 +35,8 @@ class Tuple {
     return new Tuple(this.x * scalar, this.y * scalar, this.z * scalar, this.w * scalar);
   }
 
-  public Tuple mult(double scalar) {
-    return this.scale(scalar);
-  }
-
   public Tuple div(double scalar) {
-    return this.mult(1 / scalar);
+    return this.scale(1 / scalar);
   }
 
   public Point asPoint() {

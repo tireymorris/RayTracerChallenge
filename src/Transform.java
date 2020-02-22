@@ -1,8 +1,9 @@
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Transform {
-  private ArrayList<Matrix> state;
+  private List<Matrix> state;
 
   private Transform() {
     this.state = new ArrayList<Matrix>();

@@ -3,18 +3,6 @@ public final class Constants {
   public static final double VECTOR_W_VALUE = 0.0;
   public static final double POINT_W_VALUE = 1.0;
 
-  public static final Color BLACK() {
-    return new Color(0, 0, 0);
-  }
-
-  public static final Color PURPLE() {
-    return new Color(0.4, 0.0627, 0.949);
-  }
-
-  public static final Color WHITE() {
-    return new Color(1, 1, 1);
-  }
-
   public static final double QUARTER_PI = Math.PI / 4.0;
   public static final double HALF_PI = Math.PI / 2.0;
   public static final double PI = Math.PI;

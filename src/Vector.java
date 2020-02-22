@@ -17,13 +17,8 @@ public class Vector extends Tuple {
   }
 
   @Override
-  public Vector mult(double scalar) {
-    return super.scale(scalar).asVector();
-  }
-
-  @Override
   public Vector div(double scalar) {
-    return super.mult(1 / scalar).asVector();
+    return super.scale(1 / scalar).asVector();
   }
 
   // gives us the opposite of a vector

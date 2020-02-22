@@ -4,7 +4,7 @@ import org.junit.Test;
 public class LightTest {
   @Test
   public void hasPositionAndIntensity() {
-    Color intensity = Constants.WHITE();
+    Color intensity = Color.WHITE();
     Point position = new Point(0, 0, 0);
 
     Light light = Light.pointLight(position, intensity);

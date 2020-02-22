@@ -161,7 +161,7 @@ public class TupleTest {
   @Test
   public void scalarMultiplyTuple2() {
     Tuple t = new Tuple(1, -2, 3, -4);
-    assertEquals(new Tuple(0.5, -1, 1.5, -2), t.mult(0.5));
+    assertEquals(new Tuple(0.5, -1, 1.5, -2), t.scale(0.5));
   }
 
   @Test
