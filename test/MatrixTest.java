@@ -86,9 +86,9 @@ public class MatrixTest {
     double[][] rows = { { 1, 2, 3, 4 }, { 2, 4, 4, 2 }, { 8, 6, 4, 1 }, { 0, 0, 0, 1 } };
 
     Matrix a = Matrix.fromRows(rows);
-    Tuple b = Tuple.tuple(1, 2, 3, 1);
+    Tuple b = new Tuple(1, 2, 3, 1);
 
-    assertEquals(Tuple.tuple(18, 24, 33, 1), a.mult(b));
+    assertEquals(new Tuple(18, 24, 33, 1), a.mult(b));
   }
 
   @Test
@@ -104,8 +104,8 @@ public class MatrixTest {
 
   @Test
   public void multIdentityByTuple() {
-    Tuple tuple = Tuple.tuple(1, 2, 3, 4);
-    Tuple backup = Tuple.tuple(1, 2, 3, 4);
+    Tuple tuple = new Tuple(1, 2, 3, 4);
+    Tuple backup = new Tuple(1, 2, 3, 4);
 
     assertEquals(tuple, Constants.IDENTITY_MATRIX().mult(tuple));
     assertEquals(backup, Constants.IDENTITY_MATRIX().mult(tuple));

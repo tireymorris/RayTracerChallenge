@@ -23,7 +23,7 @@ public class CanvasTest {
   @Test
   public void canWritePixel() {
     Canvas canvas = new Canvas(10, 20);
-    Color red = Tuple.color(1, 0, 0);
+    Color red = new Color(1, 0, 0);
 
     canvas.writePixel(2, 3, red);
 
@@ -47,9 +47,9 @@ public class CanvasTest {
   public void constructPPM() {
     Canvas canvas = new Canvas(5, 3);
 
-    Color c1 = Tuple.color(1.5, 0, 0);
-    Color c2 = Tuple.color(0, 0.5, 0);
-    Color c3 = Tuple.color(-0.5, 0, 1);
+    Color c1 = new Color(1.5, 0, 0);
+    Color c2 = new Color(0, 0.5, 0);
+    Color c3 = new Color(-0.5, 0, 1);
 
     canvas.writePixel(0, 0, c1);
     canvas.writePixel(2, 1, c2);
@@ -70,7 +70,7 @@ public class CanvasTest {
   public void constructPPMSplitsLongLines() {
     Canvas canvas = new Canvas(10, 2);
 
-    canvas.fill(Tuple.color(1, 0.8, 0.6));
+    canvas.fill(new Color(1, 0.8, 0.6));
 
     String PPM = canvas.constructPPM();
 

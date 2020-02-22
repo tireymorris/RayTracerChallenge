@@ -4,11 +4,11 @@ public class Vector extends Tuple {
   }
 
   public Vector minus(Vector other) {
-    return super.subtract(this, other).asVector();
+    return super.minus(other).asVector();
   }
 
   public Vector plus(Vector other) {
-    return super.add(this, other).asVector();
+    return super.plus(other).asVector();
   }
 
   @Override
@@ -30,7 +30,7 @@ public class Vector extends Tuple {
   // for example, given a vector that points from a surface toward a light source,
   // what vector points from the light source back to the surface?
   public Vector negate() {
-    return Tuple.vector(0, 0, 0).minus(this);
+    return new Vector(0, 0, 0).minus(this);
   }
 
   // represents length of vector
@@ -44,7 +44,7 @@ public class Vector extends Tuple {
   public Vector normalize() {
     double magnitude = this.magnitude();
 
-    return super.vector(this.x / magnitude, this.y / magnitude, this.z / magnitude);
+    return new Vector(this.x / magnitude, this.y / magnitude, this.z / magnitude);
   }
 
   // also called scalar product or inner product
@@ -61,7 +61,7 @@ public class Vector extends Tuple {
   // primariliy used with view transformations
   // order matters! otherwise sign will be negated
   public Vector cross(Vector other) {
-    return Tuple.vector(this.y * other.z - this.z * other.y, this.z * other.x - this.x * other.z,
+    return new Vector(this.y * other.z - this.z * other.y, this.z * other.x - this.x * other.z,
         this.x * other.y - this.y * other.x);
   }
 

@@ -5,16 +5,16 @@ public class Point extends Tuple {
 
   // The vector pointing from p2 to p1
   public Vector minus(Point other) {
-    return super.subtract(this, other).asVector();
+    return super.minus(other).asVector();
   }
 
   // represents moving backward by a vector
   public Point minus(Vector other) {
-    return super.subtract(this, other).asPoint();
+    return super.minus(other).asPoint();
   }
 
   // represents moving forward by a vector
   public Point plus(Vector other) {
-    return super.add(this, other).asPoint();
+    return super.plus(other).asPoint();
   }
 }

@@ -5,8 +5,8 @@ public class ClockExample {
     Canvas canvas = new Canvas(600, 600);
 
     int radius = Math.min(canvas.width, canvas.height) / 2 - 50;
-    Point center = Tuple.point(0, 0, 0);
-    Vector hand = Tuple.vector(0, 1, 0);
+    Point center = new Point(0, 0, 0);
+    Vector hand = new Vector(0, 1, 0);
 
     for (int hour = 1; hour <= 12; hour++) {
       Point dot = center.plus(hand.scale(radius));

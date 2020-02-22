@@ -9,11 +9,11 @@ public class Color extends Tuple {
   }
 
   public Color plus(Color other) {
-    return super.add(this, other).asColor();
+    return super.plus(other).asColor();
   }
 
   public Color minus(Color other) {
-    return super.subtract(this, other).asColor();
+    return super.minus(other).asColor();
   }
 
   @Override

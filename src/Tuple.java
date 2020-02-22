@@ -20,19 +20,19 @@ class Tuple {
   }
 
   public Tuple clone() {
-    return tuple(this.x, this.y, this.z, this.w);
+    return new Tuple(this.x, this.y, this.z, this.w);
   }
 
-  public static Tuple add(Tuple t1, Tuple t2) {
-    return tuple(t1.x + t2.x, t1.y + t2.y, t1.z + t2.z, t1.w + t2.w);
+  public Tuple plus(Tuple other) {
+    return new Tuple(this.x + other.x, this.y + other.y, this.z + other.z, this.w + other.w);
   }
 
-  public static Tuple subtract(Tuple t1, Tuple t2) {
-    return tuple(t1.x - t2.x, t1.y - t2.y, t1.z - t2.z, t1.w - t2.w);
+  public Tuple minus(Tuple other) {
+    return new Tuple(this.x - other.x, this.y - other.y, this.z - other.z, this.w - other.w);
   }
 
   public Tuple scale(double scalar) {
-    return tuple(this.x * scalar, this.y * scalar, this.z * scalar, this.w * scalar);
+    return new Tuple(this.x * scalar, this.y * scalar, this.z * scalar, this.w * scalar);
   }
 
   public Tuple mult(double scalar) {
@@ -43,20 +43,8 @@ class Tuple {
     return this.mult(1 / scalar);
   }
 
-  public static Tuple tuple(double x, double y, double z, double w) {
-    return new Tuple(x, y, z, w);
-  }
-
-  public static Point point(double x, double y, double z) {
-    return new Point(x, y, z);
-  }
-
   public Point asPoint() {
     return new Point(this.x, this.y, this.z);
-  }
-
-  public static Vector vector(double x, double y, double z) {
-    return new Vector(x, y, z);
   }
 
   public Vector asVector() {
@@ -73,7 +61,7 @@ class Tuple {
 
   // ensure
   public Tuple constrain(double min, double max) {
-    return tuple(Constants.constrain(this.x, min, max), Constants.constrain(this.y, min, max),
+    return new Tuple(Constants.constrain(this.x, min, max), Constants.constrain(this.y, min, max),
         Constants.constrain(this.z, min, max), Constants.constrain(this.z, min, max));
   }
 

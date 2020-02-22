@@ -2,14 +2,14 @@ public class Sphere extends Entity {
   public double radius;
 
   public Sphere() {
-    super(Tuple.point(0, 0, 0), new Material(), Transform.identity());
+    super(new Point(0, 0, 0), new Material(), Transform.identity());
     this.radius = 1;
   }
 
   public Vector normalAt(Point worldPoint) {
     Point objectPoint = this.transform.build().inverse().mult(worldPoint);
 
-    Vector objectNormal = objectPoint.minus(Tuple.point(0, 0, 0));
+    Vector objectNormal = objectPoint.minus(new Point(0, 0, 0));
 
     Vector worldNormal = this.transform.build().inverse().transpose().mult(objectNormal);
 
@@ -39,7 +39,7 @@ public class Sphere extends Entity {
 
     // Vector from the sphere's center to the ray origin
     // idea is that sphere is centered at the world origin
-    Vector sphereToRay = transformedRay.origin.minus(Tuple.point(0, 0, 0));
+    Vector sphereToRay = transformedRay.origin.minus(new Point(0, 0, 0));
 
     double a = transformedRay.direction.dot(transformedRay.direction);
     double b = 2.0 * transformedRay.direction.dot(sphereToRay);

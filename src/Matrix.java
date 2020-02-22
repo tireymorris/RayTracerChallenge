@@ -74,27 +74,23 @@ public class Matrix {
 
   // computes the dot product of every row-column combination in the two matrices
   // will be useful for combining transformations
-  public static Matrix mult(Matrix a, Matrix b) {
-    if (a.numCols != b.numRows) {
+  public Matrix mult(Matrix other) {
+    if (this.numCols != other.numRows) {
       throw new IndexOutOfBoundsException("Multiplication attempted for non-matching matrices");
     }
 
-    Matrix result = new Matrix(a.numRows, b.numCols);
+    Matrix result = new Matrix(this.numRows, other.numCols);
 
-    for (int row = 0; row < a.numRows; row++) {
-      for (int col = 0; col < b.numCols; col++) {
-        double product = a.get(row, 0) * b.get(0, col) + a.get(row, 1) * b.get(1, col) + a.get(row, 2) * b.get(2, col)
-            + a.get(row, 3) * b.get(3, col);
+    for (int row = 0; row < this.numRows; row++) {
+      for (int col = 0; col < other.numCols; col++) {
+        double product = this.get(row, 0) * other.get(0, col) + this.get(row, 1) * other.get(1, col)
+            + this.get(row, 2) * other.get(2, col) + this.get(row, 3) * other.get(3, col);
 
         result.set(row, col, product);
       }
     }
 
     return result;
-  }
-
-  public Matrix mult(Matrix other) {
-    return Matrix.mult(this, other);
   }
 
   public Tuple mult(Tuple other) {
@@ -105,8 +101,8 @@ public class Matrix {
     bMatrix.set(2, 0, other.z);
     bMatrix.set(3, 0, other.w);
 
-    Matrix product = Matrix.mult(this, bMatrix);
-    Tuple result = Tuple.tuple(product.get(0, 0), product.get(1, 0), product.get(2, 0), product.get(3, 0));
+    Matrix product = this.mult(bMatrix);
+    Tuple result = new Tuple(product.get(0, 0), product.get(1, 0), product.get(2, 0), product.get(3, 0));
 
     return result;
   }

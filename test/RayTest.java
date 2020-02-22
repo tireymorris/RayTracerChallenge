@@ -4,8 +4,8 @@ import org.junit.Test;
 public class RayTest {
   @Test
   public void createAndQuery() {
-    Point origin = Tuple.point(1, 2, 3);
-    Vector direction = Tuple.vector(4, 5, 6);
+    Point origin = new Point(1, 2, 3);
+    Vector direction = new Vector(4, 5, 6);
 
     Ray r = new Ray(origin, direction);
     assertEquals(origin, r.origin);
@@ -14,17 +14,17 @@ public class RayTest {
 
   @Test
   public void position() {
-    Ray r = new Ray(Tuple.point(2, 3, 4), Tuple.vector(1, 0, 0));
+    Ray r = new Ray(new Point(2, 3, 4), new Vector(1, 0, 0));
 
-    assertEquals(Tuple.point(2, 3, 4), r.position(0));
-    assertEquals(Tuple.point(3, 3, 4), r.position(1));
-    assertEquals(Tuple.point(1, 3, 4), r.position(-1));
-    assertEquals(Tuple.point(4.5, 3, 4), r.position(2.5));
+    assertEquals(new Point(2, 3, 4), r.position(0));
+    assertEquals(new Point(3, 3, 4), r.position(1));
+    assertEquals(new Point(1, 3, 4), r.position(-1));
+    assertEquals(new Point(4.5, 3, 4), r.position(2.5));
   }
 
   @Test
   public void intersectsSphereTwice() {
-    Ray r = new Ray(Tuple.point(0, 0, -5), Tuple.vector(0, 0, 1));
+    Ray r = new Ray(new Point(0, 0, -5), new Vector(0, 0, 1));
     Sphere s = new Sphere();
 
     Intersection[] xs = s.intersections(r);
@@ -36,7 +36,7 @@ public class RayTest {
 
   @Test
   public void intersectsSphereOnce() {
-    Ray r = new Ray(Tuple.point(0, 1, -5), Tuple.vector(0, 0, 1));
+    Ray r = new Ray(new Point(0, 1, -5), new Vector(0, 0, 1));
     Sphere s = new Sphere();
 
     Intersection[] xs = s.intersections(r);
@@ -48,7 +48,7 @@ public class RayTest {
 
   @Test
   public void intersectsTwiceInsideSphere() {
-    Ray r = new Ray(Tuple.point(0, 0, 0), Tuple.vector(0, 0, 1));
+    Ray r = new Ray(new Point(0, 0, 0), new Vector(0, 0, 1));
     Sphere s = new Sphere();
 
     Intersection[] xs = s.intersections(r);
@@ -60,7 +60,7 @@ public class RayTest {
 
   @Test
   public void intersectsTwiceSphereBehindRay() {
-    Ray r = new Ray(Tuple.point(0, 0, 5), Tuple.vector(0, 0, 1));
+    Ray r = new Ray(new Point(0, 0, 5), new Vector(0, 0, 1));
     Sphere s = new Sphere();
 
     Intersection[] xs = s.intersections(r);
@@ -72,7 +72,7 @@ public class RayTest {
 
   @Test
   public void intersectionContainsEntity() {
-    Ray r = new Ray(Tuple.point(0, 0, -5), Tuple.vector(0, 0, 1));
+    Ray r = new Ray(new Point(0, 0, -5), new Vector(0, 0, 1));
     Sphere s = new Sphere();
 
     Intersection[] xs = s.intersections(r);
@@ -84,26 +84,26 @@ public class RayTest {
 
   @Test
   public void translateRay() {
-    Ray r = new Ray(Tuple.point(1, 2, 3), Tuple.vector(0, 1, 0));
+    Ray r = new Ray(new Point(1, 2, 3), new Vector(0, 1, 0));
     Matrix m = Transformations.translation(3, 4, 5);
 
     Ray r2 = r.transform(m);
 
-    assertEquals(Tuple.point(4, 6, 8), r2.origin);
-    assertEquals(Tuple.vector(0, 1, 0), r2.direction);
+    assertEquals(new Point(4, 6, 8), r2.origin);
+    assertEquals(new Vector(0, 1, 0), r2.direction);
 
-    assertEquals(Tuple.point(1, 2, 3), r.origin);
-    assertEquals(Tuple.vector(0, 1, 0), r.direction);
+    assertEquals(new Point(1, 2, 3), r.origin);
+    assertEquals(new Vector(0, 1, 0), r.direction);
   }
 
   @Test
   public void scaleRay() {
-    Ray r = new Ray(Tuple.point(1, 2, 3), Tuple.vector(0, 1, 0));
+    Ray r = new Ray(new Point(1, 2, 3), new Vector(0, 1, 0));
     Matrix m = Transformations.scaling(2, 3, 4);
 
     Ray r2 = r.transform(m);
 
-    assertEquals(Tuple.point(2, 6, 12), r2.origin);
-    assertEquals(Tuple.vector(0, 3, 0), r2.direction);
+    assertEquals(new Point(2, 6, 12), r2.origin);
+    assertEquals(new Vector(0, 3, 0), r2.direction);
   }
 }

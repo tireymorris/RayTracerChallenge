@@ -1,8 +1,8 @@
 import java.io.IOException;
 
 class Environment {
-  Vector gravity = Tuple.vector(0, -0.1, 0);
-  Vector wind = Tuple.vector(-0.01, 0, 0);
+  Vector gravity = new Vector(0, -0.1, 0);
+  Vector wind = new Vector(-0.01, 0, 0);
 }
 
 class ProjectileExample {
@@ -11,8 +11,8 @@ class ProjectileExample {
   Environment env;
 
   public ProjectileExample() {
-    position = Tuple.point(0, 1, 0);
-    velocity = Tuple.vector(1, 1.8, 0).normalize().scale(11.25);
+    position = new Point(0, 1, 0);
+    velocity = new Vector(1, 1.8, 0).normalize().scale(11.25);
     env = new Environment();
   }
 
@@ -23,7 +23,7 @@ class ProjectileExample {
 
   public static void main(String[] args) {
     Canvas canvas = new Canvas(900, 550);
-    canvas.fill(Tuple.color(0.85, 0.85, 0.85));
+    canvas.fill(new Color(0.85, 0.85, 0.85));
 
     ProjectileExample p = new ProjectileExample();
 

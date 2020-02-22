@@ -7,7 +7,7 @@ public class RayCastingSphereExample {
 
     Sphere shape = new Sphere();
 
-    Point rayOrigin = Tuple.point(0, 0, -5);
+    Point rayOrigin = new Point(0, 0, -5);
 
     double wallZ = 10.0;
     double wallSize = 7.0;
@@ -22,7 +22,7 @@ public class RayCastingSphereExample {
       for (int x = 0; x < canvasPixels; x++) {
         double worldX = -half + pixelSize * x;
 
-        Point position = Tuple.point(worldX, worldY, wallZ);
+        Point position = new Point(worldX, worldY, wallZ);
         Ray r = new Ray(rayOrigin, position.minus(rayOrigin).normalize());
 
         Intersection[] xs = shape.intersections(r);
@@ -48,11 +48,11 @@ public class RayCastingSphereExample {
     Sphere shape = new Sphere();
     shape.material.color = Constants.PURPLE();
 
-    Point lightPosition = Tuple.point(-10, 10, -10);
-    Color lightColor = Tuple.color(1, 1, 1);
+    Point lightPosition = new Point(-10, 10, -10);
+    Color lightColor = new Color(1, 1, 1);
     Light pointLight = Light.pointLight(lightPosition, lightColor);
 
-    Point rayOrigin = Tuple.point(0, 0, -5);
+    Point rayOrigin = new Point(0, 0, -5);
 
     double wallZ = 10.0;
     double wallSize = 7.0;
@@ -67,7 +67,7 @@ public class RayCastingSphereExample {
       for (int x = 0; x < canvasPixels; x++) {
         double worldX = -half + pixelSize * x;
 
-        Point position = Tuple.point(worldX, worldY, wallZ);
+        Point position = new Point(worldX, worldY, wallZ);
         Ray r = new Ray(rayOrigin, position.minus(rayOrigin).normalize());
 
         Intersection[] xs = shape.intersections(r);

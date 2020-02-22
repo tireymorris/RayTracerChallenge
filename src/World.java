@@ -14,8 +14,8 @@ public class World {
   }
 
   public static World defaultWorld() {
-    Light light = Light.pointLight(Tuple.point(-10, 10, -10), Tuple.color(1, 1, 1));
-    Sphere s1 = new Sphere().withMaterial(new Material(Tuple.color(0.8, 1.0, 0.6), 0.1, 0.7, 0.2, 200.0));
+    Light light = Light.pointLight(new Point(-10, 10, -10), new Color(1, 1, 1));
+    Sphere s1 = new Sphere().withMaterial(new Material(new Color(0.8, 1.0, 0.6), 0.1, 0.7, 0.2, 200.0));
     Sphere s2 = new Sphere().withTransform(Transform.identity().scale(0.5, 0.5, 0.5));
 
     return createWorld().withEntities(s1, s2).withLightSource(light);

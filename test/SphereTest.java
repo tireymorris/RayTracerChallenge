@@ -19,7 +19,7 @@ public class SphereTest {
 
   @Test
   public void intersectScaledSphere() {
-    Ray r = new Ray(Tuple.point(0, 0, -5), Tuple.vector(0, 0, 1));
+    Ray r = new Ray(new Point(0, 0, -5), new Vector(0, 0, 1));
     Sphere s = new Sphere();
 
     s.setTransform(Transform.identity().scale(2, 2, 2));
@@ -33,25 +33,25 @@ public class SphereTest {
   @Test
   public void xAxisNormal() {
     Sphere s = new Sphere();
-    Vector n = s.normalAt(Tuple.point(1, 0, 0));
+    Vector n = s.normalAt(new Point(1, 0, 0));
 
-    assertEquals(Tuple.vector(1, 0, 0), n);
+    assertEquals(new Vector(1, 0, 0), n);
   }
 
   @Test
   public void yAxisNormal() {
     Sphere s = new Sphere();
-    Vector n = s.normalAt(Tuple.point(0, 1, 0));
+    Vector n = s.normalAt(new Point(0, 1, 0));
 
-    assertEquals(Tuple.vector(0, 1, 0), n);
+    assertEquals(new Vector(0, 1, 0), n);
   }
 
   @Test
   public void zAxisNormal() {
     Sphere s = new Sphere();
-    Vector n = s.normalAt(Tuple.point(0, 0, 1));
+    Vector n = s.normalAt(new Point(0, 0, 1));
 
-    assertEquals(Tuple.vector(0, 0, 1), n);
+    assertEquals(new Vector(0, 0, 1), n);
   }
 
   @Test
@@ -59,9 +59,9 @@ public class SphereTest {
     double magicNumber = Math.sqrt(3) / 3.0;
 
     Sphere s = new Sphere();
-    Vector n = s.normalAt(Tuple.point(magicNumber, magicNumber, magicNumber));
+    Vector n = s.normalAt(new Point(magicNumber, magicNumber, magicNumber));
 
-    assertEquals(Tuple.vector(magicNumber, magicNumber, magicNumber), n);
+    assertEquals(new Vector(magicNumber, magicNumber, magicNumber), n);
   }
 
   @Test
@@ -69,10 +69,10 @@ public class SphereTest {
     double magicNumber = Math.sqrt(3) / 3.0;
 
     Sphere s = new Sphere();
-    Vector n = s.normalAt(Tuple.point(magicNumber, magicNumber, magicNumber));
+    Vector n = s.normalAt(new Point(magicNumber, magicNumber, magicNumber));
 
-    assertEquals(Tuple.vector(magicNumber, magicNumber, magicNumber), n);
-    assertEquals(Tuple.vector(magicNumber, magicNumber, magicNumber), n.normalize());
+    assertEquals(new Vector(magicNumber, magicNumber, magicNumber), n);
+    assertEquals(new Vector(magicNumber, magicNumber, magicNumber), n.normalize());
   }
 
   @Test
@@ -80,8 +80,8 @@ public class SphereTest {
     Sphere s = new Sphere();
     s.setTransform(Transform.identity().translate(0, 1, 0));
 
-    Vector n = s.normalAt(Tuple.point(0, 1.70711, -0.70711));
-    assertEquals(Tuple.vector(0, 0.70711, -0.70711), n);
+    Vector n = s.normalAt(new Point(0, 1.70711, -0.70711));
+    assertEquals(new Vector(0, 0.70711, -0.70711), n);
   }
 
   @Test
@@ -89,8 +89,8 @@ public class SphereTest {
     Sphere s = new Sphere();
     s.setTransform(Transform.identity().rotateZ(Constants.PI / 5.0).scale(1, 0.5, 1));
 
-    Vector n = s.normalAt(Tuple.point(0, Math.sqrt(2) / 2.0, -Math.sqrt(2) / 2.0));
-    assertEquals(Tuple.vector(0, 0.97014, -0.24254), n);
+    Vector n = s.normalAt(new Point(0, Math.sqrt(2) / 2.0, -Math.sqrt(2) / 2.0));
+    assertEquals(new Vector(0, 0.97014, -0.24254), n);
   }
 
   @Test
