@@ -5,12 +5,12 @@ class Environment {
   Vector wind = Tuple.vector(-0.01, 0, 0);
 }
 
-class Projectile {
+class ProjectileExample {
   Point position;
   Vector velocity;
   Environment env;
 
-  public Projectile() {
+  public ProjectileExample() {
     position = Tuple.point(0, 1, 0);
     velocity = Tuple.vector(1, 1.8, 0).normalize().scale(11.25);
     env = new Environment();
@@ -25,7 +25,7 @@ class Projectile {
     Canvas canvas = new Canvas(900, 550);
     canvas.fill(Tuple.color(0.85, 0.85, 0.85));
 
-    Projectile p = new Projectile();
+    ProjectileExample p = new ProjectileExample();
 
     while (p.position.y > 0) {
       p.tick();

@@ -25,6 +25,6 @@ dependencies {
 
 jar {
    manifest {
-      attributes 'Main-Class': 'Projectile'
+      attributes 'Main-Class': 'RayCastingSphereExample'
    }
 }

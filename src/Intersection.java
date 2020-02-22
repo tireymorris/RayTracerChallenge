@@ -19,13 +19,9 @@ public class Intersection implements Comparable {
   // hit will never be behind the ray's origin, since that's effectively behind
   // the camera - therefore, we can ignore negative values
   public static Intersection hit(Intersection[] intersections) {
-    // return Arrays.asList(intersections).stream().filter(i -> i.t >= 0).min((i1,
-    // i2) -> )
-    // .orElse(null);
-
     // Assumes intersections are already sorted!
     for (Intersection intersection : intersections) {
-      if (intersection.t >= 0) {
+      if (intersection != null && intersection.t >= 0) {
         return intersection;
       }
     }

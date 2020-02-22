@@ -1,6 +1,6 @@
 import java.io.IOException;
 
-public class Clock {
+public class ClockExample {
   public static void main(String[] args) {
     Canvas canvas = new Canvas(600, 600);
 
