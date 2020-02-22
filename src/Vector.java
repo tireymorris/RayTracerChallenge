@@ -64,4 +64,8 @@ public class Vector extends Tuple {
     return Tuple.vector(this.y * other.z - this.z * other.y, this.z * other.x - this.x * other.z,
         this.x * other.y - this.y * other.x);
   }
+
+  public Vector reflect(Vector normal) {
+    return this.minus(normal.scale(2 * this.dot(normal)));
+  }
 }

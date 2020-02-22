@@ -1,5 +1,5 @@
 public abstract class Entity {
-  Point origin;
+  public Point origin;
 
   public Entity(Point origin) {
     this.origin = origin;

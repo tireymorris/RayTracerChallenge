@@ -15,7 +15,7 @@ public class Canvas {
     pixels = new Color[width * height];
 
     for (int idx = 0; idx < width * height; idx++) {
-      pixels[idx] = Tuple.color(0, 0, 0);
+      pixels[idx] = Constants.BLACK();
     }
   }
 

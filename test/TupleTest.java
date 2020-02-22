@@ -246,4 +246,22 @@ public class TupleTest {
     assertEquals(Tuple.vector(-1, 2, -1), v1.cross(v2));
     assertEquals(Tuple.vector(1, -2, 1), v2.cross(v1));
   }
+
+  @Test
+  public void reflect45Degree() {
+    Vector vel = Tuple.vector(1, -1, 0);
+    Vector n = Tuple.vector(0, 1, 0);
+
+    Vector r = vel.reflect(n);
+    assertEquals(Tuple.vector(1, 1, 0), r);
+  }
+
+  @Test
+  public void reflectSlantedSurface() {
+    Vector vel = Tuple.vector(0, -1, 0);
+    Vector n = Tuple.vector(Math.sqrt(2) / 2.0, Math.sqrt(2) / 2.0, 0);
+
+    Vector r = vel.reflect(n);
+    assertEquals(Tuple.vector(1, 0, 0), r);
+  }
 }

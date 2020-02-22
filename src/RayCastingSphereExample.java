@@ -29,7 +29,7 @@ public class RayCastingSphereExample {
         Intersection hit = Intersection.hit(xs);
 
         if (hit != null) {
-          canvas.writePixel(x, y, Constants.PURPLE);
+          canvas.writePixel(x, y, Constants.PURPLE());
         }
       }
     }

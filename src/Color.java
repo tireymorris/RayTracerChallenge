@@ -21,6 +21,11 @@ public class Color extends Tuple {
     return super.scale(scalar).asColor();
   }
 
+  @Override
+  public Color mult(double scalar) {
+    return this.scale(scalar);
+  }
+
   // Hadamard product
   // Multiply components together to form a new, blended color
   // Might use when (i.e.) finding out the visible color of a yellow-green surface

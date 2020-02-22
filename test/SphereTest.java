@@ -92,4 +92,22 @@ public class SphereTest {
     Vector n = s.normalAt(Tuple.point(0, Math.sqrt(2) / 2.0, -Math.sqrt(2) / 2.0));
     assertEquals(Tuple.vector(0, 0.97014, -0.24254), n);
   }
+
+  @Test
+  public void hasDefaultMaterial() {
+    Sphere s = new Sphere();
+    Material m = s.material;
+    assertEquals(new Material(), m);
+  }
+
+  @Test
+  public void mayBeAssignedMaterial() {
+    Sphere s = new Sphere();
+    Material m = new Material();
+
+    m.ambient = 1;
+    s.material = m;
+
+    assertEquals(1, s.material.ambient, Constants.EPSILON);
+  }
 }

@@ -16,7 +16,7 @@ public class CanvasTest {
     Canvas canvas = new Canvas(800, 600);
 
     for (Color pixel : canvas.pixels) {
-      assertEquals(Tuple.color(0, 0, 0), pixel);
+      assertEquals(Constants.BLACK(), pixel);
     }
   }
 
