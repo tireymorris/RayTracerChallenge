@@ -1,4 +1,4 @@
-public class Entity {
+public abstract class Entity {
   Point origin;
 
   public Entity(Point origin) {

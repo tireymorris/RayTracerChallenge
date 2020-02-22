@@ -22,4 +22,16 @@ public class Sphere extends Entity {
   public void setTransform(Transform transform) {
     this.transform = transform;
   }
+
+  public Vector normalAt(Point worldPoint) {
+    Point objectPoint = this.transform.build().inverse().mult(worldPoint);
+
+    Vector objectNormal = objectPoint.minus(Tuple.point(0, 0, 0));
+
+    Vector worldNormal = this.transform.build().inverse().transpose().mult(objectNormal);
+
+    worldNormal.w = 0;
+
+    return worldNormal.normalize();
+  }
 }

@@ -111,6 +111,14 @@ public class Matrix {
     return result;
   }
 
+  public Vector mult(Vector other) {
+    return this.mult((Tuple) other).asVector();
+  }
+
+  public Point mult(Point other) {
+    return this.mult((Tuple) other).asPoint();
+  }
+
   public Matrix transpose() {
     Matrix result = new Matrix(this.numRows, this.numCols);
     for (int row = 0; row < this.numRows; row++) {
