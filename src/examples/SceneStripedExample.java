@@ -32,7 +32,7 @@ public class SceneStripedExample {
     middle.material.color = new Color(0.1, 1, 0.5);
     middle.material.diffuse = 0.7;
     middle.material.specular = 0.3;
-    middle.material.pattern = new StripePattern(Color.fromHex("#c91900"), Color.fromHex("#00b0c7"))
+    middle.material.pattern = new GradientPattern(Color.fromHex("#c91900"), Color.fromHex("#00b0c7"))
         .withTransform(Transform.identity().scale(0.2, 0.2, 0.2).rotateY(-Constants.PI / 4.2));
 
     Sphere right = new Sphere();
