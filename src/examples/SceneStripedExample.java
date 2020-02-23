@@ -28,11 +28,12 @@ public class SceneStripedExample {
     rightWall.material = floor.material;
 
     Sphere middle = new Sphere();
-    middle.transform = Transform.identity().translate(-0.5, 1, 0.5);
+    middle.transform = Transform.identity().translate(-0.5, 1, 0.5).scale(1, 1.5, 1);
     middle.material.color = new Color(0.1, 1, 0.5);
     middle.material.diffuse = 0.7;
     middle.material.specular = 0.3;
-    middle.material.pattern = new GradientPattern(Color.fromHex("#c91900"), Color.fromHex("#00b0c7"));
+    middle.material.pattern = new GradientPattern(Color.fromHex("#c91900"), Color.fromHex("#00b0c7"))
+        .withTransform(Transform.identity().scale(2, 1, 1));
 
     Sphere right = new Sphere();
     right.transform = Transform.identity().scale(0.5, 0.5, 0.5).translate(1.5, 0.5, -0.5);
