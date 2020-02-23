@@ -1,3 +1,8 @@
+package entities;
+
+import structures.*;
+import graphics.*;
+
 public class Sphere extends Entity {
   public double radius;
 

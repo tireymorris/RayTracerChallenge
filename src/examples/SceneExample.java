@@ -1,3 +1,11 @@
+package examples;
+
+import graphics.*;
+import structures.*;
+import entities.*;
+import util.Constants;
+import scene.*;
+
 import java.io.IOException;
 
 public class SceneExample {

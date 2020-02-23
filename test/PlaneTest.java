@@ -1,6 +1,11 @@
 import static org.junit.Assert.*;
 import org.junit.Test;
 
+import graphics.*;
+import structures.*;
+import entities.*;
+import util.Constants;
+
 public class PlaneTest {
   @Test
   public void normalIsConstantEverywhere() {

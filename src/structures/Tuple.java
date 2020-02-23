@@ -1,4 +1,8 @@
-class Tuple {
+package structures;
+
+import util.Constants;
+
+public class Tuple {
   public double x;
   public double y;
   public double z;

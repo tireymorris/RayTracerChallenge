@@ -1,3 +1,9 @@
+package examples;
+
+import structures.*;
+import util.Constants;
+import scene.*;
+
 import java.io.IOException;
 
 public class ClockExample {

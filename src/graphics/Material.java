@@ -1,3 +1,7 @@
+package graphics;
+
+import structures.Color;
+
 public class Material {
   public Color color;
   public double ambient;

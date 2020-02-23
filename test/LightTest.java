@@ -1,6 +1,9 @@
 import static org.junit.Assert.*;
 import org.junit.Test;
 
+import graphics.*;
+import structures.*;
+
 public class LightTest {
   @Test
   public void hasPositionAndIntensity() {

@@ -1,5 +1,10 @@
+package entities;
+
+import structures.*;
+import graphics.*;
+
 public class TestShape extends Entity {
-  Ray savedRay;
+  public Ray savedRay;
 
   public TestShape() {
     super(new Point(0, 0, 0));

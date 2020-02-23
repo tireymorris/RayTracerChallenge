@@ -1,3 +1,6 @@
+package structures;
+
+import util.Constants;
 import java.util.Arrays;
 
 public class Matrix {

@@ -1,3 +1,8 @@
+package scene;
+
+import structures.*;
+import graphics.Ray;
+
 public class Camera {
   private int hsize;
   private int vsize;

@@ -1,3 +1,10 @@
+package examples;
+
+import graphics.*;
+import structures.*;
+import entities.*;
+import scene.*;
+
 import java.io.IOException;
 
 public class RayCastingSphereExample {

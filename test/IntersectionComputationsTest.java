@@ -1,6 +1,12 @@
 import static org.junit.Assert.*;
 import org.junit.Test;
 
+import graphics.*;
+import structures.*;
+import entities.*;
+import util.Constants;
+import scene.*;
+
 public class IntersectionComputationsTest {
   @Test
   public void precomputeIntersectionState() {

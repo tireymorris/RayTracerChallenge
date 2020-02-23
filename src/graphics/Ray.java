@@ -1,3 +1,7 @@
+package graphics;
+
+import structures.*;
+
 public class Ray {
   public Point origin;
   public Vector direction;

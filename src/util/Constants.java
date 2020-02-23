@@ -1,3 +1,5 @@
+package util;
+
 public final class Constants {
   public static final double EPSILON = 0.00001;
   public static final double VECTOR_W_VALUE = 0.0;

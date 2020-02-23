@@ -1,13 +1,19 @@
+package graphics;
+
+import structures.*;
+import entities.*;
+import static util.Constants.EPSILON;
+
 public class IntersectionComputations {
-  boolean inside = false;
-  double t;
+  public boolean inside = false;
+  public double t;
 
-  Entity entity;
-  Vector eyeVector;
-  Vector normalVector;
+  public Entity entity;
+  public Vector eyeVector;
+  public Vector normalVector;
 
-  Point point;
-  Point overPoint;
+  public Point point;
+  public Point overPoint;
 
   public IntersectionComputations(Intersection intersection, Ray ray) {
     t = intersection.t;
@@ -22,6 +28,6 @@ public class IntersectionComputations {
       normalVector = normalVector.scale(-1);
     }
 
-    overPoint = point.plus(normalVector.scale(Constants.EPSILON));
+    overPoint = point.plus(normalVector.scale(EPSILON));
   }
 }

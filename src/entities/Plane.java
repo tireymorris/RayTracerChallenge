@@ -1,3 +1,9 @@
+package entities;
+
+import structures.*;
+import graphics.*;
+import util.Constants;
+
 public class Plane extends Entity {
   public Plane() {
     super(new Point(0, 0, 0));

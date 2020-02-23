@@ -1,6 +1,10 @@
 import static org.junit.Assert.*;
 import org.junit.Test;
 
+import graphics.*;
+import structures.*;
+import util.Constants;
+
 public class MaterialTest {
   Material m = new Material();
   Point position = new Point(0, 0, 0);

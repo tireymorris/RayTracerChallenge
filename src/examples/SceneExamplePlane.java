@@ -1,6 +1,14 @@
+package examples;
+
+import graphics.*;
+import structures.*;
+import entities.*;
+import util.Constants;
+import scene.*;
+
 import java.io.IOException;
 
-public class SceneExample2 {
+public class SceneExamplePlane {
   public static void main(String[] args) {
     Entity floor = new Plane();
 

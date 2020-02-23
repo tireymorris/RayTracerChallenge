@@ -1,3 +1,5 @@
+package structures;
+
 public class Transformations {
   public static Matrix translation(double x, double y, double z) {
     Matrix result = Matrix.IDENTITY_MATRIX();

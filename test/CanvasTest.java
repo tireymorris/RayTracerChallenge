@@ -2,6 +2,9 @@ import static org.junit.Assert.*;
 import java.util.Arrays;
 import org.junit.Test;
 
+import structures.*;
+import scene.*;
+
 public class CanvasTest {
   @Test
   public void canCreateCanvas() {

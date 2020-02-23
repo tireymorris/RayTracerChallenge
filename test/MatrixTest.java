@@ -1,6 +1,9 @@
 import static org.junit.Assert.*;
 import org.junit.Test;
 
+import structures.*;
+import util.Constants;
+
 public class MatrixTest {
   @Test(expected = IndexOutOfBoundsException.class)
   public void invalidMatrixThrows() {

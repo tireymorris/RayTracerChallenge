@@ -1,6 +1,9 @@
 import static org.junit.Assert.*;
 import org.junit.Test;
 
+import structures.*;
+import entities.*;
+
 public class SphereTest {
   @Test
   public void xAxisNormal() {

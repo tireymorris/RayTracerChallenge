@@ -1,3 +1,8 @@
+package entities;
+
+import structures.*;
+import graphics.*;
+
 public abstract class Entity {
   public Point origin;
   public Material material;

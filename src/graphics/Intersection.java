@@ -1,3 +1,6 @@
+package graphics;
+
+import entities.Entity;
 import java.util.Arrays;
 
 public class Intersection implements Comparable {

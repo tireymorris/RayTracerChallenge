@@ -1,7 +1,13 @@
+package scene;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import entities.*;
+import structures.*;
+import graphics.*;
 
 public class World {
   public List<Entity> entities;

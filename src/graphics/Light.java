@@ -1,4 +1,7 @@
-// TODO: consider different structure
+package graphics;
+
+import structures.*;
+
 public class Light {
   public Point position;
   public Color intensity;
@@ -12,7 +15,7 @@ public class Light {
     return new Light(position, intensity);
   }
 
-  static Color lighting(Material material, Light light, Point point, Vector eyeVector, Vector normal,
+  public static Color lighting(Material material, Light light, Point point, Vector eyeVector, Vector normal,
       boolean inShadow) {
     // combine surface color and light's color/intensity
     Color effectiveColor = material.color.blend(light.intensity);

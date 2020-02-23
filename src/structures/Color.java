@@ -1,3 +1,7 @@
+package structures;
+
+import util.Constants;
+
 public class Color extends Tuple {
   public double r, g, b;
 

@@ -1,6 +1,11 @@
 import static org.junit.Assert.*;
 import org.junit.Test;
 
+import graphics.*;
+import structures.*;
+import util.Constants;
+import scene.*;
+
 public class CameraTest {
   @Test
   public void cameraConstruction() {

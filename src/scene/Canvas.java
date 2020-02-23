@@ -1,9 +1,14 @@
+package scene;
+
+import structures.Color;
+import graphics.Ray;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
 public class Canvas {
-  protected Color[] pixels;
+  public Color[] pixels;
 
   public int width;
   public int height;

@@ -1,3 +1,8 @@
+package examples;
+
+import structures.*;
+import scene.*;
+
 import java.io.IOException;
 
 class Environment {
