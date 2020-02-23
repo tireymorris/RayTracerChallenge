@@ -1,6 +1,7 @@
 import static org.junit.Assert.*;
 import org.junit.Test;
 
+import entities.Sphere;
 import graphics.*;
 import structures.*;
 import util.Constants;
@@ -26,7 +27,7 @@ public class MaterialTest {
     Vector normal = new Vector(0, 0, -1);
     Light light = Light.pointLight(new Point(0, 0, -10), Color.WHITE());
 
-    Color result = Light.lighting(m, light, position, eye, normal, false);
+    Color result = Light.lighting(m, new Sphere(), light, position, eye, normal, false);
     assertEquals(new Color(1.9, 1.9, 1.9), result);
   }
 
@@ -36,7 +37,7 @@ public class MaterialTest {
     Vector normal = new Vector(0, 0, -1);
     Light light = Light.pointLight(new Point(0, 0, -10), Color.WHITE());
 
-    Color result = Light.lighting(m, light, position, eye, normal, false);
+    Color result = Light.lighting(m, new Sphere(), light, position, eye, normal, false);
     assertEquals(new Color(1.0, 1.0, 1.0), result);
   }
 
@@ -46,7 +47,7 @@ public class MaterialTest {
     Vector normal = new Vector(0, 0, -1);
     Light light = Light.pointLight(new Point(0, 10, -10), Color.WHITE());
 
-    Color result = Light.lighting(m, light, position, eye, normal, false);
+    Color result = Light.lighting(m, new Sphere(), light, position, eye, normal, false);
     assertEquals(new Color(0.7364, 0.7364, 0.7364), result);
   }
 
@@ -56,7 +57,7 @@ public class MaterialTest {
     Vector normal = new Vector(0, 0, -1);
     Light light = Light.pointLight(new Point(0, 10, -10), Color.WHITE());
 
-    Color result = Light.lighting(m, light, position, eye, normal, false);
+    Color result = Light.lighting(m, new Sphere(), light, position, eye, normal, false);
     assertEquals(new Color(1.6364, 1.6364, 1.6364), result);
   }
 
@@ -66,7 +67,7 @@ public class MaterialTest {
     Vector normal = new Vector(0, 0, -1);
     Light light = Light.pointLight(new Point(0, 0, 10), Color.WHITE());
 
-    Color result = Light.lighting(m, light, position, eye, normal, false);
+    Color result = Light.lighting(m, new Sphere(), light, position, eye, normal, false);
     assertEquals(new Color(0.1, 0.1, 0.1), result);
   }
 
@@ -78,8 +79,28 @@ public class MaterialTest {
 
     boolean inShadow = true;
 
-    Color result = Light.lighting(m, light, position, eye, normal, inShadow);
+    Color result = Light.lighting(m, new Sphere(), light, position, eye, normal, inShadow);
     assertEquals(new Color(0.1, 0.1, 0.1), result);
+  }
+
+  @Test
+  public void lightingWithPatternApplied() {
+    Material m2 = m.clone();
+    m2.pattern = new StripePattern(Color.WHITE(), Color.BLACK());
+    m2.ambient = 1;
+    m2.diffuse = 0;
+    m2.specular = 0;
+
+    Vector eyeVector = new Vector(0, 0, -1);
+    Vector normalVector = new Vector(0, 0, -1);
+
+    Light light = Light.pointLight(new Point(0, 0, -10), Color.WHITE());
+
+    Color c1 = Light.lighting(m2, new Sphere(), light, new Point(0.9, 0, 0), eyeVector, normalVector, false);
+    Color c2 = Light.lighting(m2, new Sphere(), light, new Point(1.1, 0, 0), eyeVector, normalVector, false);
+
+    assertEquals(Color.WHITE(), c1);
+    assertEquals(Color.BLACK(), c2);
   }
 
 }

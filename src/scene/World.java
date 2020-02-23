@@ -82,8 +82,8 @@ public class World {
   public Color shadeHit(IntersectionComputations comps) {
     boolean isShadowed = isShadowed(comps.overPoint);
 
-    return Light.lighting(comps.entity.material, lightSource, comps.point, comps.eyeVector, comps.normalVector,
-        isShadowed);
+    return Light.lighting(comps.entity.material, comps.entity, lightSource, comps.point, comps.eyeVector,
+        comps.normalVector, isShadowed);
   }
 
   public boolean isShadowed(Point point) {

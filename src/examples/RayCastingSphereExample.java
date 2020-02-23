@@ -84,7 +84,8 @@ public class RayCastingSphereExample {
           Point point = r.position(hit.t);
           Vector normalVector = shape.normalAt(point);
           Vector eyeVector = r.direction.scale(-1);
-          Color finalColor = Light.lighting(hit.entity.material, pointLight, point, eyeVector, normalVector, false);
+          Color finalColor = Light.lighting(hit.entity.material, new Sphere(), pointLight, point, eyeVector,
+              normalVector, false);
           canvas.writePixel(x, y, finalColor);
         }
       }

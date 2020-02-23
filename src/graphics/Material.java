@@ -8,6 +8,7 @@ public class Material {
   public double diffuse;
   public double specular;
   public double shininess;
+  public Pattern pattern;
 
   public Material() {
     this.color = Color.WHITE();

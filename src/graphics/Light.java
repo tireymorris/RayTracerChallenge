@@ -1,5 +1,6 @@
 package graphics;
 
+import entities.Entity;
 import structures.*;
 
 public class Light {
@@ -15,10 +16,12 @@ public class Light {
     return new Light(position, intensity);
   }
 
-  public static Color lighting(Material material, Light light, Point point, Vector eyeVector, Vector normal,
-      boolean inShadow) {
+  public static Color lighting(Material material, Entity object, Light light, Point point, Vector eyeVector,
+      Vector normal, boolean inShadow) {
     // combine surface color and light's color/intensity
-    Color effectiveColor = material.color.blend(light.intensity);
+    Color effectiveColor = material.pattern != null ? material.pattern.patternAtObject(object, point) : material.color;
+
+    effectiveColor = effectiveColor.blend(light.intensity);
 
     // find direction to the light source
     Vector lightVector = light.position.minus(point).normalize();

@@ -5,7 +5,6 @@ import graphics.*;
 import structures.*;
 import entities.*;
 import util.Constants;
-import scene.*;
 
 public class IntersectionComputationsTest {
   @Test

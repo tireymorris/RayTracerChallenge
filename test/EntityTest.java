@@ -5,7 +5,6 @@ import graphics.*;
 import structures.*;
 import entities.*;
 import util.Constants;
-import scene.*;
 
 public class EntityTest {
   @Test
@@ -47,7 +46,7 @@ public class EntityTest {
     TestShape s = new TestShape();
 
     s.setTransform(Transform.identity().scale(2, 2, 2));
-    Intersection[] xs = s.intersections(r);
+    s.intersections(r);
 
     assertEquals(new Point(0, 0, -2.5), s.savedRay.origin);
     assertEquals(new Vector(0, 0, 0.5), s.savedRay.direction);
@@ -59,7 +58,7 @@ public class EntityTest {
     TestShape s = new TestShape();
 
     s.setTransform(Transform.identity().translate(5, 0, 0));
-    Intersection[] xs = s.intersections(r);
+    s.intersections(r);
 
     assertEquals(new Point(-5, 0, -5), s.savedRay.origin);
     assertEquals(new Vector(0, 0, 1), s.savedRay.direction);

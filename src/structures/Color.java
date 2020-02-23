@@ -24,6 +24,15 @@ public class Color extends Tuple {
     this.b = b;
   }
 
+  public static Color fromRGB(double r, double g, double b) {
+    return new Color(r / 255.0, g / 255.0, b / 255.0);
+  }
+
+  public static Color fromHex(String colorStr) {
+    return new Color(Integer.valueOf(colorStr.substring(1, 3), 16) / 255.0,
+        Integer.valueOf(colorStr.substring(3, 5), 16) / 255.0, Integer.valueOf(colorStr.substring(5, 7), 16) / 255.0);
+  }
+
   public Color plus(Color other) {
     return super.plus(other).asColor();
   }

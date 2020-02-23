@@ -25,6 +25,6 @@ dependencies {
 
 jar {
    manifest {
-      attributes 'Main-Class': 'examples.SceneExamplePlane'
+      attributes 'Main-Class': 'examples.SceneStripedExample'
    }
 }

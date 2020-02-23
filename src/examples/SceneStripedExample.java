@@ -8,16 +8,19 @@ import scene.*;
 
 import java.io.IOException;
 
-public class SceneExample {
+public class SceneStripedExample {
   public static void main(String[] args) {
     Entity floor = new Sphere();
     floor.transform = Transform.identity().scale(10, 0.01, 10);
     floor.material.color = new Color(1, 0.9, 0.9);
     floor.material.specular = 0;
+    floor.material.pattern = new StripePattern(Color.fromHex("#f07951"), Color.fromHex("#7952f0"))
+        .withTransform(Transform.identity().scale(0.05, 0.05, 0.05));
 
     Entity leftWall = new Sphere();
     leftWall.transform = Transform.identity().scale(10, 0.01, 10).rotateX(Constants.HALF_PI)
         .rotateY(-Constants.QUARTER_PI).translate(0, 0, 5);
+    leftWall.material = floor.material;
 
     Entity rightWall = new Sphere();
     rightWall.transform = Transform.identity().scale(10, 0.01, 10).rotateX(Constants.HALF_PI)
@@ -29,18 +32,24 @@ public class SceneExample {
     middle.material.color = new Color(0.1, 1, 0.5);
     middle.material.diffuse = 0.7;
     middle.material.specular = 0.3;
+    middle.material.pattern = new StripePattern(Color.fromHex("#c91900"), Color.fromHex("#00b0c7"))
+        .withTransform(Transform.identity().scale(0.2, 0.2, 0.2));
 
     Sphere right = new Sphere();
     right.transform = Transform.identity().scale(0.5, 0.5, 0.5).translate(1.5, 0.5, -0.5);
     right.material.color = new Color(0.5, 1, 0.1);
     right.material.diffuse = 0.7;
     right.material.specular = 0.3;
+    right.material.pattern = new StripePattern(Color.fromHex("#9f199a"), Color.fromHex("#199f1d"))
+        .withTransform(Transform.identity().scale(0.2, 0.2, 0.2));
 
     Sphere left = new Sphere();
     left.transform = Transform.identity().scale(0.33, 0.33, 0.33).translate(-1.5, 0.33, -0.75);
     left.material.color = new Color(1, 0.8, 0.1);
     left.material.diffuse = 0.7;
     left.material.specular = 0.3;
+    left.material.pattern = new StripePattern(new Color(1, 0.8, 0), new Color(0, 1, 0.8))
+        .withTransform(Transform.identity().scale(0.2, 0.2, 0.2));
 
     Light light = Light.pointLight(new Point(-10, 10, -10), new Color(1, 1, 1));
 
