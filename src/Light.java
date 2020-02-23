@@ -12,7 +12,8 @@ public class Light {
     return new Light(position, intensity);
   }
 
-  static Color lighting(Material material, Light light, Point point, Vector eyeVector, Vector normal) {
+  static Color lighting(Material material, Light light, Point point, Vector eyeVector, Vector normal,
+      boolean inShadow) {
     // combine surface color and light's color/intensity
     Color effectiveColor = material.color.blend(light.intensity);
 
@@ -47,6 +48,10 @@ public class Light {
         double factor = Math.pow(reflectDotEye, material.shininess);
         specular = light.intensity.scale(material.specular).scale(factor);
       }
+    }
+
+    if (inShadow) {
+      return ambient;
     }
 
     return ambient.plus(diffuse).plus(specular);

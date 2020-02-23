@@ -3,9 +3,11 @@ public class IntersectionComputations {
   double t;
 
   Entity entity;
-  Point point;
   Vector eyeVector;
   Vector normalVector;
+
+  Point point;
+  Point overPoint;
 
   public IntersectionComputations(Intersection intersection, Ray ray) {
     t = intersection.t;
@@ -19,5 +21,7 @@ public class IntersectionComputations {
       inside = true;
       normalVector = normalVector.scale(-1);
     }
+
+    overPoint = point.plus(normalVector.scale(Constants.EPSILON));
   }
 }

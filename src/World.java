@@ -74,7 +74,24 @@ public class World {
   }
 
   public Color shadeHit(IntersectionComputations comps) {
-    return Light.lighting(comps.entity.material, lightSource, comps.point, comps.eyeVector, comps.normalVector);
+    boolean isShadowed = isShadowed(comps.overPoint);
+
+    return Light.lighting(comps.entity.material, lightSource, comps.point, comps.eyeVector, comps.normalVector,
+        isShadowed);
+  }
+
+  public boolean isShadowed(Point point) {
+    // distance between from the point to the light source
+    Vector pointToLightVector = lightSource.position.minus(point);
+    double distance = pointToLightVector.magnitude();
+
+    Ray pointToLightRay = new Ray(point, pointToLightVector.normalize());
+
+    Intersection[] intersections = intersections(pointToLightRay);
+
+    Intersection hit = Intersection.hit(intersections);
+
+    return hit != null && hit.t < distance;
   }
 
   public Color colorAt(Ray ray) {

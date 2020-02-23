@@ -109,4 +109,59 @@ public class WorldTest {
 
     assertEquals(inner.material.color, w.colorAt(r));
   }
+
+  @Test
+  public void noShadowWhenColinear() {
+    World w = World.defaultWorld();
+    Point p = new Point(0, 10, 0);
+
+    assertFalse(w.isShadowed(p));
+  }
+
+  @Test
+  public void sphereBetweenPointAndLight() {
+    World w = World.defaultWorld();
+    Point p = new Point(10, -10, 10);
+
+    assertTrue(w.isShadowed(p));
+  }
+
+  @Test
+  public void lightBetweenPointAndSphere() {
+    World w = World.defaultWorld();
+    Point p = new Point(-20, 20, -20);
+
+    assertFalse(w.isShadowed(p));
+  }
+
+  @Test
+  public void pointBetweenLightAndSphere() {
+    World w = World.defaultWorld();
+    Point p = new Point(-2, 2, -2);
+
+    assertFalse(w.isShadowed(p));
+  }
+
+  @Test
+  public void shadeHitInIntersection() {
+    World w = World.defaultWorld();
+    w.lightSource = Light.pointLight(new Point(0, 0, -10), Color.WHITE());
+
+    Entity s1 = new Sphere();
+    w.addEntity(s1);
+
+    Entity s2 = new Sphere().withTransform(Transform.identity().translate(0, 0, 10));
+    w.addEntity(s2);
+
+    Ray r = new Ray(new Point(0, 0, 5), new Vector(0, 0, 1));
+    Intersection i = new Intersection(4, s2);
+
+    IntersectionComputations comps = new IntersectionComputations(i, r);
+
+    Color c = w.shadeHit(comps);
+
+    assertEquals(new Color(0.1, 0.1, 0.1), c);
+
+  }
+
 }

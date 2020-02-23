@@ -64,4 +64,16 @@ public class IntersectionTest {
     Intersection[] xs = Intersection.intersections(i1, i2, i3, i4);
     assertEquals(i4, Intersection.hit(xs));
   }
+
+  @Test
+  public void hitOffsetsPoint() {
+    Ray r = new Ray(new Point(0, 0, -5), new Vector(0, 0, 1));
+    Entity s = new Sphere().withTransform(Transform.identity().translate(0, 0, 1));
+    Intersection i = new Intersection(5, s);
+
+    IntersectionComputations comps = new IntersectionComputations(i, r);
+
+    assertTrue(comps.overPoint.z < -Constants.EPSILON / 2);
+    assertTrue(comps.point.z > comps.overPoint.z);
+  }
 }
