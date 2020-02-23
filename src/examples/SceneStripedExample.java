@@ -33,7 +33,7 @@ public class SceneStripedExample {
     middle.material.diffuse = 0.7;
     middle.material.specular = 0.3;
     middle.material.pattern = new StripePattern(Color.fromHex("#c91900"), Color.fromHex("#00b0c7"))
-        .withTransform(Transform.identity().scale(0.2, 0.2, 0.2));
+        .withTransform(Transform.identity().scale(0.2, 0.2, 0.2).rotateY(-Constants.PI / 4.2));
 
     Sphere right = new Sphere();
     right.transform = Transform.identity().scale(0.5, 0.5, 0.5).translate(1.5, 0.5, -0.5);
@@ -41,7 +41,7 @@ public class SceneStripedExample {
     right.material.diffuse = 0.7;
     right.material.specular = 0.3;
     right.material.pattern = new StripePattern(Color.fromHex("#9f199a"), Color.fromHex("#199f1d"))
-        .withTransform(Transform.identity().scale(0.2, 0.2, 0.2));
+        .withTransform(Transform.identity().scale(0.05, 0.2, 0.2).rotateX(Constants.HALF_PI));
 
     Sphere left = new Sphere();
     left.transform = Transform.identity().scale(0.33, 0.33, 0.33).translate(-1.5, 0.33, -0.75);
@@ -49,7 +49,7 @@ public class SceneStripedExample {
     left.material.diffuse = 0.7;
     left.material.specular = 0.3;
     left.material.pattern = new StripePattern(new Color(1, 0.8, 0), new Color(0, 1, 0.8))
-        .withTransform(Transform.identity().scale(0.2, 0.2, 0.2));
+        .withTransform(Transform.identity().scale(0.1, 0.2, 0.2).rotateZ(Constants.PI / 6));
 
     Light light = Light.pointLight(new Point(-10, 10, -10), new Color(1, 1, 1));
 
