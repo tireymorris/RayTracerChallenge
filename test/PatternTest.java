@@ -71,4 +71,48 @@ public class PatternTest {
 
     assertEquals(Color.WHITE(), p.patternAtObject(o, new Point(2.5, 0, 0)));
   }
+
+  @Test
+  public void defaultPatternTransformation() {
+    Pattern pattern = new TestPattern();
+    assertEquals(Transform.identity(), pattern.transform);
+  }
+
+  @Test
+  public void assignPatternTransformation() {
+    Pattern pattern = new TestPattern();
+    pattern.setTransform(Transform.identity().translate(1, 2, 3));
+    assertEquals(Transform.identity().translate(1, 2, 3), pattern.transform);
+  }
+
+  @Test
+  public void testPatternWithObjectTransformation() {
+    Entity o = new Sphere();
+    o.setTransform(Transform.identity().scale(2, 2, 2));
+
+    TestPattern p = new TestPattern();
+
+    assertEquals(new Color(1, 1.5, 2), p.patternAtObject(o, new Point(2, 3, 4)));
+  }
+
+  @Test
+  public void testPatternWithPatternTransformation() {
+    Entity o = new Sphere();
+    TestPattern p = new TestPattern();
+    p.setTransform(Transform.identity().scale(2, 2, 2));
+
+    assertEquals(new Color(1, 1.5, 2), p.patternAtObject(o, new Point(2, 3, 4)));
+  }
+
+  @Test
+  public void testPatternWithBothTransforms() {
+    Entity o = new Sphere();
+    o.setTransform(Transform.identity().scale(2, 2, 2));
+
+    TestPattern p = new TestPattern();
+    p.setTransform(Transform.identity().translate(0.5, 1, 1.5));
+
+    assertEquals(new Color(0.75, 0.5, 0.25), p.patternAtObject(o, new Point(2.5, 3, 3.5)));
+  }
+
 }

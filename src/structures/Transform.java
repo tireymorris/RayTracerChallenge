@@ -89,4 +89,15 @@ public class Transform {
 
     return this;
   }
+
+  @Override
+  public boolean equals(Object other) {
+    if (other == null || !(other instanceof Transform)) {
+      return false;
+    }
+
+    Transform otherTransform = (Transform) other;
+
+    return build().equals(otherTransform.build());
+  }
 }
