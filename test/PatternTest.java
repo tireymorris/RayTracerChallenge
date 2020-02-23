@@ -125,4 +125,42 @@ public class PatternTest {
     assertEquals(new Color(0.25, 0.25, 0.25), p.patternAt(new Point(0.75, 0, 0)));
   }
 
+  @Test
+  public void ringExtendsInXAndZ() {
+    Pattern p = new RingPattern(Color.WHITE(), Color.BLACK());
+
+    assertEquals(Color.WHITE(), p.patternAt(new Point(0, 0, 0)));
+    assertEquals(Color.BLACK(), p.patternAt(new Point(1, 0, 0)));
+    assertEquals(Color.BLACK(), p.patternAt(new Point(0, 0, 1)));
+
+    assertEquals(Color.BLACK(), p.patternAt(new Point(0.708, 0, 0.708)));
+  }
+
+  @Test
+  public void checkersRepeatInX() {
+    Pattern p = new CheckerPattern(Color.WHITE(), Color.BLACK());
+
+    assertEquals(Color.WHITE(), p.patternAt(new Point(0, 0, 0)));
+    assertEquals(Color.WHITE(), p.patternAt(new Point(0.99, 0, 0)));
+    assertEquals(Color.BLACK(), p.patternAt(new Point(1.01, 0, 0)));
+  }
+
+  @Test
+  public void checkersRepeatInY() {
+    Pattern p = new CheckerPattern(Color.WHITE(), Color.BLACK());
+
+    assertEquals(Color.WHITE(), p.patternAt(new Point(0, 0, 0)));
+    assertEquals(Color.WHITE(), p.patternAt(new Point(0, 0.99, 0)));
+    assertEquals(Color.BLACK(), p.patternAt(new Point(0, 1.01, 0)));
+  }
+
+  @Test
+  public void checkersRepeatInZ() {
+    Pattern p = new CheckerPattern(Color.WHITE(), Color.BLACK());
+
+    assertEquals(Color.WHITE(), p.patternAt(new Point(0, 0, 0)));
+    assertEquals(Color.WHITE(), p.patternAt(new Point(0, 0, 0.99)));
+    assertEquals(Color.BLACK(), p.patternAt(new Point(0, 0, 1.01)));
+  }
+
 }
