@@ -56,7 +56,7 @@ public class ScenePatternExample {
     World world = World.createWorld().withEntities(floor, leftWall, rightWall, middle, right, left)
         .withLightSource(light);
 
-    Camera camera = new Camera(400, 400, Constants.PI / 3);
+    Camera camera = new Camera(1920, 1080, Constants.PI / 3);
     camera.setTransform(
         Transform.identity().viewTransform(new Point(0, 1.5, -5), new Point(0, 1, 0), new Vector(0, 1, 0)));
 
