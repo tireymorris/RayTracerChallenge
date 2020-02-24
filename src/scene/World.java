@@ -79,11 +79,15 @@ public class World {
     return intersections.toArray(xs);
   }
 
-  public Color shadeHit(IntersectionComputations comps) {
+  public Color shadeHit(IntersectionComputations comps, int remainingCalls) {
     boolean isShadowed = isShadowed(comps.overPoint);
 
-    return Light.lighting(comps.entity.material, comps.entity, lightSource, comps.point, comps.eyeVector,
+    Color surface = Light.lighting(comps.entity.material, comps.entity, lightSource, comps.point, comps.eyeVector,
         comps.normalVector, isShadowed);
+
+    Color reflected = reflectedColor(comps, remainingCalls);
+
+    return surface.plus(reflected);
   }
 
   public boolean isShadowed(Point point) {
@@ -100,7 +104,7 @@ public class World {
     return hit != null && hit.t < distance;
   }
 
-  public Color colorAt(Ray ray) {
+  public Color colorAt(Ray ray, int remainingCalls) {
     Intersection[] intersections = intersections(ray);
 
     if (intersections.length == 0) {
@@ -113,6 +117,22 @@ public class World {
       return Color.BLACK();
     }
 
-    return shadeHit(new IntersectionComputations(hit, ray));
+    return shadeHit(new IntersectionComputations(hit, ray), remainingCalls);
+  }
+
+  public Color reflectedColor(IntersectionComputations comps, int remainingCalls) {
+    if (remainingCalls <= 0) {
+      return Color.BLACK();
+    }
+
+    if (comps.entity.material.reflective == 0) {
+      return Color.BLACK();
+    }
+
+    Ray reflectRay = new Ray(comps.overPoint, comps.reflectVector);
+
+    Color reflectColor = colorAt(reflectRay, remainingCalls - 1);
+
+    return reflectColor.scale(comps.entity.material.reflective);
   }
 }

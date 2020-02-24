@@ -11,6 +11,7 @@ public class IntersectionComputations {
   public Entity entity;
   public Vector eyeVector;
   public Vector normalVector;
+  public Vector reflectVector;
 
   public Point point;
   public Point overPoint;
@@ -29,5 +30,6 @@ public class IntersectionComputations {
     }
 
     overPoint = point.plus(normalVector.scale(EPSILON));
+    reflectVector = ray.direction.reflect(normalVector);
   }
 }

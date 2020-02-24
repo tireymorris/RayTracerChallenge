@@ -66,7 +66,7 @@ public class WorldTest {
     Intersection i = new Intersection(4, s);
 
     IntersectionComputations comps = new IntersectionComputations(i, r);
-    Color c = w.shadeHit(comps);
+    Color c = w.shadeHit(comps, Constants.INITIAL_REFLECTIONS);
 
     assertEquals(new Color(0.38066, 0.47583, 0.2855), c);
   }
@@ -81,7 +81,7 @@ public class WorldTest {
     Intersection i = new Intersection(0.5, s);
 
     IntersectionComputations comps = new IntersectionComputations(i, r);
-    Color c = w.shadeHit(comps);
+    Color c = w.shadeHit(comps, Constants.INITIAL_REFLECTIONS);
 
     assertEquals(new Color(0.90498, 0.90498, 0.90498), c);
   }
@@ -91,7 +91,7 @@ public class WorldTest {
     World w = World.defaultWorld();
     Ray r = new Ray(new Point(0, 0, -5), new Vector(0, 1, 0));
 
-    assertEquals(Color.BLACK(), w.colorAt(r));
+    assertEquals(Color.BLACK(), w.colorAt(r, Constants.INITIAL_REFLECTIONS));
   }
 
   @Test
@@ -99,7 +99,7 @@ public class WorldTest {
     World w = World.defaultWorld();
     Ray r = new Ray(new Point(0, 0, -5), new Vector(0, 0, 1));
 
-    assertEquals(new Color(0.38066, 0.47583, 0.2855), w.colorAt(r));
+    assertEquals(new Color(0.38066, 0.47583, 0.2855), w.colorAt(r, Constants.INITIAL_REFLECTIONS));
   }
 
   @Test
@@ -113,7 +113,7 @@ public class WorldTest {
 
     Ray r = new Ray(new Point(0, 0, 0.75), new Vector(0, 0, -1));
 
-    assertEquals(inner.material.color, w.colorAt(r));
+    assertEquals(inner.material.color, w.colorAt(r, Constants.INITIAL_REFLECTIONS));
   }
 
   @Test
@@ -164,10 +164,101 @@ public class WorldTest {
 
     IntersectionComputations comps = new IntersectionComputations(i, r);
 
-    Color c = w.shadeHit(comps);
+    Color c = w.shadeHit(comps, Constants.INITIAL_REFLECTIONS);
 
     assertEquals(new Color(0.1, 0.1, 0.1), c);
+  }
 
+  @Test
+  public void rayStrikesNonReflectiveSurface() {
+    World w = World.defaultWorld();
+    Ray r = new Ray(new Point(0, 0, 0), new Vector(0, 0, 1));
+    Entity s = w.getEntity(1);
+    s.material.ambient = 1;
+
+    Intersection i = new Intersection(1, s);
+    IntersectionComputations comps = new IntersectionComputations(i, r);
+
+    assertEquals(Color.BLACK(), w.reflectedColor(comps, Constants.INITIAL_REFLECTIONS));
+  }
+
+  @Test
+  public void rayStrikesReflectiveSurface() {
+    World w = World.defaultWorld();
+
+    Material reflective = new Material();
+    reflective.reflective = 0.5;
+
+    Entity s = new Plane().withMaterial(reflective).withTransform(Transform.identity().translate(0, -1, 0));
+
+    w.addEntity(s);
+
+    Ray r = new Ray(new Point(0, 0, -3), new Vector(0, -Math.sqrt(2) / 2.0, Math.sqrt(2) / 2.0));
+
+    Intersection i = new Intersection(Math.sqrt(2), s);
+    IntersectionComputations comps = new IntersectionComputations(i, r);
+
+    assertEquals(new Color(0.19032, 0.2379, 0.14274), w.reflectedColor(comps, Constants.INITIAL_REFLECTIONS));
+  }
+
+  @Test
+  public void shadeHitReflective() {
+    World w = World.defaultWorld();
+
+    Material reflective = new Material();
+    reflective.reflective = 0.5;
+
+    Entity s = new Plane().withMaterial(reflective).withTransform(Transform.identity().translate(0, -1, 0));
+
+    w.addEntity(s);
+
+    Ray r = new Ray(new Point(0, 0, -3), new Vector(0, -Math.sqrt(2) / 2.0, Math.sqrt(2) / 2.0));
+
+    Intersection i = new Intersection(Math.sqrt(2), s);
+    IntersectionComputations comps = new IntersectionComputations(i, r);
+
+    assertEquals(new Color(0.87677, 0.92436, 0.82918), w.shadeHit(comps, Constants.INITIAL_REFLECTIONS));
+  }
+
+  @Test
+  public void colorAtMirrors() {
+    World w = World.createWorld();
+
+    w.lightSource = Light.pointLight(new Point(0, 0, 0), Color.WHITE());
+
+    Material reflective = new Material();
+    reflective.reflective = 1;
+
+    Entity lower = new Plane().withMaterial(reflective).withTransform(Transform.identity().translate(0, -1, 0));
+
+    w.addEntity(lower);
+
+    Entity upper = new Plane().withMaterial(reflective).withTransform(Transform.identity().translate(0, 1, 0));
+
+    w.addEntity(upper);
+
+    Ray r = new Ray(new Point(0, 0, 0), new Vector(0, 1, 0));
+
+    assertNotNull(w.colorAt(r, Constants.INITIAL_REFLECTIONS));
+  }
+
+  @Test
+  public void limitRecursion() {
+    World w = World.defaultWorld();
+
+    Material reflective = new Material();
+    reflective.reflective = 0.5;
+
+    Entity s = new Plane().withMaterial(reflective).withTransform(Transform.identity().translate(0, -1, 0));
+
+    w.addEntity(s);
+
+    Ray r = new Ray(new Point(0, 0, -3), new Vector(0, -Math.sqrt(2) / 2.0, Math.sqrt(2) / 2.0));
+
+    Intersection i = new Intersection(Math.sqrt(2), s);
+    IntersectionComputations comps = new IntersectionComputations(i, r);
+
+    assertEquals(Color.BLACK(), w.reflectedColor(comps, 0));
   }
 
 }

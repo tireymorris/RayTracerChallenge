@@ -4,18 +4,24 @@ import structures.Color;
 
 public class Material {
   public Color color;
+  public Pattern pattern;
+
   public double ambient;
   public double diffuse;
   public double specular;
   public double shininess;
-  public Pattern pattern;
+
+  public double reflective;
 
   public Material() {
     this.color = Color.WHITE();
+
     this.ambient = 0.1; // works best between 0 and 1
     this.diffuse = 0.9; // works best between 0 and 1
     this.specular = 0.9; // works best between 0 and 1
     this.shininess = 200.0; // works best between 10 and 200
+
+    this.reflective = 0.0;
   }
 
   public Material(Color color, double ambient, double diffuse, double specular, double shininess) {

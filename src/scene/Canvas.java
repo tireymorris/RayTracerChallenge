@@ -1,6 +1,7 @@
 package scene;
 
 import structures.Color;
+import util.Constants;
 import graphics.Ray;
 
 import java.io.File;
@@ -108,7 +109,7 @@ public class Canvas {
     for (int y = 0; y < camera.getVsize(); y++) {
       for (int x = 0; x < camera.getHsize(); x++) {
         Ray ray = camera.rayForPixel(x, y);
-        Color color = world.colorAt(ray);
+        Color color = world.colorAt(ray, Constants.INITIAL_REFLECTIONS);
         image.writePixel(x, y, color);
       }
     }

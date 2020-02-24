@@ -14,6 +14,7 @@ public class ScenePatternExample {
     floor.material.color = new Color(1, 0.9, 0.9);
     floor.material.specular = 0;
     floor.material.pattern = new CheckerPattern(Color.fromHex("#f07951"), Color.fromHex("#7952f0"));
+    floor.material.reflective = 0.15;
 
     Entity leftWall = new Plane();
     leftWall.transform = Transform.identity().rotateX(Constants.HALF_PI).rotateY(-Constants.QUARTER_PI).translate(0, 0,
@@ -32,6 +33,7 @@ public class ScenePatternExample {
     middle.material.specular = 0.3;
     middle.material.pattern = new GradientPattern(Color.fromHex("#c91900"), Color.fromHex("#00b0c7"))
         .withTransform(Transform.identity().rotateY(-Constants.HALF_PI));
+    middle.material.reflective = 0.85;
 
     Sphere right = new Sphere();
     right.transform = Transform.identity().scale(0.5, 0.5, 0.5).translate(1.5, 0.5, -0.5);
@@ -54,7 +56,7 @@ public class ScenePatternExample {
     World world = World.createWorld().withEntities(floor, leftWall, rightWall, middle, right, left)
         .withLightSource(light);
 
-    Camera camera = new Camera(1920, 1080, Constants.PI / 3);
+    Camera camera = new Camera(400, 400, Constants.PI / 3);
     camera.setTransform(
         Transform.identity().viewTransform(new Point(0, 1.5, -5), new Point(0, 1, 0), new Vector(0, 1, 0)));
 

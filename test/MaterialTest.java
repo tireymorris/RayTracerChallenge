@@ -103,4 +103,11 @@ public class MaterialTest {
     assertEquals(Color.BLACK(), c2);
   }
 
+  @Test
+  public void materialContainsReflective() {
+    Material m = new Material();
+
+    assertEquals(0, m.reflective, Constants.EPSILON);
+  }
+
 }

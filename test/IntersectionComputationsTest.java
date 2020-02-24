@@ -48,4 +48,16 @@ public class IntersectionComputationsTest {
 
     assertEquals(new Vector(0, 0, -1), comps.normalVector); // inverted because eye is inside!
   }
+
+  @Test
+  public void precomputeReflectionVector() {
+    Entity s = new Plane();
+    Ray r = new Ray(new Point(0, 1, -1), new Vector(0, -Math.sqrt(2) / 2.0, Math.sqrt(2) / 2.0));
+
+    Intersection i = new Intersection(Math.sqrt(2), s);
+
+    IntersectionComputations comps = new IntersectionComputations(i, r);
+
+    assertEquals(new Vector(0, Math.sqrt(2) / 2.0, Math.sqrt(2) / 2.0), comps.reflectVector);
+  }
 }

@@ -1,7 +1,7 @@
 package util;
 
 public final class Constants {
-  public static final double EPSILON = 0.00001;
+  public static final double EPSILON = 0.0001;
   public static final double VECTOR_W_VALUE = 0.0;
   public static final double POINT_W_VALUE = 1.0;
 
@@ -9,6 +9,8 @@ public final class Constants {
   public static final double HALF_PI = Math.PI / 2.0;
   public static final double PI = Math.PI;
   public static final double TAU = Math.PI * 2.0;
+
+  public static final int INITIAL_REFLECTIONS = 5;
 
   public static boolean valuesAlmostEqual(double valueOne, double valueTwo) {
     return Math.abs(valueOne - valueTwo) < EPSILON;
