@@ -13,11 +13,14 @@ public class CheckerPattern extends Pattern {
     this.b = b;
   }
 
+  private int index(double coordinate) {
+    return (int) Math.floor(Math.abs(coordinate));
+  }
+
   // basic blending function
   @Override
   public Color patternAt(Point patternSpacePoint) {
-    if (Math.floor((Math.abs(patternSpacePoint.x) + Math.abs(patternSpacePoint.y) + Math.abs(patternSpacePoint.z)))
-        % 2 == 0) {
+    if ((index(patternSpacePoint.x) + index(patternSpacePoint.y) + index(patternSpacePoint.z)) % 2 == 0) {
       return a;
     }
 

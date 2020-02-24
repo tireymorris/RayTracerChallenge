@@ -13,18 +13,22 @@ public class ScenePatternExample {
     Entity floor = new Plane();
     floor.material.color = new Color(1, 0.9, 0.9);
     floor.material.specular = 0;
-    floor.material.pattern = new CheckerPattern(Color.fromHex("#f07951"), Color.fromHex("#7952f0"));
+    floor.material.pattern = new CheckerPattern(Color.fromHex("#7951f0"), Color.fromHex("#c8f051"));
     floor.material.reflective = 0.15;
 
     Entity leftWall = new Plane();
     leftWall.transform = Transform.identity().rotateX(Constants.HALF_PI).rotateY(-Constants.QUARTER_PI).translate(0, 0,
         5);
-    leftWall.material = floor.material;
+    leftWall.material = floor.material.clone();
+    leftWall.material.pattern = new CheckerPattern(Color.fromHex("#51a1f0"), Color.fromHex("#f0a151"));
+    leftWall.material.reflective = 0.15;
 
     Entity rightWall = new Plane();
     rightWall.transform = Transform.identity().rotateX(Constants.HALF_PI).rotateY(Constants.QUARTER_PI).translate(0, 0,
         5);
-    rightWall.material = floor.material;
+    rightWall.material = floor.material.clone();
+    rightWall.material.pattern = new CheckerPattern(Color.fromHex("#51f0c8"), Color.fromHex("#f05179"));
+    rightWall.material.reflective = 0.15;
 
     Sphere middle = new Sphere();
     middle.transform = Transform.identity().translate(-0.5, 1, 0.5);
