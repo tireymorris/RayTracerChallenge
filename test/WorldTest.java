@@ -261,4 +261,115 @@ public class WorldTest {
     assertEquals(Color.BLACK(), w.reflectedColor(comps, 0));
   }
 
+  @Test
+  public void refractedColorOpaqueObject() {
+    World w = World.defaultWorld();
+
+    Entity s = w.getEntity(0);
+
+    Ray r = new Ray(new Point(0, 0, -5), new Vector(0, 0, 1));
+
+    Intersection[] xs = { new Intersection(4, s), new Intersection(6, s) };
+
+    IntersectionComputations comps = new IntersectionComputations(xs[0], r, xs);
+
+    Color c = w.refractedColor(comps, 5);
+
+    assertEquals(Color.BLACK(), c);
+  }
+
+  @Test
+  public void refractedColorAtMaximumDepth() {
+    World w = World.defaultWorld();
+
+    Material m = new Material();
+    m.transparency = 1;
+    m.refractiveIndex = 1.5;
+    Entity s = w.getEntity(0).withMaterial(m);
+
+    Ray r = new Ray(new Point(0, 0, -5), new Vector(0, 0, 1));
+
+    Intersection[] xs = { new Intersection(4, s), new Intersection(6, s) };
+
+    IntersectionComputations comps = new IntersectionComputations(xs[0], r, xs);
+
+    Color c = w.refractedColor(comps, 0);
+
+    assertEquals(Color.BLACK(), c);
+  }
+
+  @Test
+  public void refractedColorAtTIR() {
+    World w = World.defaultWorld();
+
+    Material m = new Material();
+    m.transparency = 1;
+    m.refractiveIndex = 1.5;
+    Entity s = w.getEntity(0).withMaterial(m);
+
+    Ray r = new Ray(new Point(0, 0, Math.sqrt(2) / 2), new Vector(0, 1, 0));
+
+    Intersection[] xs = { new Intersection(-Math.sqrt(2) / 2, s), new Intersection(Math.sqrt(2) / 2, s) };
+
+    IntersectionComputations comps = new IntersectionComputations(xs[1], r, xs);
+
+    Color c = w.refractedColor(comps, 5);
+
+    assertEquals(Color.BLACK(), c);
+  }
+
+  @Test
+  public void findingRefractedColor() {
+    World w = World.defaultWorld();
+
+    Material m1 = new Material();
+    m1.ambient = 1;
+    m1.pattern = new TestPattern();
+    Entity s1 = w.getEntity(0).withMaterial(m1);
+
+    Material m2 = new Material();
+    m2.transparency = 1;
+    m2.refractiveIndex = 1.5;
+    Entity s2 = w.getEntity(1).withMaterial(m2);
+
+    Ray r = new Ray(new Point(0, 0, 0.1), new Vector(0, 1, 0));
+
+    Intersection[] xs = { new Intersection(-0.9899, s1), new Intersection(-0.4899, s2), new Intersection(0.4899, s2),
+        new Intersection(0.9899, s1) };
+
+    IntersectionComputations comps = new IntersectionComputations(xs[2], r, xs);
+
+    Color c = w.refractedColor(comps, 5);
+
+    assertEquals(new Color(0, 0.99888, 0.04725), c);
+  }
+
+  @Test
+  public void refractionInShadeHit() {
+    World w = World.defaultWorld();
+
+    Material fm = new Material();
+    fm.transparency = 0.5;
+    fm.refractiveIndex = 1.5;
+
+    Entity floor = new Plane().withMaterial(fm).withTransform(Transform.identity().translate(0, -1, 0));
+    w.addEntity(floor);
+
+    Material bm = new Material();
+    bm.color = new Color(1, 0, 0);
+    bm.ambient = 0.5;
+    Entity ball = new Sphere().withMaterial(bm).withTransform(Transform.identity().translate(0, -3.5, -0.5));
+    w.addEntity(ball);
+
+    Ray r = new Ray(new Point(0, 0, -3), new Vector(0, -Math.sqrt(2) / 2, Math.sqrt(2) / 2));
+
+    Intersection[] xs = { new Intersection(Math.sqrt(2), floor) };
+
+    IntersectionComputations comps = new IntersectionComputations(xs[0], r, xs);
+
+    Color c = w.shadeHit(comps, 5);
+
+    assertEquals(new Color(0.93642, 0.68642, 0.68642), c);
+  }
+
 }

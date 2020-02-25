@@ -75,6 +75,7 @@ public class IntersectionComputations {
     }
 
     overPoint = point.plus(normalVector.scale(EPSILON));
+    underPoint = point.minus(normalVector.scale(EPSILON));
     reflectVector = ray.direction.reflect(normalVector);
   }
 }

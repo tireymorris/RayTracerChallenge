@@ -87,7 +87,9 @@ public class World {
 
     Color reflected = reflectedColor(comps, remainingCalls);
 
-    return surface.plus(reflected);
+    Color refracted = refractedColor(comps, remainingCalls);
+
+    return surface.plus(reflected).plus(refracted);
   }
 
   public boolean isShadowed(Point point) {
@@ -134,5 +136,29 @@ public class World {
     Color reflectColor = colorAt(reflectRay, remainingCalls - 1);
 
     return reflectColor.scale(comps.entity.material.reflective);
+  }
+
+  public Color refractedColor(IntersectionComputations comps, int remainingCalls) {
+    if (comps.entity.material.transparency == 0 || remainingCalls == 0) {
+      return Color.BLACK();
+    }
+
+    double nRatio = comps.n1 / comps.n2;
+    double cosI = comps.eyeVector.dot(comps.normalVector);
+    double sin2Theta = nRatio * nRatio * (1 - cosI * cosI);
+
+    if (sin2Theta > 1) {
+      return Color.BLACK();
+    }
+
+    double cosT = Math.sqrt(1.0 - sin2Theta);
+
+    Vector refractDirection = comps.normalVector.scale(nRatio * cosI - cosT).minus(comps.eyeVector.scale(nRatio));
+
+    Ray refractRay = new Ray(comps.underPoint, refractDirection);
+
+    Color refractColor = colorAt(refractRay, remainingCalls - 1).scale(comps.entity.material.transparency);
+
+    return refractColor;
   }
 }

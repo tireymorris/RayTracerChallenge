@@ -81,4 +81,18 @@ public class IntersectionTest {
     assertTrue(comps.overPoint.z < -Constants.EPSILON / 2);
     assertTrue(comps.point.z > comps.overPoint.z);
   }
+
+  @Test
+  public void underPointOffsetJustBeneathSurface() {
+    Ray r = new Ray(new Point(0, 0, -5), new Vector(0, 0, 1));
+    Entity s = new GlassSphere().withTransform(Transform.identity().translate(0, 0, 1));
+
+    Intersection i = new Intersection(5, s);
+
+    IntersectionComputations comps = new IntersectionComputations(i, r);
+
+    assertTrue(comps.underPoint.z > Constants.EPSILON / 2);
+    assertTrue(comps.point.z < comps.underPoint.z);
+
+  }
 }
