@@ -110,4 +110,11 @@ public class MaterialTest {
     assertEquals(0, m.reflective, Constants.EPSILON);
   }
 
+  @Test
+  public void transparencyRefractiveDefaults() {
+    Material m = new Material();
+    assertEquals(0, m.transparency, Constants.EPSILON);
+    assertEquals(Constants.REFRACTION_INDEX_AIR, m.refractiveIndex, Constants.EPSILON);
+  }
+
 }

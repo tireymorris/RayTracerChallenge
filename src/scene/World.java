@@ -117,7 +117,7 @@ public class World {
       return Color.BLACK();
     }
 
-    return shadeHit(new IntersectionComputations(hit, ray), remainingCalls);
+    return shadeHit(new IntersectionComputations(hit, ray, intersections), remainingCalls);
   }
 
   public Color reflectedColor(IntersectionComputations comps, int remainingCalls) {

@@ -10,6 +10,12 @@ public final class Constants {
   public static final double PI = Math.PI;
   public static final double TAU = Math.PI * 2.0;
 
+  public static final double REFRACTION_INDEX_VACUUM = 1;
+  public static final double REFRACTION_INDEX_AIR = 1.00029;
+  public static final double REFRACTION_INDEX_WATER = 1.333;
+  public static final double REFRACTION_INDEX_GLASS = 1.52;
+  public static final double REFRACTION_INDEX_DIAMOND = 2.417;
+
   public static final int INITIAL_REFLECTIONS = 5;
 
   public static boolean valuesAlmostEqual(double valueOne, double valueTwo) {

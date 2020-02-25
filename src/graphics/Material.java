@@ -1,6 +1,7 @@
 package graphics;
 
 import structures.Color;
+import util.Constants;
 
 public class Material {
   public Color color;
@@ -12,6 +13,8 @@ public class Material {
   public double shininess;
 
   public double reflective;
+  public double transparency;
+  public double refractiveIndex;
 
   public Material() {
     this.color = Color.WHITE();
@@ -22,6 +25,8 @@ public class Material {
     this.shininess = 200.0; // works best between 10 and 200
 
     this.reflective = 0.0;
+    this.transparency = 0.0;
+    this.refractiveIndex = Constants.REFRACTION_INDEX_AIR;
   }
 
   public Material(Color color, double ambient, double diffuse, double specular, double shininess) {
