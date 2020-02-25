@@ -25,6 +25,6 @@ dependencies {
 
 jar {
    manifest {
-      attributes 'Main-Class': 'examples.ScenePatternExample'
+      attributes 'Main-Class': 'examples.RandomScene'
    }
 }
