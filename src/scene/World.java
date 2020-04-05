@@ -89,6 +89,14 @@ public class World {
 
     Color refracted = refractedColor(comps, remainingCalls);
 
+    Material material = comps.entity.material;
+
+    if (material.reflective > 0 && material.transparency > 0) {
+      double reflectance = comps.schlick();
+
+      return surface.plus(reflected.scale(reflectance)).plus(refracted.scale(1 - reflectance));
+    }
+
     return surface.plus(reflected).plus(refracted);
   }
 
@@ -145,13 +153,13 @@ public class World {
 
     double nRatio = comps.n1 / comps.n2;
     double cosI = comps.eyeVector.dot(comps.normalVector);
-    double sin2Theta = nRatio * nRatio * (1 - cosI * cosI);
+    double sinSquaredT = nRatio * nRatio * (1 - cosI * cosI);
 
-    if (sin2Theta > 1) {
+    if (sinSquaredT > 1) {
       return Color.BLACK();
     }
 
-    double cosT = Math.sqrt(1.0 - sin2Theta);
+    double cosT = Math.sqrt(1.0 - sinSquaredT);
 
     Vector refractDirection = comps.normalVector.scale(nRatio * cosI - cosT).minus(comps.eyeVector.scale(nRatio));
 

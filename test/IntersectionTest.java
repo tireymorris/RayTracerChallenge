@@ -76,7 +76,7 @@ public class IntersectionTest {
     Entity s = new Sphere().withTransform(Transform.identity().translate(0, 0, 1));
     Intersection i = new Intersection(5, s);
 
-    IntersectionComputations comps = new IntersectionComputations(i, r);
+    IntersectionComputations comps = new IntersectionComputations(i, r, null);
 
     assertTrue(comps.overPoint.z < -Constants.EPSILON / 2);
     assertTrue(comps.point.z > comps.overPoint.z);
@@ -89,7 +89,7 @@ public class IntersectionTest {
 
     Intersection i = new Intersection(5, s);
 
-    IntersectionComputations comps = new IntersectionComputations(i, r);
+    IntersectionComputations comps = new IntersectionComputations(i, r, null);
 
     assertTrue(comps.underPoint.z > Constants.EPSILON / 2);
     assertTrue(comps.point.z < comps.underPoint.z);

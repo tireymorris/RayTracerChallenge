@@ -24,10 +24,6 @@ public class IntersectionComputations {
   public double n1;
   public double n2;
 
-  public IntersectionComputations(Intersection intersection, Ray ray) {
-    this(intersection, ray, null);
-  }
-
   public IntersectionComputations(Intersection intersection, Ray ray, Intersection[] intersections) {
     List<Entity> containers = new ArrayList<>();
 
@@ -78,4 +74,25 @@ public class IntersectionComputations {
     underPoint = point.minus(normalVector.scale(EPSILON));
     reflectVector = ray.direction.reflect(normalVector);
   }
+
+  public double schlick() {
+    double cos = this.eyeVector.dot(this.normalVector);
+
+    if (n1 > n2) {
+      double n = n1 / n2;
+      double sinSquaredT = Math.pow(n, 2) * (1.0 - cos * cos);
+      if (sinSquaredT > 1.0) {
+        return 1.0;
+      }
+
+      double cosT = Math.sqrt(1 - sinSquaredT);
+
+      cos = cosT;
+    }
+
+    double r0 = Math.pow((n1 - n2) / (n1 + n2), 2);
+
+    return r0 + (1.0 - r0) * Math.pow((1.0 - cos), 5);
+  }
+
 }

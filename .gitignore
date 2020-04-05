@@ -41,3 +41,5 @@ launch.json
 bin/
 
 .DS_Store
+
+world.ppm
