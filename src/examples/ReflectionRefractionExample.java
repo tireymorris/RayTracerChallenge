@@ -63,14 +63,14 @@ public class ReflectionRefractionExample {
     World world = World.createWorld().withEntities(floor, leftWall, rightWall, middle, right, left, front)
         .withLightSource(light);
 
-    Camera camera = new Camera(3840, 2160, Constants.PI / 3);
+    Camera camera = new Camera(1920, 1080, Constants.PI / 3);
     camera.setTransform(
         Transform.identity().viewTransform(new Point(0, 1.5, -5), new Point(0, 1, 0), new Vector(0, 1, 0)));
 
     Canvas image = Canvas.render(camera, world);
 
     try {
-      image.exportToPPM("/Users/tymorris/workspace/RayTracerChallenge/world.ppm");
+      image.exportToPPM("/home/tm/workspace/RayTracerChallenge/world.ppm");
     } catch (IOException e) {
       e.printStackTrace();
     }
